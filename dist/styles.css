@@ -81,15 +81,11 @@ a {
 }
 
 .intro__wordmark {
+  display: block;
+  width: clamp(340px, 48vw, 680px);
+  height: auto;
   margin: -2vh 0 0;
-  color: #f2eee5;
-  font-family: "Cormorant Garamond", "Bodoni 72", Didot, Georgia, serif;
-  font-size: clamp(7.4rem, 15vw, 14rem);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.075em;
-  line-height: 0.72;
-  text-shadow: 0 10px 35px rgba(0, 0, 0, 0.28);
+  filter: drop-shadow(0 10px 35px rgba(0, 0, 0, 0.28));
 }
 
 .intro__actions {
@@ -355,8 +351,8 @@ a {
   }
 
   .intro__wordmark {
+    width: min(92vw, 500px);
     margin-top: -8vh;
-    font-size: clamp(6rem, 30vw, 9rem);
   }
 
   .intro__actions {
