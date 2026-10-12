@@ -102,6 +102,11 @@ function updateScrollProgress(currentScrollY) {
 }
 
 function syncHeroDormancy(currentScrollY = window.scrollY) {
+  if (mobileViewport.matches) {
+    hero.classList.remove("is-dormant");
+    return;
+  }
+
   hero.classList.toggle("is-dormant", currentScrollY > window.innerHeight * 1.8);
 }
 
@@ -115,7 +120,7 @@ function pauseHeavyHeroWorkDuringMobileScroll() {
     isMobileScrollActive = false;
     syncHeroDormancy();
     syncBackgroundVideo();
-  }, 220);
+  }, 360);
 }
 
 function updateFromScroll() {
@@ -124,7 +129,7 @@ function updateFromScroll() {
 
   if (hasUserScrollIntent && isScrollingDown && currentScrollY > revealThreshold) revealHero();
 
-  if (!mobileViewport.matches) syncHeroDormancy(currentScrollY);
+  syncHeroDormancy(currentScrollY);
   updateScrollProgress(currentScrollY);
   syncBackgroundVideo();
   previousScrollY = currentScrollY;
@@ -161,7 +166,7 @@ function syncDeepLinkPosition(target, behavior = "auto") {
   backgroundVideo.pause();
   target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : behavior, block: "start" });
   previousScrollY = window.scrollY;
-  hero.classList.toggle("is-dormant", previousScrollY > window.innerHeight * 1.8);
+  syncHeroDormancy(previousScrollY);
   updateScrollProgress(previousScrollY);
   syncBackgroundVideo();
 }
@@ -223,7 +228,7 @@ window.addEventListener(
 
     if (!hashTarget) {
       previousScrollY = window.scrollY;
-      hero.classList.toggle("is-dormant", previousScrollY > window.innerHeight * 1.8);
+      syncHeroDormancy(previousScrollY);
       updateScrollProgress(previousScrollY);
       syncBackgroundVideo();
     }
@@ -289,7 +294,7 @@ window.addEventListener("hashchange", () => {
 
   window.requestAnimationFrame(() => {
     previousScrollY = window.scrollY;
-    hero.classList.toggle("is-dormant", previousScrollY > window.innerHeight * 1.8);
+    syncHeroDormancy(previousScrollY);
     updateScrollProgress(previousScrollY);
     syncBackgroundVideo();
     focusNavigationTarget(getVisibleNavigationTarget());

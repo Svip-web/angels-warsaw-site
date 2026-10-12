@@ -1007,12 +1007,18 @@ a {
   }
 
   body {
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: auto;
   }
 
   .hero {
     --intro-circle-radius: clamp(104px, 30vw, 160px);
     --intro-touch-diagonal: clamp(74px, 21.2vw, 113px);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .hero.is-dormant {
+    visibility: visible;
   }
 
   .intro-fresco {
