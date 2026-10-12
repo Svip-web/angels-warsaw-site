@@ -7442,25 +7442,4 @@ body.is-booking-open {
   .site-content::before {
     display: none;
   }
-
-  /* Mobile scrolling stays compositor-light: posters replace video layers and
-     the expensive full-screen reveal transition is resolved immediately. */
-  .reveal__background,
-  .contact__video {
-    display: none !important;
-  }
-
-  .contact__media {
-    background: url("assets/mediabank-cocktail-poster.webp") center / cover no-repeat;
-  }
-
-  .hero .reveal,
-  .hero .intro,
-  .hero .intro-header,
-  .hero .final-ui,
-  .hero + .site-header,
-  .hero .intro-sky__image,
-  .hero .intro-fresco-mobile {
-    transition: none !important;
-  }
 }

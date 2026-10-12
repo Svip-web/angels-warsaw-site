@@ -24,6 +24,8 @@ let menuReturnFocus = null;
 let hasUserScrollIntent = false;
 let touchStartY = null;
 let isTouchScrolling = false;
+let isMobileScrollActive = false;
+let mobileScrollIdleTimer = 0;
 let heroRevealSettleTimer = 0;
 let syncContactVideoPlayback = () => {};
 
@@ -36,20 +38,18 @@ function hideBackgroundVideo() {
 }
 
 function syncBackgroundVideo() {
-  if (mobileViewport.matches) {
-    backgroundVideo.pause();
-    return;
-  }
-
   const isPastHeroSequence = window.scrollY > window.innerHeight * 1.8;
   const isHeroRevealed = hero.classList.contains("is-revealed");
+  const isAwayFromMobileHero = mobileViewport.matches && window.scrollY > window.innerHeight * 0.25;
 
   if (
     document.hidden ||
     prefersReducedMotion ||
     saveData ||
     isPastHeroSequence ||
-    !isHeroRevealed
+    isAwayFromMobileHero ||
+    !isHeroRevealed ||
+    (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
   ) {
     backgroundVideo.pause();
     return;
@@ -73,10 +73,9 @@ function revealHero() {
 
   if (mobileViewport.matches) {
     window.clearTimeout(heroRevealSettleTimer);
-    hero.classList.add("is-reveal-settled");
-    revealedHeader.classList.add("has-surface");
-    backgroundVideo.pause();
-    if (contactVideo) contactVideo.pause();
+    heroRevealSettleTimer = window.setTimeout(() => {
+      hero.classList.add("is-reveal-settled");
+    }, 1200);
   }
 }
 
@@ -130,6 +129,20 @@ function syncHeroDormancy(currentScrollY = window.scrollY) {
   hero.classList.toggle("is-dormant", currentScrollY > window.innerHeight * 1.8);
 }
 
+function pauseHeavyHeroWorkDuringMobileScroll() {
+  if (!mobileViewport.matches) return;
+
+  isMobileScrollActive = true;
+  if (!backgroundVideo.paused) backgroundVideo.pause();
+  if (contactVideo && !contactVideo.paused) contactVideo.pause();
+  window.clearTimeout(mobileScrollIdleTimer);
+  mobileScrollIdleTimer = window.setTimeout(() => {
+    isMobileScrollActive = false;
+    syncBackgroundVideo();
+    syncContactVideoPlayback();
+  }, 520);
+}
+
 function updateFromScroll() {
   const currentScrollY = window.scrollY;
   const isScrollingDown = currentScrollY > previousScrollY;
@@ -144,13 +157,7 @@ function updateFromScroll() {
 }
 
 function handleScroll() {
-  if (mobileViewport.matches) {
-    const currentScrollY = window.scrollY;
-    if (hasUserScrollIntent && currentScrollY > revealThreshold) revealHero();
-    previousScrollY = currentScrollY;
-    return;
-  }
-
+  pauseHeavyHeroWorkDuringMobileScroll();
   if (frameRequested) return;
   frameRequested = true;
   window.requestAnimationFrame(updateFromScroll);
@@ -397,11 +404,11 @@ if (contactVideo) {
 
   syncContactVideoPlayback = () => {
     if (
-      mobileViewport.matches ||
       document.hidden ||
       prefersReducedMotion ||
       saveData ||
-      !contactVideoIsNear
+      !contactVideoIsNear ||
+      (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
     ) {
       contactVideo.pause();
       return;
@@ -415,7 +422,7 @@ if (contactVideo) {
     if (contactVideo.paused) contactVideo.play().catch(() => {});
   };
 
-  if (!mobileViewport.matches && !prefersReducedMotion && !saveData && "IntersectionObserver" in window) {
+  if (!prefersReducedMotion && !saveData && "IntersectionObserver" in window) {
     const contactVideoObserver = new IntersectionObserver(
       ([entry]) => {
         contactVideoIsNear = entry.isIntersecting;
@@ -425,7 +432,7 @@ if (contactVideo) {
     );
 
     contactVideoObserver.observe(contactVideo);
-  } else if (!mobileViewport.matches && !prefersReducedMotion && !saveData) {
+  } else if (!prefersReducedMotion && !saveData) {
     contactVideoIsNear = true;
     syncContactVideoPlayback();
   }
@@ -433,13 +440,9 @@ if (contactVideo) {
   document.addEventListener("visibilitychange", syncContactVideoPlayback);
 }
 
-if (prefersReducedMotion || saveData || mobileViewport.matches) {
+if (prefersReducedMotion || saveData) {
   backgroundVideo.preload = "none";
   backgroundVideo.pause();
-  if (contactVideo) {
-    contactVideo.preload = "none";
-    contactVideo.pause();
-  }
 } else if (!initialHashTarget) {
   syncBackgroundVideo();
 }
