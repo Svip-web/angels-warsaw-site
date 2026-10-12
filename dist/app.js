@@ -24,6 +24,8 @@ let menuReturnFocus = null;
 let hasUserScrollIntent = false;
 let touchStartY = null;
 let isTouchScrolling = false;
+let isMobileScrollActive = false;
+let mobileScrollIdleTimer = 0;
 
 function showBackgroundVideo() {
   backgroundVideo.classList.add("is-ready");
@@ -43,7 +45,7 @@ function syncBackgroundVideo() {
     saveData ||
     isPastHeroSequence ||
     !isHeroRevealed ||
-    (mobileViewport.matches && isTouchScrolling)
+    (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
   ) {
     backgroundVideo.pause();
     return;
@@ -99,13 +101,30 @@ function updateScrollProgress(currentScrollY) {
   revealedHeader.classList.toggle("has-surface", currentScrollY > window.innerHeight * 1.1);
 }
 
+function syncHeroDormancy(currentScrollY = window.scrollY) {
+  hero.classList.toggle("is-dormant", currentScrollY > window.innerHeight * 1.8);
+}
+
+function pauseHeavyHeroWorkDuringMobileScroll() {
+  if (!mobileViewport.matches) return;
+
+  isMobileScrollActive = true;
+  if (!backgroundVideo.paused) backgroundVideo.pause();
+  window.clearTimeout(mobileScrollIdleTimer);
+  mobileScrollIdleTimer = window.setTimeout(() => {
+    isMobileScrollActive = false;
+    syncHeroDormancy();
+    syncBackgroundVideo();
+  }, 220);
+}
+
 function updateFromScroll() {
   const currentScrollY = window.scrollY;
   const isScrollingDown = currentScrollY > previousScrollY;
 
   if (hasUserScrollIntent && isScrollingDown && currentScrollY > revealThreshold) revealHero();
 
-  hero.classList.toggle("is-dormant", currentScrollY > window.innerHeight * 1.8);
+  if (!mobileViewport.matches) syncHeroDormancy(currentScrollY);
   updateScrollProgress(currentScrollY);
   syncBackgroundVideo();
   previousScrollY = currentScrollY;
@@ -113,6 +132,7 @@ function updateFromScroll() {
 }
 
 function handleScroll() {
+  pauseHeavyHeroWorkDuringMobileScroll();
   if (frameRequested) return;
   frameRequested = true;
   window.requestAnimationFrame(updateFromScroll);
