@@ -15,6 +15,7 @@ const menuClose = document.querySelector(".menu-panel__close");
 const scrollProgress = document.querySelector(".scroll-indicator span");
 const revealThreshold = Math.max(120, Math.min(180, window.innerHeight * 0.18));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const mobileViewport = window.matchMedia("(max-width: 680px)");
 const saveData = navigator.connection?.saveData === true;
 
 let previousScrollY = window.scrollY;
@@ -22,6 +23,7 @@ let frameRequested = false;
 let menuReturnFocus = null;
 let hasUserScrollIntent = false;
 let touchStartY = null;
+let isTouchScrolling = false;
 
 function showBackgroundVideo() {
   backgroundVideo.classList.add("is-ready");
@@ -35,7 +37,14 @@ function syncBackgroundVideo() {
   const isPastHeroSequence = window.scrollY > window.innerHeight * 1.8;
   const isHeroRevealed = hero.classList.contains("is-revealed");
 
-  if (document.hidden || prefersReducedMotion || saveData || isPastHeroSequence || !isHeroRevealed) {
+  if (
+    document.hidden ||
+    prefersReducedMotion ||
+    saveData ||
+    isPastHeroSequence ||
+    !isHeroRevealed ||
+    (mobileViewport.matches && isTouchScrolling)
+  ) {
     backgroundVideo.pause();
     return;
   }
@@ -213,6 +222,8 @@ window.addEventListener(
   "touchstart",
   (event) => {
     touchStartY = event.touches[0]?.clientY ?? null;
+    isTouchScrolling = true;
+    if (mobileViewport.matches && !backgroundVideo.paused) backgroundVideo.pause();
   },
   { passive: true },
 );
@@ -226,6 +237,13 @@ window.addEventListener(
   },
   { passive: true },
 );
+const finishTouchScroll = () => {
+  touchStartY = null;
+  isTouchScrolling = false;
+  syncBackgroundVideo();
+};
+window.addEventListener("touchend", finishTouchScroll, { passive: true });
+window.addEventListener("touchcancel", finishTouchScroll, { passive: true });
 window.addEventListener("keydown", (event) => {
   if (["ArrowDown", "PageDown", "End", " "].includes(event.key)) hasUserScrollIntent = true;
 });

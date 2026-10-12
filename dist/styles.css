@@ -978,6 +978,15 @@ a {
 }
 
 @media (max-width: 680px) {
+  html {
+    scroll-behavior: auto;
+    scrollbar-gutter: auto;
+  }
+
+  body {
+    overscroll-behavior-y: none;
+  }
+
   .hero {
     --intro-circle-radius: clamp(104px, 30vw, 160px);
     --intro-touch-diagonal: clamp(74px, 21.2vw, 113px);
@@ -1149,8 +1158,15 @@ a {
   }
 
   .hero-copy h1 {
-    font-size: clamp(3.2rem, 15.8vw, 4.9rem);
-    line-height: 0.88;
+    width: 100%;
+    font-size: clamp(4.25rem, 20vw, 5.65rem);
+    line-height: 0.82;
+  }
+
+  .hero-title__line {
+    max-width: 100%;
+    line-height: 0.84;
+    white-space: nowrap;
   }
 
   .hero-copy__description {
@@ -7107,6 +7123,19 @@ body.is-booking-open {
 
   .menu-page__section {
     contain-intrinsic-size: auto 1700px;
+  }
+}
+
+/* Keep the mobile document height stable while sections enter the viewport. */
+@media (max-width: 680px) {
+  @supports (content-visibility: auto) {
+    .site-content > .section,
+    .menu-page__section,
+    .private,
+    .contact {
+      content-visibility: visible;
+      contain-intrinsic-size: none;
+    }
   }
 }
 
