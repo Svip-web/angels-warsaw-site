@@ -26,6 +26,7 @@ let touchStartY = null;
 let isTouchScrolling = false;
 let isMobileScrollActive = false;
 let mobileScrollIdleTimer = 0;
+let heroRevealSettleTimer = 0;
 
 function showBackgroundVideo() {
   backgroundVideo.classList.add("is-ready");
@@ -38,12 +39,14 @@ function hideBackgroundVideo() {
 function syncBackgroundVideo() {
   const isPastHeroSequence = window.scrollY > window.innerHeight * 1.8;
   const isHeroRevealed = hero.classList.contains("is-revealed");
+  const isAwayFromMobileHero = mobileViewport.matches && window.scrollY > window.innerHeight * 0.25;
 
   if (
     document.hidden ||
     prefersReducedMotion ||
     saveData ||
     isPastHeroSequence ||
+    isAwayFromMobileHero ||
     !isHeroRevealed ||
     (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
   ) {
@@ -66,6 +69,13 @@ function revealHero() {
   if (hero.classList.contains("is-revealed")) return;
   hero.classList.add("is-revealed");
   setHeroInteractiveState(true);
+
+  if (mobileViewport.matches) {
+    window.clearTimeout(heroRevealSettleTimer);
+    heroRevealSettleTimer = window.setTimeout(() => {
+      hero.classList.add("is-reveal-settled");
+    }, 1200);
+  }
 }
 
 function setMenuOpen(isOpen, sourceTrigger = null) {
@@ -98,12 +108,17 @@ function setMenuOpen(isOpen, sourceTrigger = null) {
 function updateScrollProgress(currentScrollY) {
   const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
   scrollProgress.style.transform = `scaleY(${Math.min(currentScrollY / maxScroll, 1)})`;
-  revealedHeader.classList.toggle("has-surface", currentScrollY > window.innerHeight * 1.1);
+  const shouldShowHeaderSurface = mobileViewport.matches
+    ? hero.classList.contains("is-revealed")
+    : currentScrollY > window.innerHeight * 1.1;
+  revealedHeader.classList.toggle("has-surface", shouldShowHeaderSurface);
 }
 
 function syncHeroDormancy(currentScrollY = window.scrollY) {
   if (mobileViewport.matches) {
-    hero.classList.remove("is-dormant");
+    const prewarmDistance = window.innerHeight * 0.7;
+    const dormantThreshold = siteContent.offsetTop + prewarmDistance;
+    hero.classList.toggle("is-dormant", currentScrollY > dormantThreshold);
     return;
   }
 
@@ -145,7 +160,8 @@ function handleScroll() {
 
 function resetHero() {
   setMenuOpen(false);
-  hero.classList.remove("is-revealed", "is-dormant");
+  window.clearTimeout(heroRevealSettleTimer);
+  hero.classList.remove("is-revealed", "is-reveal-settled", "is-dormant");
   hasUserScrollIntent = false;
   setHeroInteractiveState(false);
   window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });

@@ -1017,8 +1017,22 @@ a {
     transform: translateZ(0);
   }
 
-  .hero.is-dormant {
-    visibility: visible;
+  .hero.is-reveal-settled .reveal {
+    clip-path: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .hero.is-reveal-settled .intro-sky,
+  .hero.is-reveal-settled .intro-fresco-mobile,
+  .hero.is-reveal-settled .intro {
+    display: none;
+  }
+
+  .site-header::before {
+    background: rgba(0, 0, 0, 0.86);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .intro-fresco {
