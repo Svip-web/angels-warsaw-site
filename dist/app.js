@@ -440,6 +440,42 @@ if (contactVideo) {
   document.addEventListener("visibilitychange", syncContactVideoPlayback);
 }
 
+const contactMapFrame = document.querySelector(".contact-map iframe[data-src]");
+
+if (contactMapFrame) {
+  // The Google Maps embed runs heavy script on the page's main thread. Loading it
+  // only once the map is on screen and scrolling has settled keeps it from
+  // stalling frames while the user scrolls through the sections above it.
+  let contactMapIsVisible = false;
+  let contactMapIdleTimer = 0;
+  let contactMapObserver = null;
+
+  const loadContactMap = () => {
+    contactMapFrame.src = contactMapFrame.dataset.src;
+    delete contactMapFrame.dataset.src;
+    contactMapObserver?.disconnect();
+    window.removeEventListener("scroll", scheduleContactMapLoad);
+  };
+
+  function scheduleContactMapLoad() {
+    window.clearTimeout(contactMapIdleTimer);
+    if (!contactMapIsVisible) return;
+    contactMapIdleTimer = window.setTimeout(loadContactMap, 350);
+  }
+
+  if ("IntersectionObserver" in window) {
+    contactMapObserver = new IntersectionObserver(([entry]) => {
+      contactMapIsVisible = entry.isIntersecting;
+      scheduleContactMapLoad();
+    });
+
+    contactMapObserver.observe(contactMapFrame);
+    window.addEventListener("scroll", scheduleContactMapLoad, { passive: true });
+  } else {
+    loadContactMap();
+  }
+}
+
 if (prefersReducedMotion || saveData) {
   backgroundVideo.preload = "none";
   backgroundVideo.pause();

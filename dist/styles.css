@@ -7322,39 +7322,9 @@ body.is-booking-open {
   }
 }
 
-/* Skip layout and paint work for distant sections until they approach the viewport. */
-@supports (content-visibility: auto) {
-  .site-content > .section,
-  .menu-page__section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 900px;
-  }
-
-  .private {
-    contain-intrinsic-size: auto 2600px;
-  }
-
-  .contact {
-    contain-intrinsic-size: auto 1800px;
-  }
-
-  .menu-page__section {
-    contain-intrinsic-size: auto 1700px;
-  }
-}
-
-/* Keep the mobile document height stable while sections enter the viewport. */
-@media (max-width: 680px) {
-  @supports (content-visibility: auto) {
-    .site-content > .section,
-    .menu-page__section,
-    .private,
-    .contact {
-      content-visibility: visible;
-      contain-intrinsic-size: none;
-    }
-  }
-}
+/* Sections deliberately avoid content-visibility: auto. Its placeholder heights
+   resolve to real heights mid-scroll, and Safari (no scroll anchoring) jumps the
+   page by hundreds of pixels when scrolling up after a jump or anchor link. */
 
 @media (prefers-reduced-data: reduce) {
   .reveal__background,
