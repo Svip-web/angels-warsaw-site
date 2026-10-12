@@ -26,12 +26,12 @@
       rel="stylesheet"
     />
     <title>Меню — Angel's Варшава</title>
-    <link rel="stylesheet" href="styles.css?v=20261012-2" />
+    <link rel="stylesheet" href="styles.css?v=20261012-3" />
   </head>
   <body class="menu-page">
     <header class="menu-page__header">
       <a class="menu-page__back" href="index.html#about" aria-label="Вернуться на главную">
-        <span aria-hidden="true">←</span> На главную
+        <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg><span>На главную</span>
       </a>
       <a class="menu-page__logo" href="index.html#hero" aria-label="Angel's — на главную">
         <img src="assets/angels-wordmark-v2.webp" alt="Angel's" width="800" height="396" decoding="async" />
@@ -70,9 +70,9 @@
         <p class="menu-page__eyebrow">Angel's · Варшава</p>
         <h1 id="menu-page-title">Меню <em>Angel's</em></h1>
         <nav class="menu-page__nav" aria-label="Разделы меню">
-          <a href="#bar"><span>01</span><strong>Бар</strong><i aria-hidden="true">↓</i></a>
-          <a href="#kitchen"><span>02</span><strong>Кухня</strong><i aria-hidden="true">↓</i></a>
-          <a href="#non-alcoholic"><span>03</span><strong>Безалкогольные напитки</strong><i aria-hidden="true">↓</i></a>
+          <a href="#bar"><span>01</span><strong>Бар</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
+          <a href="#kitchen"><span>02</span><strong>Кухня</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
+          <a href="#non-alcoholic"><span>03</span><strong>Безалкогольные напитки</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
         </nav>
       </section>
 
@@ -203,7 +203,8 @@
         href="https://www.google.com/maps/search/?api=1&amp;query=Zurawia+6%2F12+Warsaw+Poland"
         target="_blank"
         rel="noreferrer"
-      >Żurawia 6/12, Варшава ↗</a>
+        class="link-with-icon"
+      ><span>Żurawia 6/12, Варшава</span><svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a>
       <span>© 2026</span>
     </footer>
     <div class="booking-modal" id="booking" aria-hidden="true">
