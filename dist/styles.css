@@ -1384,6 +1384,16 @@ a {
   transform: translateY(0);
 }
 
+@media (max-width: 680px) {
+  /* Mobile scrolling must not compete with long entrance transitions. */
+  .js [data-reveal],
+  .js [data-reveal].in-view {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .manifest {
   min-height: auto;
   padding: clamp(96px, 8vw, 132px) 0 clamp(104px, 10vw, 168px);

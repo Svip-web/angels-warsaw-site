@@ -27,6 +27,7 @@ let isTouchScrolling = false;
 let isMobileScrollActive = false;
 let mobileScrollIdleTimer = 0;
 let heroRevealSettleTimer = 0;
+let syncContactVideoPlayback = () => {};
 
 function showBackgroundVideo() {
   backgroundVideo.classList.add("is-ready");
@@ -106,8 +107,10 @@ function setMenuOpen(isOpen, sourceTrigger = null) {
 }
 
 function updateScrollProgress(currentScrollY) {
-  const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-  scrollProgress.style.transform = `scaleY(${Math.min(currentScrollY / maxScroll, 1)})`;
+  if (!mobileViewport.matches) {
+    const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    scrollProgress.style.transform = `scaleY(${Math.min(currentScrollY / maxScroll, 1)})`;
+  }
   const shouldShowHeaderSurface = mobileViewport.matches
     ? hero.classList.contains("is-revealed")
     : currentScrollY > window.innerHeight * 1.1;
@@ -116,9 +119,10 @@ function updateScrollProgress(currentScrollY) {
 
 function syncHeroDormancy(currentScrollY = window.scrollY) {
   if (mobileViewport.matches) {
-    const prewarmDistance = window.innerHeight * 0.7;
-    const dormantThreshold = siteContent.offsetTop + prewarmDistance;
-    hero.classList.toggle("is-dormant", currentScrollY > dormantThreshold);
+    // Recreating a hidden full-screen fixed layer causes a short hitch when the
+    // user reverses scroll direction on mobile. Keep the settled hero mounted
+    // behind the opaque page content instead.
+    hero.classList.remove("is-dormant");
     return;
   }
 
@@ -130,12 +134,13 @@ function pauseHeavyHeroWorkDuringMobileScroll() {
 
   isMobileScrollActive = true;
   if (!backgroundVideo.paused) backgroundVideo.pause();
+  if (contactVideo && !contactVideo.paused) contactVideo.pause();
   window.clearTimeout(mobileScrollIdleTimer);
   mobileScrollIdleTimer = window.setTimeout(() => {
     isMobileScrollActive = false;
-    syncHeroDormancy();
     syncBackgroundVideo();
-  }, 360);
+    syncContactVideoPlayback();
+  }, 520);
 }
 
 function updateFromScroll() {
@@ -146,7 +151,7 @@ function updateFromScroll() {
 
   syncHeroDormancy(currentScrollY);
   updateScrollProgress(currentScrollY);
-  syncBackgroundVideo();
+  if (!mobileViewport.matches) syncBackgroundVideo();
   previousScrollY = currentScrollY;
   frameRequested = false;
 }
@@ -397,8 +402,14 @@ document.addEventListener("visibilitychange", () => {
 if (contactVideo) {
   let contactVideoIsNear = false;
 
-  const syncContactVideo = () => {
-    if (document.hidden || prefersReducedMotion || saveData || !contactVideoIsNear) {
+  syncContactVideoPlayback = () => {
+    if (
+      document.hidden ||
+      prefersReducedMotion ||
+      saveData ||
+      !contactVideoIsNear ||
+      (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
+    ) {
       contactVideo.pause();
       return;
     }
@@ -415,7 +426,7 @@ if (contactVideo) {
     const contactVideoObserver = new IntersectionObserver(
       ([entry]) => {
         contactVideoIsNear = entry.isIntersecting;
-        syncContactVideo();
+        syncContactVideoPlayback();
       },
       { rootMargin: "320px 0px", threshold: 0.01 },
     );
@@ -423,10 +434,10 @@ if (contactVideo) {
     contactVideoObserver.observe(contactVideo);
   } else if (!prefersReducedMotion && !saveData) {
     contactVideoIsNear = true;
-    syncContactVideo();
+    syncContactVideoPlayback();
   }
 
-  document.addEventListener("visibilitychange", syncContactVideo);
+  document.addEventListener("visibilitychange", syncContactVideoPlayback);
 }
 
 if (prefersReducedMotion || saveData) {
@@ -438,7 +449,7 @@ if (prefersReducedMotion || saveData) {
 
 const revealElements = document.querySelectorAll("[data-reveal]");
 
-if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+if (prefersReducedMotion || mobileViewport.matches || !("IntersectionObserver" in window)) {
   revealElements.forEach((element) => element.classList.add("in-view"));
 } else {
   const revealObserver = new IntersectionObserver(
