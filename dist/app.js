@@ -214,7 +214,7 @@ function focusNavigationTarget(target) {
 }
 
 function getVisibleNavigationTarget() {
-  if (window.scrollY < window.innerHeight * 1.65) return hero;
+  if (window.scrollY < Math.max(siteContent.offsetTop - 96, 0)) return hero;
 
   const sections = Array.from(document.querySelectorAll(".site-content section[id]"));
   return sections.reduce((current, section) => {

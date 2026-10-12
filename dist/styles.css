@@ -7422,3 +7422,24 @@ body.is-booking-open {
     margin-bottom: 26px;
   }
 }
+
+/* Mobile document flow: the content starts after the hero instead of covering it. */
+@media (max-width: 680px) {
+  .hero {
+    position: relative;
+    inset: auto;
+    height: 100svh;
+    min-height: 100svh;
+    backface-visibility: visible;
+    transform: none;
+  }
+
+  .site-content {
+    margin-top: 0;
+    box-shadow: none;
+  }
+
+  .site-content::before {
+    display: none;
+  }
+}
