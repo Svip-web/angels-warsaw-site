@@ -1,0 +1,7 @@
+.env
+node_modules/
+local-server.log
+local-server-error.log
+source-assets/
+tmp/
+mediabank-preview.png

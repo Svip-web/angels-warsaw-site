@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Меню Angel's Варшава: бар, кухня и безалкогольные напитки."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:title" content="Меню Angel's — бар и кухня" />
+    <meta property="og:description" content="Авторские коктейли, кухня и безалкогольные напитки Angel's в Варшаве." />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Cpath d='M10 45 28 14h8l18 31h-9l-4-8H23l-4 8Zm17-16h10l-5-10Z' fill='%23ece7db'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Меню — Angel's Варшава</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="menu-page">
+    <header class="menu-page__header">
+      <a class="menu-page__back" href="index.html#about" aria-label="Вернуться на главную">
+        <span aria-hidden="true">←</span> На главную
+      </a>
+      <a class="menu-page__logo" href="index.html#hero" aria-label="Angel's — на главную">
+        <img src="assets/angels-wordmark-v2.webp" alt="Angel's" width="800" height="396" decoding="async" />
+      </a>
+      <a class="button menu-page__booking" href="#booking">
+        Забронировать стол
+      </a>
+    </header>
+
+    <nav class="menu-page__quick-nav" aria-label="Быстрый переход по разделам меню">
+      <a href="#bar">
+        <svg class="menu-page__quick-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 3h11l-1.3 6.4a4.3 4.3 0 0 1-8.4 0L6.5 3Z" />
+          <path d="M12 13.5V20M8.8 20h6.4" />
+        </svg>
+        <span>Бар</span>
+      </a>
+      <a href="#kitchen">
+        <svg class="menu-page__quick-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 16.5h16M6 16.5v-1.3a6 6 0 0 1 12 0v1.3M12 9.2V7M9.8 7h4.4M3 19h18" />
+        </svg>
+        <span>Кухня</span>
+      </a>
+      <a href="#non-alcoholic">
+        <svg class="menu-page__quick-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 5h10l-1 15H8L7 5ZM6 5h12M9 9h6" />
+          <path d="M14 5c.4-2 1.8-3 4-3" />
+        </svg>
+        <span>Без алкоголя</span>
+      </a>
+    </nav>
+
+    <main>
+      <section class="menu-page__hero" aria-labelledby="menu-page-title">
+        <div class="menu-page__hero-glow" aria-hidden="true"></div>
+        <p class="menu-page__eyebrow">Angel's · Варшава</p>
+        <h1 id="menu-page-title">Меню <em>Angel's</em></h1>
+        <nav class="menu-page__nav" aria-label="Разделы меню">
+          <a href="#bar"><span>01</span><strong>Бар</strong><i aria-hidden="true">↓</i></a>
+          <a href="#kitchen"><span>02</span><strong>Кухня</strong><i aria-hidden="true">↓</i></a>
+          <a href="#non-alcoholic"><span>03</span><strong>Безалкогольные напитки</strong><i aria-hidden="true">↓</i></a>
+        </nav>
+      </section>
+
+      <section class="menu-page__section" id="bar" aria-labelledby="bar-title">
+        <div class="menu-page__section-inner">
+          <header class="menu-page__section-heading">
+            <span class="menu-page__number">01</span>
+            <div>
+              <h2 id="bar-title">Бар</h2>
+              <p>Авторские коктейли, шампанское и крепкий алкоголь — карта для тех, кто разбирается.</p>
+            </div>
+          </header>
+          <ul class="menu-page__product-grid" aria-label="Коктейли">
+            <li class="menu-product">
+              <figure><img src="assets/story-bar.webp" alt="Коктейль Velvet Rose" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>46 zł</strong></div><h3>Velvet Rose</h3><p>Роза, персик, лайм и бархатистая пенка.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-table.webp" alt="Коктейль 1800 Tequila Silk" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>49 zł</strong></div><h3>1800 Tequila Silk</h3><p>Текила, маракуйя и благородная терпкость грейпфрута.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-finale.webp" alt="Коктейль Angel's Secret Martini" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Авторский</span><strong>52 zł</strong></div><h3>Angel's Secret Martini</h3><p>Джин, сухой вермут, мараскино и пикантный финиш.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-guests.webp" alt="Коктейль Angels Nostalgia" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>47 zł</strong></div><h3>Angels Nostalgia</h3><p>Лаванда, кислый микс и воздушная пенка.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/lounge-interior.jpg" alt="Коктейль Old Fashioned Premium" width="1200" height="800" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Премиум</span><strong>69 zł</strong></div><h3>Old Fashioned Premium</h3><p>Macallan 15, сахар и биттер Peychaud's.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-show.webp" alt="Коктейль Bubble Margarita" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>45 zł</strong></div><h3>Bubble Margarita</h3><p>Текила, лайм и узнаваемый вкус жвачки.</p></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="menu-page__section" id="kitchen" aria-labelledby="kitchen-title">
+        <div class="menu-page__section-inner">
+          <header class="menu-page__section-heading">
+            <span class="menu-page__number">02</span>
+            <div>
+              <h2 id="kitchen-title">Кухня</h2>
+              <p>Закуски, суши и основные блюда от шефа.</p>
+            </div>
+          </header>
+          <ul class="menu-page__product-grid" aria-label="Позиции кухни">
+            <li class="menu-product">
+              <figure><img src="assets/story-kitchen.webp" alt="Тартар из лосося" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>54 zł</strong></div><h3>Тартар из лосося</h3><p>Лосось, авокадо, понзу, кунжут и хрустящий рис.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-table.webp" alt="Креветки темпура" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>49 zł</strong></div><h3>Креветки темпура</h3><p>Креветки, темпура, спайси-майо и лайм.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-kitchen.webp" alt="Ролл Angel's" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Выбор шефа</span><strong>58 zł</strong></div><h3>Ролл Angel's</h3><p>Лосось, тунец, авокадо, сливочный сыр и икра тобико.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-finale.webp" alt="Трюфельные аранчини" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Без мяса</span><strong>39 zł</strong></div><h3>Трюфельные аранчини</h3><p>Рис, пармезан, трюфельный крем и томатный соус.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-kitchen.webp" alt="Томлёная говядина" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>72 zł</strong></div><h3>Томлёная говядина</h3><p>Говядина, картофельный крем, демиглас и шалот.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-table.webp" alt="Паста с трюфелем" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Выбор шефа</span><strong>57 zł</strong></div><h3>Паста с трюфелем</h3><p>Тальятелле, сливочный соус, пармезан и трюфель.</p></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="menu-page__section" id="non-alcoholic" aria-labelledby="non-alcoholic-title">
+        <div class="menu-page__section-inner">
+          <header class="menu-page__section-heading">
+            <span class="menu-page__number">03</span>
+            <div>
+              <h2 id="non-alcoholic-title">Безалкогольные напитки</h2>
+              <p>Лимонады, кофе и чай — для тех, кто выбирает ясность ума.</p>
+            </div>
+          </header>
+          <ul class="menu-page__product-grid" aria-label="Безалкогольные напитки">
+            <li class="menu-product">
+              <figure><img src="assets/story-bar.webp" alt="Напиток Pink Tonic" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>29 zł</strong></div><h3>Pink Tonic</h3><p>Грейпфрут, роза, тоник и свежий розмарин.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-guests.webp" alt="Лимонад Passion" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>27 zł</strong></div><h3>Passion Lemonade</h3><p>Маракуйя, апельсин, лайм и содовая.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-table.webp" alt="Напиток Cucumber Cooler" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Свежий</span><strong>27 zł</strong></div><h3>Cucumber Cooler</h3><p>Огурец, яблоко, бузина, лимон и содовая.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/lounge-interior.jpg" alt="Эспрессо-тоник" width="1200" height="800" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>24 zł</strong></div><h3>Espresso Tonic</h3><p>Двойной эспрессо, тоник и апельсиновая цедра.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-finale.webp" alt="Матча с клубникой" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Без кофеина</span><strong>26 zł</strong></div><h3>Матча клубника</h3><p>Матча, клубничное пюре и кокосовое молоко.</p></div>
+            </li>
+            <li class="menu-product">
+              <figure><img src="assets/story-show.webp" alt="Жасминовый чай" width="900" height="1600" loading="lazy" decoding="async" /></figure>
+              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Чай</span><strong>22 zł</strong></div><h3>Жасминовый чай</h3><p>Зелёный чай, жасмин и лепестки розы.</p></div>
+            </li>
+          </ul>
+          </div>
+      </section>
+
+      <section class="menu-page__closing" id="booking-cta" aria-label="Бронирование">
+        <a class="button button--primary" href="#booking">
+          Забронировать стол
+        </a>
+      </section>
+    </main>
+
+    <footer class="menu-page__footer">
+      <a href="index.html#hero">Angel's Варшава</a>
+      <a
+        href="https://www.google.com/maps/search/?api=1&amp;query=Zurawia+6%2F12+Warsaw+Poland"
+        target="_blank"
+        rel="noreferrer"
+      >Żurawia 6/12, Варшава ↗</a>
+      <span>© 2026</span>
+    </footer>
+    <div class="booking-modal" id="booking" aria-hidden="true">
+      <button class="booking-modal__scrim" type="button" aria-label="Закрыть форму бронирования"></button>
+      <section
+        class="booking-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="booking-title"
+        aria-describedby="booking-description"
+        tabindex="-1"
+      >
+        <button class="booking-modal__close" type="button" aria-label="Закрыть форму">
+          <span></span><span></span>
+        </button>
+        <div class="booking-modal__intro">
+          <p class="booking-modal__eyebrow">Angel's</p>
+          <h2 id="booking-title">Бронирование</h2>
+          <p id="booking-description">
+            Оставьте заявку — мы свяжемся с вами.
+          </p>
+          <div class="booking-modal__facts" aria-label="Информация о бронировании">
+            <span>Żurawia 6/12, Варшава</span>
+          </div>
+        </div>
+        <form class="booking-form" id="booking-form" novalidate>
+          <div class="booking-form__grid">
+            <label class="booking-field">
+              <span>Дата</span>
+              <input type="date" name="date" required autocomplete="off" />
+            </label>
+            <label class="booking-field">
+              <span>Время</span>
+              <select name="time" required>
+                <option value="">Выберите</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+                <option value="22:30">22:30</option>
+                <option value="23:00">23:00</option>
+                <option value="23:30">23:30</option>
+                <option value="00:00">00:00</option>
+                <option value="00:30">00:30</option>
+                <option value="01:00">01:00</option>
+                <option value="01:30">01:30</option>
+                <option value="02:00">02:00</option>
+                <option value="02:30">02:30</option>
+                <option value="03:00">03:00</option>
+                <option value="03:30">03:30</option>
+                <option value="04:00">04:00</option>
+              </select>
+            </label>
+            <label class="booking-field">
+              <span>Количество гостей</span>
+              <input type="number" name="guests" min="1" max="60" step="1" inputmode="numeric" placeholder="2" required />
+            </label>
+            <label class="booking-field">
+              <span>Ваше имя</span>
+              <input type="text" name="name" minlength="2" maxlength="80" autocomplete="name" placeholder="Имя" required />
+            </label>
+            <label class="booking-field booking-field--wide">
+              <span>Номер телефона</span>
+              <input type="tel" name="phone" maxlength="32" autocomplete="tel" inputmode="tel" placeholder="+48 000 000 000" required />
+            </label>
+            <label class="booking-field booking-field--wide">
+              <span>Комментарий <small>необязательно</small></span>
+              <textarea name="note" maxlength="500" rows="2" placeholder="Повод, пожелания или удобный способ связи"></textarea>
+            </label>
+            <label class="booking-field booking-field--trap" aria-hidden="true">
+              <span>Сайт</span>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="booking-form__footer">
+            <p>Нажимая кнопку, вы соглашаетесь на обработку данных для связи по заявке.</p>
+            <button class="button button--primary booking-form__submit" type="submit">
+              <span>Отправить заявку</span>
+            </button>
+          </div>
+          <p class="booking-form__status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+
+    <script src="booking.js"></script>
+  </body>
+</html>

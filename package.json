@@ -1,0 +1,8 @@
+{
+  "name": "angels-warsaw-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs"
+  }
+}
