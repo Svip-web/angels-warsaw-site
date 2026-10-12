@@ -6968,6 +6968,7 @@ body.is-booking-open {
     width: 100%;
     min-height: 48px;
     align-items: center;
+    grid-row: auto;
     justify-self: stretch;
     padding: 10px 0;
     border-bottom: 1px solid rgba(236, 231, 219, 0.12);
