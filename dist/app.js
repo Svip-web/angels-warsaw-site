@@ -29,6 +29,9 @@ let mobileScrollIdleTimer = 0;
 let heroRevealSettleTimer = 0;
 let syncContactVideoPlayback = () => {};
 let stableHeroWidth = 0;
+let isMobileRevealLocked = false;
+let mobileRevealLockTimer = 0;
+const mobileRevealLockMs = 1000;
 
 // iOS Safari resizes the viewport (and, on recent versions, svh) while its
 // toolbars collapse and expand, which made the in-flow mobile hero change height
@@ -183,7 +186,47 @@ function resetHero() {
   hero.classList.remove("is-revealed", "is-reveal-settled", "is-dormant");
   hasUserScrollIntent = false;
   setHeroInteractiveState(false);
+  armMobileRevealLock();
   window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+}
+
+// The mobile hero sits in the document flow, so a swipe used to scroll it off
+// screen while the circle was still opening. The first upward swipe from the top
+// now plays the reveal in place and holds page scrolling until the circle is open.
+function holdScrollForMobileReveal(event) {
+  if (isMobileRevealLocked) {
+    if (event.cancelable) event.preventDefault();
+    return;
+  }
+
+  if (!mobileViewport.matches || prefersReducedMotion || hero.classList.contains("is-revealed")) {
+    releaseMobileRevealLock();
+    return;
+  }
+
+  const currentTouchY = event.touches[0]?.clientY;
+  if (window.scrollY > 4 || touchStartY === null || currentTouchY === undefined || currentTouchY >= touchStartY) return;
+
+  // Cancel from the first upward move: iOS ignores preventDefault once scrolling starts.
+  if (event.cancelable) event.preventDefault();
+  if (currentTouchY > touchStartY - 8) return;
+
+  hasUserScrollIntent = true;
+  revealHero();
+  isMobileRevealLocked = true;
+  mobileRevealLockTimer = window.setTimeout(releaseMobileRevealLock, mobileRevealLockMs);
+}
+
+function releaseMobileRevealLock() {
+  window.clearTimeout(mobileRevealLockTimer);
+  isMobileRevealLocked = false;
+  window.removeEventListener("touchmove", holdScrollForMobileReveal);
+}
+
+function armMobileRevealLock() {
+  releaseMobileRevealLock();
+  // Non-passive on purpose, and only attached until the reveal has played.
+  window.addEventListener("touchmove", holdScrollForMobileReveal, { passive: false });
 }
 
 function getHashTarget() {
@@ -254,6 +297,7 @@ window.addEventListener(
       hero.classList.remove("is-revealed");
       hasUserScrollIntent = false;
       setHeroInteractiveState(false);
+      armMobileRevealLock();
       window.scrollTo(0, 0);
     } else if (window.scrollY > revealThreshold) {
       revealHero();
@@ -271,6 +315,7 @@ window.addEventListener(
 );
 
 window.addEventListener("scroll", handleScroll, { passive: true });
+if (!hero.classList.contains("is-revealed")) armMobileRevealLock();
 window.addEventListener(
   "wheel",
   (event) => {
