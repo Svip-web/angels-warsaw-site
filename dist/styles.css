@@ -7398,8 +7398,8 @@ body.is-booking-open {
   .hero {
     position: relative;
     inset: auto;
-    height: 100svh;
-    min-height: 100svh;
+    height: var(--hero-stable-height, 100svh);
+    min-height: var(--hero-stable-height, 100svh);
     backface-visibility: visible;
     transform: none;
   }

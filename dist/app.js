@@ -28,6 +28,20 @@ let isMobileScrollActive = false;
 let mobileScrollIdleTimer = 0;
 let heroRevealSettleTimer = 0;
 let syncContactVideoPlayback = () => {};
+let stableHeroWidth = 0;
+
+// iOS Safari resizes the viewport (and, on recent versions, svh) while its
+// toolbars collapse and expand, which made the in-flow mobile hero change height
+// mid-scroll and jerk everything below it. Lock the height measured at load and
+// only re-measure when the width changes, e.g. on rotation.
+function lockHeroHeight() {
+  if (window.innerWidth === stableHeroWidth) return;
+  stableHeroWidth = window.innerWidth;
+  document.documentElement.style.setProperty("--hero-stable-height", `${window.innerHeight}px`);
+}
+
+lockHeroHeight();
+window.addEventListener("resize", lockHeroHeight, { passive: true });
 
 function showBackgroundVideo() {
   backgroundVideo.classList.add("is-ready");
