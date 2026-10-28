@@ -55,24 +55,15 @@ function hideBackgroundVideo() {
 }
 
 function syncBackgroundVideo() {
-  const isPastHeroSequence = window.scrollY > window.innerHeight * 1.8;
-  const isHeroRevealed = hero.classList.contains("is-revealed");
-  const isAwayFromMobileHero = mobileViewport.matches && window.scrollY > window.innerHeight * 0.25;
-
-  if (
-    document.hidden ||
-    prefersReducedMotion ||
-    saveData ||
-    isPastHeroSequence ||
-    isAwayFromMobileHero ||
-    !isHeroRevealed ||
-    (mobileViewport.matches && (isTouchScrolling || isMobileScrollActive))
-  ) {
+  if (document.hidden || prefersReducedMotion || saveData) {
     backgroundVideo.pause();
     return;
   }
 
-  if (backgroundVideo.preload === "none") backgroundVideo.preload = "metadata";
+  backgroundVideo.muted = true;
+  backgroundVideo.defaultMuted = true;
+  backgroundVideo.playsInline = true;
+  if (backgroundVideo.preload !== "auto") backgroundVideo.preload = "auto";
   if (backgroundVideo.paused) backgroundVideo.play().catch(hideBackgroundVideo);
 }
 
@@ -150,7 +141,6 @@ function pauseHeavyHeroWorkDuringMobileScroll() {
   if (!mobileViewport.matches) return;
 
   isMobileScrollActive = true;
-  if (!backgroundVideo.paused) backgroundVideo.pause();
   if (contactVideo && !contactVideo.paused) contactVideo.pause();
   window.clearTimeout(mobileScrollIdleTimer);
   mobileScrollIdleTimer = window.setTimeout(() => {
@@ -241,7 +231,6 @@ function getHashTarget() {
 
 function syncDeepLinkPosition(target, behavior = "auto") {
   revealHero();
-  backgroundVideo.pause();
   target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : behavior, block: "start" });
   previousScrollY = window.scrollY;
   syncHeroDormancy(previousScrollY);
@@ -328,7 +317,6 @@ window.addEventListener(
   (event) => {
     touchStartY = event.touches[0]?.clientY ?? null;
     isTouchScrolling = true;
-    if (mobileViewport.matches && !backgroundVideo.paused) backgroundVideo.pause();
   },
   { passive: true },
 );
@@ -454,6 +442,11 @@ backgroundVideo.addEventListener("playing", showBackgroundVideo);
 backgroundVideo.addEventListener("loadeddata", showBackgroundVideo, { once: true });
 backgroundVideo.addEventListener("waiting", hideBackgroundVideo);
 backgroundVideo.addEventListener("stalled", hideBackgroundVideo);
+backgroundVideo.addEventListener("pause", () => {
+  if (!document.hidden && !prefersReducedMotion && !saveData) {
+    window.requestAnimationFrame(syncBackgroundVideo);
+  }
+});
 document.addEventListener("visibilitychange", () => {
   syncBackgroundVideo();
 });
@@ -538,7 +531,8 @@ if (contactMapFrame) {
 if (prefersReducedMotion || saveData) {
   backgroundVideo.preload = "none";
   backgroundVideo.pause();
-} else if (!initialHashTarget) {
+} else {
+  backgroundVideo.preload = "auto";
   syncBackgroundVideo();
 }
 
