@@ -10,16 +10,53 @@
       maximumFractionDigits: 2,
     }).format(value);
 
-  const createItem = (item) => {
+  const cocktailImages = Array.from(
+    { length: 10 },
+    (_, index) => `assets/menu-cocktail-${String(index + 1).padStart(2, "0")}.webp`,
+  );
+
+  const kitchenImages = [
+    "assets/story-kitchen.webp",
+    "assets/story-kitchen.webp",
+    "assets/story-kitchen.webp",
+  ];
+
+  const hashText = (value) =>
+    Array.from(value).reduce((hash, character) => (hash * 31 + character.charCodeAt(0)) >>> 0, 0);
+
+  const getItemImage = (item, group, itemIndex) => {
+    const isKitchen = menu.kitchen.groups.includes(group);
+    const images = isKitchen ? kitchenImages : cocktailImages;
+    return images[(hashText(`${group.key}-${item.name}`) + itemIndex) % images.length];
+  };
+
+  const createItem = (item, group, subgroup, itemIndex) => {
     const row = document.createElement("li");
     row.className = "menu-catalog__item";
 
-    const name = document.createElement("span");
+    const media = document.createElement("figure");
+    media.className = "menu-catalog__media";
+    const image = document.createElement("img");
+    image.src = getItemImage(item, group, itemIndex);
+    image.alt = "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.width = 640;
+    image.height = 480;
+    media.append(image);
+
+    const body = document.createElement("div");
+    body.className = "menu-catalog__item-body";
+
+    const category = document.createElement("span");
+    category.className = "menu-catalog__item-category";
+    category.textContent = subgroup.title || group.title;
+
+    const name = document.createElement("h5");
     name.className = "menu-catalog__item-name";
     name.textContent = item.name;
-    row.append(name);
 
-    const prices = document.createElement("span");
+    const prices = document.createElement("div");
     prices.className = "menu-catalog__prices";
 
     item.prices.forEach((price) => {
@@ -36,11 +73,12 @@
       prices.append(value);
     });
 
-    row.append(prices);
+    body.append(category, name, prices);
+    row.append(media, body);
     return row;
   };
 
-  const createSubgroup = (subgroup) => {
+  const createSubgroup = (subgroup, group) => {
     const block = document.createElement("section");
     block.className = "menu-catalog__subgroup";
 
@@ -51,7 +89,9 @@
     }
 
     const list = document.createElement("ul");
-    subgroup.items.forEach((item) => list.append(createItem(item)));
+    subgroup.items.forEach((item, itemIndex) =>
+      list.append(createItem(item, group, subgroup, itemIndex)),
+    );
     block.append(list);
     return block;
   };
@@ -75,7 +115,7 @@
 
     const body = document.createElement("div");
     body.className = "menu-catalog__group-body";
-    group.subgroups.forEach((subgroup) => body.append(createSubgroup(subgroup)));
+    group.subgroups.forEach((subgroup) => body.append(createSubgroup(subgroup, group)));
     details.append(body);
     return details;
   };
