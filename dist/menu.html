@@ -26,7 +26,7 @@
       rel="stylesheet"
     />
     <title>Меню — Angel's Варшава</title>
-    <link rel="stylesheet" href="styles.css?v=20261013-1" />
+    <link rel="stylesheet" href="styles.css?v=20261028-menu" />
   </head>
   <body class="menu-page">
     <header class="menu-page__header">
@@ -83,73 +83,39 @@
             <span class="menu-page__number">01</span>
             <div>
               <h2 id="bar-title">Бар</h2>
-              <p>Авторские коктейли, шампанское и крепкий алкоголь — карта для тех, кто разбирается.</p>
+              <p>Авторские коктейли, шампанское, вино и крепкий алкоголь. Все позиции и цены — из актуальной карты Angel's.</p>
             </div>
           </header>
-          <ul class="menu-page__product-grid" aria-label="Коктейли">
-            <li class="menu-product">
-              <figure><img src="assets/story-bar.webp" alt="Коктейль Velvet Rose" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>46 zł</strong></div><h3>Velvet Rose</h3><p>Роза, персик, лайм и бархатистая пенка.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-table.webp" alt="Коктейль 1800 Tequila Silk" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>49 zł</strong></div><h3>1800 Tequila Silk</h3><p>Текила, маракуйя и благородная терпкость грейпфрута.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-finale.webp" alt="Коктейль Angel's Secret Martini" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Авторский</span><strong>52 zł</strong></div><h3>Angel's Secret Martini</h3><p>Джин, сухой вермут, мараскино и пикантный финиш.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-guests.webp" alt="Коктейль Angels Nostalgia" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>47 zł</strong></div><h3>Angels Nostalgia</h3><p>Лаванда, кислый микс и воздушная пенка.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/lounge-interior.jpg" alt="Коктейль Old Fashioned Premium" width="1200" height="800" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Премиум</span><strong>69 zł</strong></div><h3>Old Fashioned Premium</h3><p>Macallan 15, сахар и биттер Peychaud's.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-show.webp" alt="Коктейль Bubble Margarita" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>45 zł</strong></div><h3>Bubble Margarita</h3><p>Текила, лайм и узнаваемый вкус жвачки.</p></div>
-            </li>
-          </ul>
+
+          <div class="menu-photo-strip" aria-label="Коктейли Angel's">
+            <figure><img src="assets/menu-cocktail-01.webp" alt="Коктейль Angel's" width="958" height="1440" loading="eager" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-02.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-03.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-04.webp" alt="Коктейль Angel's" width="960" height="960" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-05.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-06.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-07.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-08.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-09.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+            <figure><img src="assets/menu-cocktail-10.webp" alt="Коктейль Angel's" width="958" height="1440" loading="lazy" decoding="async" /></figure>
+          </div>
+
+          <div class="menu-catalog" id="bar-catalog" aria-label="Барная карта Angel's"></div>
+          <noscript><p class="menu-catalog__noscript">Для просмотра полного меню включите JavaScript.</p></noscript>
         </div>
       </section>
 
-      <section class="menu-page__section" id="kitchen" aria-labelledby="kitchen-title">
+      <section class="menu-page__section menu-page__section--soft" id="kitchen" aria-labelledby="kitchen-title">
         <div class="menu-page__section-inner">
           <header class="menu-page__section-heading">
             <span class="menu-page__number">02</span>
             <div>
               <h2 id="kitchen-title">Кухня</h2>
-              <p>Закуски, суши и основные блюда от шефа.</p>
+              <p>Устрицы, закуски, салаты, супы, суши и десерты. Без случайных фотографий — только актуальные позиции и цены.</p>
             </div>
           </header>
-          <ul class="menu-page__product-grid" aria-label="Позиции кухни">
-            <li class="menu-product">
-              <figure><img src="assets/story-kitchen.webp" alt="Тартар из лосося" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>54 zł</strong></div><h3>Тартар из лосося</h3><p>Лосось, авокадо, понзу, кунжут и хрустящий рис.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-table.webp" alt="Креветки темпура" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>49 zł</strong></div><h3>Креветки темпура</h3><p>Креветки, темпура, спайси-майо и лайм.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-kitchen.webp" alt="Ролл Angel's" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Выбор шефа</span><strong>58 zł</strong></div><h3>Ролл Angel's</h3><p>Лосось, тунец, авокадо, сливочный сыр и икра тобико.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-finale.webp" alt="Трюфельные аранчини" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Без мяса</span><strong>39 zł</strong></div><h3>Трюфельные аранчини</h3><p>Рис, пармезан, трюфельный крем и томатный соус.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-kitchen.webp" alt="Томлёная говядина" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>72 zł</strong></div><h3>Томлёная говядина</h3><p>Говядина, картофельный крем, демиглас и шалот.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-table.webp" alt="Паста с трюфелем" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Выбор шефа</span><strong>57 zł</strong></div><h3>Паста с трюфелем</h3><p>Тальятелле, сливочный соус, пармезан и трюфель.</p></div>
-            </li>
-          </ul>
+          <div class="menu-catalog menu-catalog--kitchen" id="kitchen-catalog" aria-label="Меню кухни Angel's"></div>
+          <p class="menu-page__source-note" id="kitchen-note"></p>
         </div>
       </section>
 
@@ -158,37 +124,12 @@
           <header class="menu-page__section-heading">
             <span class="menu-page__number">03</span>
             <div>
-              <h2 id="non-alcoholic-title">Безалкогольные напитки</h2>
-              <p>Лимонады, кофе и чай — для тех, кто выбирает ясность ума.</p>
+              <h2 id="non-alcoholic-title">Без алкоголя</h2>
+              <p>Безалкогольные коктейли, лимонады, фреши, вода, кофе и чай.</p>
             </div>
           </header>
-          <ul class="menu-page__product-grid" aria-label="Безалкогольные напитки">
-            <li class="menu-product">
-              <figure><img src="assets/story-bar.webp" alt="Напиток Pink Tonic" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Хит</span><strong>29 zł</strong></div><h3>Pink Tonic</h3><p>Грейпфрут, роза, тоник и свежий розмарин.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-guests.webp" alt="Лимонад Passion" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Выбор гостей</span><strong>27 zł</strong></div><h3>Passion Lemonade</h3><p>Маракуйя, апельсин, лайм и содовая.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-table.webp" alt="Напиток Cucumber Cooler" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Свежий</span><strong>27 zł</strong></div><h3>Cucumber Cooler</h3><p>Огурец, яблоко, бузина, лимон и содовая.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/lounge-interior.jpg" alt="Эспрессо-тоник" width="1200" height="800" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge">Новинка</span><strong>24 zł</strong></div><h3>Espresso Tonic</h3><p>Двойной эспрессо, тоник и апельсиновая цедра.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-finale.webp" alt="Матча с клубникой" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Без кофеина</span><strong>26 zł</strong></div><h3>Матча клубника</h3><p>Матча, клубничное пюре и кокосовое молоко.</p></div>
-            </li>
-            <li class="menu-product">
-              <figure><img src="assets/story-show.webp" alt="Жасминовый чай" width="900" height="1600" loading="lazy" decoding="async" /></figure>
-              <div class="menu-product__body"><div class="menu-product__meta"><span class="menu-product__badge menu-product__badge--quiet">Чай</span><strong>22 zł</strong></div><h3>Жасминовый чай</h3><p>Зелёный чай, жасмин и лепестки розы.</p></div>
-            </li>
-          </ul>
-          </div>
+          <div class="menu-catalog menu-catalog--compact" id="non-alcoholic-catalog" aria-label="Безалкогольные напитки Angel's"></div>
+        </div>
       </section>
 
       <section class="menu-page__closing" id="booking-cta" aria-label="Бронирование">
@@ -296,6 +237,8 @@
       </section>
     </div>
 
+    <script src="menu-data.js"></script>
+    <script src="menu-page.js"></script>
     <script src="booking.js"></script>
   </body>
 </html>
