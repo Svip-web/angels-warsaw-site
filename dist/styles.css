@@ -7669,50 +7669,56 @@ body.is-booking-open {
 
   .menu-catalog__subgroup ul,
   .menu-catalog--kitchen .menu-catalog__subgroup ul {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .menu-catalog__item {
-    display: grid;
-    grid-template-columns: 116px minmax(0, 1fr);
-    min-height: 142px;
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
   }
 
   .menu-catalog__media {
-    height: 100%;
-    min-height: 142px;
-    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
   }
 
   .menu-catalog__item-body {
-    min-height: 142px;
-    padding: 15px 16px;
+    min-height: 154px;
+    padding: 13px 12px 14px;
   }
 
   .menu-catalog__item-category {
-    margin-bottom: 8px;
-    font-size: 8px;
+    width: 100%;
+    margin-bottom: 7px;
+    overflow: hidden;
+    font-size: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .menu-catalog__item-name {
-    margin-bottom: 12px;
-    font-size: clamp(1.12rem, 5.2vw, 1.42rem);
-    line-height: 1.02;
+    margin-bottom: 10px;
+    font-size: clamp(1rem, 4.8vw, 1.24rem);
+    line-height: 1.04;
   }
 
   .menu-catalog__prices {
-    gap: 10px;
-    padding-top: 9px;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    padding-top: 8px;
   }
 
   .menu-catalog__price strong {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .menu-catalog__price small {
-    max-width: 66px;
-    font-size: 8px;
+    max-width: 58px;
+    font-size: 7px;
     line-height: 1.2;
     white-space: normal;
     text-align: right;
