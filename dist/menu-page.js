@@ -109,7 +109,7 @@
     title.textContent = group.title;
     const meta = document.createElement("span");
     meta.className = "menu-catalog__summary-meta";
-    meta.innerHTML = `<small>${countItems(group)} поз.</small><i aria-hidden="true"></i>`;
+    meta.innerHTML = `<small>${countItems(group)} поз.</small>`;
     summary.append(title, meta);
     details.append(summary);
 
