@@ -4324,6 +4324,10 @@ a {
   display: none;
 }
 
+.menu-page__subnav {
+  display: none;
+}
+
 .menu-page__hero {
   position: relative;
   display: flex;
@@ -4889,6 +4893,87 @@ a {
     filter: drop-shadow(0 0 5px rgba(210, 62, 132, 0.42));
   }
 
+  .menu-page__subnav {
+    position: fixed;
+    inset: 130px 0 auto;
+    z-index: 18;
+    display: block;
+    height: 44px;
+    border-bottom: 1px solid rgba(236, 231, 219, 0.14);
+    background: rgba(7, 5, 7, 0.96);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-7px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    visibility: hidden;
+  }
+
+  .menu-page__subnav.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .menu-page__subnav::after {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 30px;
+    content: "";
+    background: linear-gradient(90deg, transparent, #070507 82%);
+    pointer-events: none;
+  }
+
+  .menu-page__subnav-track {
+    display: flex;
+    height: 44px;
+    gap: 6px;
+    padding: 0 30px 0 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .menu-page__subnav-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-page__subnav a {
+    position: relative;
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    flex: 0 0 auto;
+    padding: 0 12px;
+    color: rgba(236, 231, 219, 0.58);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    scroll-snap-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 180ms ease, background-color 180ms ease;
+    white-space: nowrap;
+  }
+
+  .menu-page__subnav a:hover,
+  .menu-page__subnav a:focus-visible,
+  .menu-page__subnav a.is-active,
+  .menu-page__subnav a[aria-current="location"] {
+    color: #fff;
+    background: rgba(210, 62, 132, 0.11);
+  }
+
+  .menu-page__subnav a.is-active::after,
+  .menu-page__subnav a[aria-current="location"]::after {
+    position: absolute;
+    inset: auto 12px 0;
+    height: 2px;
+    content: "";
+    background: var(--magenta);
+  }
+
   .menu-page__back {
     grid-column: 1;
     font-size: 0;
@@ -4984,7 +5069,11 @@ a {
   .menu-page__section {
     min-height: 0;
     padding: 96px 18px;
-    scroll-margin-top: 126px;
+    scroll-margin-top: 174px;
+  }
+
+  .menu-catalog__group {
+    scroll-margin-top: 184px;
   }
 
   .menu-page__section-inner {

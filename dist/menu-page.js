@@ -24,6 +24,13 @@
   const hashText = (value) =>
     Array.from(value).reduce((hash, character) => (hash * 31 + character.charCodeAt(0)) >>> 0, 0);
 
+  const slugify = (value) =>
+    value
+      .toLowerCase()
+      .replace(/&/g, "-and-")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
   const getItemImage = (item, group, itemIndex) => {
     const isKitchen = menu.kitchen.groups.includes(group);
     const images = isKitchen ? kitchenImages : cocktailImages;
@@ -99,10 +106,12 @@
   const countItems = (group) =>
     group.subgroups.reduce((total, subgroup) => total + subgroup.items.length, 0);
 
-  const createGroup = (group, open) => {
+  const createGroup = (group, open, groupId) => {
     const details = document.createElement("details");
     details.className = "menu-catalog__group";
     details.open = open;
+    details.id = groupId;
+    details.dataset.navLabel = group.title;
 
     const summary = document.createElement("summary");
     const title = document.createElement("span");
@@ -126,7 +135,8 @@
     const fragment = document.createDocumentFragment();
     groups.forEach((group, index) => {
       const open = options.openAll || options.openKeys?.includes(group.key) || index === 0;
-      fragment.append(createGroup(group, open));
+      const groupId = `${options.sectionId}-${slugify(group.key)}`;
+      fragment.append(createGroup(group, open, groupId));
     });
     target.replaceChildren(fragment);
   };
@@ -138,9 +148,12 @@
     ["NON-ALCOHOLIC", "COFFEE & TEA"].includes(group.key),
   );
 
-  renderCatalog("#bar-catalog", barGroups, { openKeys: ["COCKTAILS"] });
-  renderCatalog("#kitchen-catalog", menu.kitchen.groups, { openAll: true });
-  renderCatalog("#non-alcoholic-catalog", zeroProofGroups, { openAll: true });
+  renderCatalog("#bar-catalog", barGroups, { sectionId: "bar", openKeys: ["COCKTAILS"] });
+  renderCatalog("#kitchen-catalog", menu.kitchen.groups, { sectionId: "kitchen", openAll: true });
+  renderCatalog("#non-alcoholic-catalog", zeroProofGroups, {
+    sectionId: "non-alcoholic",
+    openAll: true,
+  });
 
   const note = document.querySelector("#kitchen-note");
   if (note && menu.kitchen.notes.length) note.textContent = menu.kitchen.notes[0];
@@ -149,6 +162,81 @@
   const quickNavSections = quickNavLinks
     .map((link) => ({ link, section: document.querySelector(link.hash) }))
     .filter(({ section }) => section);
+  const secondaryNav = document.querySelector(".menu-page__subnav");
+  const secondaryNavTrack = secondaryNav?.querySelector(".menu-page__subnav-track");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let renderedSecondarySection = null;
+  let activeSecondaryId = null;
+
+  const getSectionGroups = (sectionId) =>
+    Array.from(document.getElementById(sectionId)?.querySelectorAll(".menu-catalog__group") || []);
+
+  const setActiveSecondaryNav = (groupId) => {
+    if (!secondaryNavTrack) return;
+
+    const links = Array.from(secondaryNavTrack.querySelectorAll("a"));
+    const nextActiveLink = links.find((link) => link.hash === `#${groupId}`);
+
+    links.forEach((link) => {
+      const isActive = link === nextActiveLink;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+
+    if (!nextActiveLink || activeSecondaryId === groupId) return;
+    activeSecondaryId = groupId;
+
+    const targetLeft = nextActiveLink.offsetLeft - (secondaryNavTrack.clientWidth - nextActiveLink.clientWidth) / 2;
+    secondaryNavTrack.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+    });
+  };
+
+  const renderSecondaryNav = (sectionId) => {
+    if (!secondaryNav || !secondaryNavTrack) return;
+
+    if (!sectionId) {
+      secondaryNav.classList.remove("is-visible");
+      secondaryNav.setAttribute("aria-hidden", "true");
+      renderedSecondarySection = null;
+      activeSecondaryId = null;
+      return;
+    }
+
+    if (renderedSecondarySection === sectionId) return;
+
+    const groups = getSectionGroups(sectionId);
+    const sectionTitle = document.querySelector(`#${sectionId} h2`)?.textContent?.trim() || "меню";
+    const fragment = document.createDocumentFragment();
+
+    groups.forEach((group) => {
+      const link = document.createElement("a");
+      link.href = `#${group.id}`;
+      link.textContent = group.dataset.navLabel || group.querySelector("summary")?.textContent?.trim();
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        group.open = true;
+        setActiveSecondaryNav(group.id);
+        window.requestAnimationFrame(() => {
+          group.scrollIntoView({
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+            block: "start",
+          });
+          window.history.replaceState(null, "", `#${group.id}`);
+        });
+      });
+      fragment.append(link);
+    });
+
+    secondaryNavTrack.replaceChildren(fragment);
+    secondaryNav.setAttribute("aria-label", `Категории раздела ${sectionTitle}`);
+    secondaryNav.setAttribute("aria-hidden", "false");
+    secondaryNav.classList.add("is-visible");
+    renderedSecondarySection = sectionId;
+    activeSecondaryId = null;
+  };
 
   if (quickNavSections.length) {
     const setActiveQuickNav = (activeId) => {
@@ -161,7 +249,7 @@
     };
 
     const updateActiveQuickNav = () => {
-      const activationLine = window.scrollY + 150;
+      const activationLine = window.scrollY + (window.innerWidth <= 680 ? 184 : 150);
       let activeId = null;
 
       quickNavSections.forEach(({ section }) => {
@@ -169,6 +257,16 @@
       });
 
       setActiveQuickNav(activeId);
+      renderSecondaryNav(activeId);
+
+      if (activeId) {
+        const groups = getSectionGroups(activeId);
+        let activeGroupId = groups[0]?.id || null;
+        groups.forEach((group) => {
+          if (group.offsetTop <= activationLine) activeGroupId = group.id;
+        });
+        setActiveSecondaryNav(activeGroupId);
+      }
     };
 
     let quickNavFrame = 0;
@@ -181,7 +279,11 @@
     };
 
     quickNavLinks.forEach((link) => {
-      link.addEventListener("click", () => setActiveQuickNav(link.hash.slice(1)));
+      link.addEventListener("click", () => {
+        const sectionId = link.hash.slice(1);
+        setActiveQuickNav(sectionId);
+        renderSecondaryNav(sectionId);
+      });
     });
 
     window.addEventListener("scroll", scheduleQuickNavUpdate, { passive: true });
