@@ -51,6 +51,9 @@
     return null;
   };
 
+  const getItemCategory = (subgroup, group) =>
+    (subgroup.title || group.title).replace(/\s*[·•]\s*.*$/, "").trim();
+
   const createItem = (item, group, subgroup) => {
     const row = document.createElement("li");
     row.className = "menu-catalog__item";
@@ -78,7 +81,7 @@
 
     const category = document.createElement("span");
     category.className = "menu-catalog__item-category";
-    category.textContent = subgroup.title || group.title;
+    category.textContent = getItemCategory(subgroup, group);
 
     const name = document.createElement("h5");
     name.className = "menu-catalog__item-name";

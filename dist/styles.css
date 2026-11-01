@@ -7797,10 +7797,10 @@ body.is-booking-open {
   .menu-catalog__item-category {
     width: 100%;
     margin-bottom: 7px;
-    overflow: hidden;
     font-size: 7px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .menu-catalog__item-name {
