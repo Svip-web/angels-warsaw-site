@@ -10,19 +10,33 @@
       maximumFractionDigits: 2,
     }).format(value);
 
-  const cocktailImages = Array.from(
-    { length: 10 },
-    (_, index) => `assets/menu-cocktail-${String(index + 1).padStart(2, "0")}.webp`,
-  );
+  // The filenames are intentionally mapped to products instead of being
+  // distributed by a hash. A drink or dish should never inherit an unrelated
+  // photo merely because it happens to occupy the same grid position.
+  const cocktailImageByName = {
+    "Old Fashioned Premium": "assets/menu-cocktail-01.webp",
+    "1800 Tequila Silk": "assets/menu-cocktail-02.webp",
+    "Angel Nostalgia": "assets/menu-cocktail-03.webp",
+    "Angel's Secret Martini": "assets/menu-cocktail-04.webp",
+    "Garden Royal": "assets/menu-cocktail-05.webp",
+    "Garden Spritz": "assets/menu-cocktail-06.webp",
+    "Gin Apple": "assets/menu-cocktail-07.webp",
+    "Strawberry Basil Smash": "assets/menu-cocktail-08.webp",
+    "Velvet Rose": "assets/menu-cocktail-09.webp",
+    "Strawberry Chocolate": "assets/menu-cocktail-10.webp",
+  };
 
-  const kitchenImages = [
-    "assets/story-kitchen.webp",
-    "assets/story-kitchen.webp",
-    "assets/story-kitchen.webp",
-  ];
-
-  const hashText = (value) =>
-    Array.from(value).reduce((hash, character) => (hash * 31 + character.charCodeAt(0)) >>> 0, 0);
+  const kitchenImageByName = {
+    "Tempura Shrimp": "assets/menu-food-tempura-shrimp.jpg",
+    "Fruit & Berry Platter": "assets/menu-food-fruit-platter.jpg",
+    Antipasti: "assets/menu-food-antipasti.jpg",
+    "Caesar Salad with Chicken & Crispy Bacon": "assets/menu-food-caesar-chicken.jpg",
+    "Borscht with Beef Cheeks": "assets/menu-food-borscht.jpg",
+    "Philadelphia Grand Roll": "assets/menu-food-philadelphia-grand.jpg",
+    "Volcano Roll": "assets/menu-food-volcano-roll.jpg",
+    "Tiger Roll": "assets/menu-food-tiger-roll.jpg",
+    "Ebi Tempura Roll": "assets/menu-food-ebi-tempura-roll.jpg",
+  };
 
   const slugify = (value) =>
     value
@@ -31,26 +45,33 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
-  const getItemImage = (item, group, itemIndex) => {
-    const isKitchen = menu.kitchen.groups.includes(group);
-    const images = isKitchen ? kitchenImages : cocktailImages;
-    return images[(hashText(`${group.key}-${item.name}`) + itemIndex) % images.length];
+  const getItemImage = (item, group) => {
+    if (menu.kitchen.groups.includes(group)) return kitchenImageByName[item.name] || null;
+    if (group.key === "COCKTAILS") return cocktailImageByName[item.name] || null;
+    return null;
   };
 
-  const createItem = (item, group, subgroup, itemIndex) => {
+  const createItem = (item, group, subgroup) => {
     const row = document.createElement("li");
     row.className = "menu-catalog__item";
 
-    const media = document.createElement("figure");
-    media.className = "menu-catalog__media";
-    const image = document.createElement("img");
-    image.src = getItemImage(item, group, itemIndex);
-    image.alt = "";
-    image.loading = "lazy";
-    image.decoding = "async";
-    image.width = 640;
-    image.height = 480;
-    media.append(image);
+    const imageSource = getItemImage(item, group);
+    let media = null;
+
+    if (imageSource) {
+      media = document.createElement("figure");
+      media.className = "menu-catalog__media";
+      const image = document.createElement("img");
+      image.src = imageSource;
+      image.alt = item.name;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.width = 1000;
+      image.height = 750;
+      media.append(image);
+    } else {
+      row.classList.add("menu-catalog__item--text-only");
+    }
 
     const body = document.createElement("div");
     body.className = "menu-catalog__item-body";
@@ -81,7 +102,8 @@
     });
 
     body.append(category, name, prices);
-    row.append(media, body);
+    if (media) row.append(media);
+    row.append(body);
     return row;
   };
 
@@ -90,9 +112,7 @@
     block.className = "menu-catalog__subgroup";
 
     const list = document.createElement("ul");
-    subgroup.items.forEach((item, itemIndex) =>
-      list.append(createItem(item, group, subgroup, itemIndex)),
-    );
+    subgroup.items.forEach((item) => list.append(createItem(item, group, subgroup)));
     block.append(list);
     return block;
   };
