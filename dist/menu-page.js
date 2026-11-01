@@ -89,12 +89,6 @@
     const block = document.createElement("section");
     block.className = "menu-catalog__subgroup";
 
-    if (subgroup.title) {
-      const heading = document.createElement("h4");
-      heading.textContent = subgroup.title;
-      block.append(heading);
-    }
-
     const list = document.createElement("ul");
     subgroup.items.forEach((item, itemIndex) =>
       list.append(createItem(item, group, subgroup, itemIndex)),
