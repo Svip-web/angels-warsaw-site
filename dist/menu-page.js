@@ -144,4 +144,49 @@
 
   const note = document.querySelector("#kitchen-note");
   if (note && menu.kitchen.notes.length) note.textContent = menu.kitchen.notes[0];
+
+  const quickNavLinks = Array.from(document.querySelectorAll(".menu-page__quick-nav a[href^='#']"));
+  const quickNavSections = quickNavLinks
+    .map((link) => ({ link, section: document.querySelector(link.hash) }))
+    .filter(({ section }) => section);
+
+  if (quickNavSections.length) {
+    const setActiveQuickNav = (activeId) => {
+      quickNavSections.forEach(({ link, section }) => {
+        const isActive = section.id === activeId;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    };
+
+    const updateActiveQuickNav = () => {
+      const activationLine = window.scrollY + 150;
+      let activeId = null;
+
+      quickNavSections.forEach(({ section }) => {
+        if (section.offsetTop <= activationLine) activeId = section.id;
+      });
+
+      setActiveQuickNav(activeId);
+    };
+
+    let quickNavFrame = 0;
+    const scheduleQuickNavUpdate = () => {
+      if (quickNavFrame) return;
+      quickNavFrame = window.requestAnimationFrame(() => {
+        quickNavFrame = 0;
+        updateActiveQuickNav();
+      });
+    };
+
+    quickNavLinks.forEach((link) => {
+      link.addEventListener("click", () => setActiveQuickNav(link.hash.slice(1)));
+    });
+
+    window.addEventListener("scroll", scheduleQuickNavUpdate, { passive: true });
+    window.addEventListener("resize", scheduleQuickNavUpdate);
+    window.addEventListener("hashchange", scheduleQuickNavUpdate);
+    updateActiveQuickNav();
+  }
 })();
