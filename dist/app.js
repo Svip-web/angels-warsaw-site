@@ -55,7 +55,7 @@ function hideBackgroundVideo() {
 }
 
 function syncBackgroundVideo() {
-  if (document.hidden || prefersReducedMotion || saveData) {
+  if (document.hidden || prefersReducedMotion) {
     backgroundVideo.pause();
     return;
   }
@@ -443,7 +443,7 @@ backgroundVideo.addEventListener("loadeddata", showBackgroundVideo, { once: true
 backgroundVideo.addEventListener("waiting", hideBackgroundVideo);
 backgroundVideo.addEventListener("stalled", hideBackgroundVideo);
 backgroundVideo.addEventListener("pause", () => {
-  if (!document.hidden && !prefersReducedMotion && !saveData) {
+  if (!document.hidden && !prefersReducedMotion) {
     window.requestAnimationFrame(syncBackgroundVideo);
   }
 });
@@ -528,7 +528,7 @@ if (contactMapFrame) {
   }
 }
 
-if (prefersReducedMotion || saveData) {
+if (prefersReducedMotion) {
   backgroundVideo.preload = "none";
   backgroundVideo.pause();
 } else {

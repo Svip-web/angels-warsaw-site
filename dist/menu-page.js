@@ -10,34 +10,6 @@
       maximumFractionDigits: 2,
     }).format(value);
 
-  // The filenames are intentionally mapped to products instead of being
-  // distributed by a hash. A drink or dish should never inherit an unrelated
-  // photo merely because it happens to occupy the same grid position.
-  const cocktailImageByName = {
-    "Old Fashioned Premium": "assets/menu-cocktail-01.webp",
-    "1800 Tequila Silk": "assets/menu-cocktail-02.webp",
-    "Angel Nostalgia": "assets/menu-cocktail-03.webp",
-    "Angel's Secret Martini": "assets/menu-cocktail-04.webp",
-    "Garden Royal": "assets/menu-cocktail-05.webp",
-    "Garden Spritz": "assets/menu-cocktail-06.webp",
-    "Gin Apple": "assets/menu-cocktail-07.webp",
-    "Strawberry Basil Smash": "assets/menu-cocktail-08.webp",
-    "Velvet Rose": "assets/menu-cocktail-09.webp",
-    "Strawberry Chocolate": "assets/menu-cocktail-10.webp",
-  };
-
-  const kitchenImageByName = {
-    "Tempura Shrimp": "assets/menu-food-tempura-shrimp.jpg",
-    "Fruit & Berry Platter": "assets/menu-food-fruit-platter.jpg",
-    Antipasti: "assets/menu-food-antipasti.jpg",
-    "Caesar Salad with Chicken & Crispy Bacon": "assets/menu-food-caesar-chicken.jpg",
-    "Borscht with Beef Cheeks": "assets/menu-food-borscht.jpg",
-    "Philadelphia Grand Roll": "assets/menu-food-philadelphia-grand.jpg",
-    "Volcano Roll": "assets/menu-food-volcano-roll.jpg",
-    "Tiger Roll": "assets/menu-food-tiger-roll.jpg",
-    "Ebi Tempura Roll": "assets/menu-food-ebi-tempura-roll.jpg",
-  };
-
   const slugify = (value) =>
     value
       .toLowerCase()
@@ -45,10 +17,31 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
-  const getItemImage = (item, group) => {
-    if (menu.kitchen.groups.includes(group)) return kitchenImageByName[item.name] || null;
-    if (group.key === "COCKTAILS") return cocktailImageByName[item.name] || null;
-    return null;
+  const placeholderIcon = (kind) => {
+    if (kind === "cocktail") {
+      return '<svg class="menu-catalog__placeholder-icon" viewBox="0 0 120 120" aria-hidden="true"><path d="M21 22h78L68 62v28h18v8H34v-8h18V62L21 22Z"/><path d="M33 32h54L61 55h-2L33 32Z"/><path d="M78 16c8 2 14 8 17 17"/></svg>';
+    }
+    if (kind === "kitchen") {
+      return '<svg class="menu-catalog__placeholder-icon" viewBox="0 0 120 120" aria-hidden="true"><path d="M18 82h84M27 82v-5c0-26 15-43 33-43s33 17 33 43v5M60 34V23M51 23h18M13 92h94"/></svg>';
+    }
+    return '<svg class="menu-catalog__placeholder-icon" viewBox="0 0 120 120" aria-hidden="true"><path d="M34 20h52L80 96H40L34 20ZM30 20h60M44 45h33M69 20c2-11 10-17 22-18"/></svg>';
+  };
+
+  const createPlaceholderMedia = (group) => {
+    const figure = document.createElement("figure");
+    const kind = group.key === "COCKTAILS"
+      ? "cocktail"
+      : menu.kitchen.groups.includes(group)
+        ? "kitchen"
+        : "bar";
+    figure.className = `menu-catalog__media menu-catalog__media--placeholder menu-catalog__media--${kind}`;
+    figure.innerHTML = `
+      <span class="menu-catalog__placeholder-orbit" aria-hidden="true"></span>
+      ${placeholderIcon(kind)}
+      <img class="menu-catalog__placeholder-logo" src="assets/angels-wordmark-v2.webp" alt="" width="800" height="396" loading="lazy" decoding="async" />
+      <span class="menu-catalog__placeholder-note">photo coming soon</span>
+    `;
+    return figure;
   };
 
   const getItemCategory = (subgroup, group) =>
@@ -58,23 +51,7 @@
     const row = document.createElement("li");
     row.className = "menu-catalog__item";
 
-    const imageSource = getItemImage(item, group);
-    let media = null;
-
-    if (imageSource) {
-      media = document.createElement("figure");
-      media.className = "menu-catalog__media";
-      const image = document.createElement("img");
-      image.src = imageSource;
-      image.alt = item.name;
-      image.loading = "lazy";
-      image.decoding = "async";
-      image.width = 1000;
-      image.height = 750;
-      media.append(image);
-    } else {
-      row.classList.add("menu-catalog__item--text-only");
-    }
+    const media = createPlaceholderMedia(group);
 
     const body = document.createElement("div");
     body.className = "menu-catalog__item-body";
@@ -105,8 +82,7 @@
     });
 
     body.append(category, name, prices);
-    if (media) row.append(media);
-    row.append(body);
+    row.append(media, body);
     return row;
   };
 
@@ -171,6 +147,8 @@
     sectionId: "non-alcoholic",
     openAll: true,
   });
+
+  window.ANGELS_I18N?.apply(document);
 
   const note = document.querySelector("#kitchen-note");
   if (note && menu.kitchen.notes.length) note.textContent = menu.kitchen.notes[0];

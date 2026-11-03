@@ -5,7 +5,33 @@ const bookingCloseButtons = bookingModal?.querySelectorAll(".booking-modal__clos
 const bookingOpeners = document.querySelectorAll('a[href="#booking"]');
 const bookingStatus = bookingModal?.querySelector(".booking-form__status");
 const bookingSubmit = bookingModal?.querySelector(".booking-form__submit");
+const bookingEndpoint = "https://angels-warsaw-booking-api.svip201517.chatgpt.site/api/booking";
 let bookingReturnFocus = null;
+
+const bookingCopy = {
+  required: {
+    ru: "Заполните обязательные поля.",
+    pl: "Uzupełnij wymagane pola.",
+    en: "Please complete the required fields.",
+  },
+  sending: { ru: "Отправляем…", pl: "Wysyłamy…", en: "Sending…" },
+  failed: {
+    ru: "Не удалось отправить заявку. Попробуйте ещё раз.",
+    pl: "Nie udało się wysłać zgłoszenia. Spróbuj ponownie.",
+    en: "We could not send your request. Please try again.",
+  },
+  sent: { ru: "Заявка отправлена ✓", pl: "Zgłoszenie wysłane ✓", en: "Request sent ✓" },
+  submit: { ru: "Отправить заявку", pl: "Wyślij zgłoszenie", en: "Send request" },
+};
+
+function bookingLanguage() {
+  return window.ANGELS_I18N?.lang || document.documentElement.lang || "ru";
+}
+
+function bookingText(key) {
+  const lang = bookingLanguage();
+  return bookingCopy[key]?.[lang] || bookingCopy[key]?.ru || "";
+}
 
 function toDateInputValue(date) {
   const year = date.getFullYear();
@@ -95,18 +121,20 @@ bookingForm?.addEventListener("submit", async (event) => {
 
   if (!bookingForm.checkValidity()) {
     bookingForm.reportValidity();
-    setBookingStatus("Заполните обязательные поля.", "error");
+    setBookingStatus(bookingText("required"), "error");
     return;
   }
 
   const formData = new FormData(bookingForm);
   const payload = Object.fromEntries(formData.entries());
+  payload.lang = bookingLanguage();
+  payload.source = `${location.hostname}${location.pathname}`;
   bookingSubmit.disabled = true;
   bookingSubmit.classList.add("is-loading");
-  bookingSubmit.querySelector("span").textContent = "Отправляем…";
+  bookingSubmit.querySelector("span").textContent = bookingText("sending");
 
   try {
-    const response = await fetch("/api/booking", {
+    const response = await fetch(bookingEndpoint, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(payload),
@@ -114,20 +142,20 @@ bookingForm?.addEventListener("submit", async (event) => {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok || result.ok !== true) {
-      throw new Error(result.message || "Не удалось отправить заявку.");
+      throw new Error(result.message || bookingText("failed"));
     }
 
     bookingForm.reset();
     setBookingDateLimits();
     setBookingStatus(result.message, "success");
-    bookingSubmit.querySelector("span").textContent = "Заявка отправлена ✓";
+    bookingSubmit.querySelector("span").textContent = bookingText("sent");
     window.setTimeout(() => {
-      bookingSubmit.querySelector("span").textContent = "Отправить заявку";
+      bookingSubmit.querySelector("span").textContent = bookingText("submit");
       bookingSubmit.disabled = false;
     }, 3200);
   } catch (error) {
-    setBookingStatus(error.message || "Не удалось отправить заявку. Попробуйте ещё раз.", "error");
-    bookingSubmit.querySelector("span").textContent = "Отправить заявку";
+    setBookingStatus(error.message || bookingText("failed"), "error");
+    bookingSubmit.querySelector("span").textContent = bookingText("submit");
     bookingSubmit.disabled = false;
   } finally {
     bookingSubmit.classList.remove("is-loading");
