@@ -74,8 +74,10 @@ function setHeroInteractiveState(isRevealed) {
   revealedHeader.inert = !isRevealed;
 }
 
-function revealHero() {
+function revealHero(animate = hasUserScrollIntent) {
   if (hero.classList.contains("is-revealed")) return;
+  // Anchor navigation prepares the offscreen hero without playing the intro.
+  hero.classList.toggle("is-reveal-instant", !animate);
   hero.classList.add("is-revealed");
   setHeroInteractiveState(true);
 
@@ -170,14 +172,20 @@ function handleScroll() {
   window.requestAnimationFrame(updateFromScroll);
 }
 
-function resetHero() {
+function resetHero(behavior = "smooth") {
   setMenuOpen(false);
   window.clearTimeout(heroRevealSettleTimer);
+  hero.classList.add("is-reveal-instant");
   hero.classList.remove("is-revealed", "is-reveal-settled", "is-dormant");
   hasUserScrollIntent = false;
   setHeroInteractiveState(false);
   armMobileRevealLock();
-  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : behavior });
+  // Commit the initial artwork before re-enabling the scroll reveal transition.
+  hero.offsetWidth;
+  window.requestAnimationFrame(() => {
+    if (!hero.classList.contains("is-revealed")) hero.classList.remove("is-reveal-instant");
+  });
 }
 
 // The mobile hero sits in the document flow, so a swipe used to scroll it off
@@ -230,7 +238,7 @@ function getHashTarget() {
 }
 
 function syncDeepLinkPosition(target, behavior = "auto") {
-  revealHero();
+  revealHero(false);
   target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : behavior, block: "start" });
   previousScrollY = window.scrollY;
   syncHeroDormancy(previousScrollY);
@@ -283,15 +291,11 @@ window.addEventListener(
       syncDeepLinkPosition(hashTarget);
       window.requestAnimationFrame(() => syncDeepLinkPosition(hashTarget));
     } else if (!event.persisted) {
-      hero.classList.remove("is-revealed");
-      hasUserScrollIntent = false;
-      setHeroInteractiveState(false);
-      armMobileRevealLock();
-      window.scrollTo(0, 0);
+      resetHero("auto");
     } else if (window.scrollY > revealThreshold) {
-      revealHero();
+      revealHero(false);
     } else {
-      setHeroInteractiveState(hero.classList.contains("is-revealed"));
+      resetHero("auto");
     }
 
     if (!hashTarget) {
@@ -351,11 +355,7 @@ window.addEventListener("hashchange", () => {
   }
 
   if (window.location.hash === "#hero") {
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-    hero.classList.remove("is-dormant");
-    previousScrollY = 0;
-    updateScrollProgress(0);
-    syncBackgroundVideo();
+    resetHero();
     window.requestAnimationFrame(() => focusNavigationTarget(hero));
     return;
   }
@@ -392,11 +392,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     if (window.location.hash !== hash) history.pushState(null, "", hash);
 
     if (target === hero) {
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-      hero.classList.remove("is-dormant");
-      previousScrollY = 0;
-      updateScrollProgress(0);
-      syncBackgroundVideo();
+      resetHero();
     } else {
       syncDeepLinkPosition(target, "smooth");
     }

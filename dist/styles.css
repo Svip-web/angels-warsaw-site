@@ -143,6 +143,11 @@ a {
     linear-gradient(180deg, rgba(9, 5, 10, 0.1), rgba(9, 5, 10, 0.22));
 }
 
+.hero.is-reveal-instant,
+.hero.is-reveal-instant * {
+  transition: none !important;
+}
+
 .is-revealed .intro-sky__image {
   transform: scale(1.11);
 }
