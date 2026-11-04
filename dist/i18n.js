@@ -188,6 +188,9 @@
     root.querySelectorAll?.("[aria-label], [title], [placeholder], meta[content]").forEach(translateAttributes);
     document.documentElement.lang = current;
     document.body.dataset.lang = current;
+    document.querySelectorAll('[data-language-select]').forEach((select) => {
+      select.value = current;
+    });
     document.querySelectorAll("[data-lang]").forEach((button) => {
       const active = button.dataset.lang === current;
       button.classList.toggle("is-active", active);
@@ -211,6 +214,10 @@
     const button = event.target.closest("[data-lang]");
     if (!button) return;
     setLanguage(button.dataset.lang);
+  });
+
+  document.addEventListener("change", (event) => {
+    if (event.target.matches('[data-language-select]')) setLanguage(event.target.value);
   });
 
   const observer = new MutationObserver((records) => {
