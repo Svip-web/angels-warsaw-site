@@ -142,6 +142,66 @@
     "Лимонады": { pl: "Lemoniady", en: "Lemonades" },
     "Фреши · 0,25 л": { pl: "Świeże soki · 0,25 l", en: "Fresh juices · 0.25 l" },
     "бокал": { pl: "kieliszek", en: "glass" },
+    "Gillardeau Oysters No. 2 — 1 pc": { ru: "Устрицы Gillardeau № 2 — 1 шт.", pl: "Ostrygi Gillardeau nr 2 — 1 szt." },
+    "Gillardeau Oysters No. 2 — 6 pcs": { ru: "Устрицы Gillardeau № 2 — 6 шт.", pl: "Ostrygi Gillardeau nr 2 — 6 szt." },
+    "Gillardeau Oysters No. 2 — 12 pcs": { ru: "Устрицы Gillardeau № 2 — 12 шт.", pl: "Ostrygi Gillardeau nr 2 — 12 szt." },
+    "Tempura Shrimp": { ru: "Креветки в темпуре", pl: "Krewetki w tempurze" },
+    "Fruit & Berry Platter": { ru: "Фруктово-ягодное ассорти", pl: "Patera owocowo-jagodowa" },
+    "Antipasti": { ru: "Антипасти", pl: "Antipasti" },
+    "Red Caviar (per 100 g)": { ru: "Красная икра (за 100 г)", pl: "Kawior czerwony (za 100 g)" },
+    "Black Caviar (per 100 g)": { ru: "Чёрная икра (за 100 г)", pl: "Kawior czarny (za 100 g)" },
+    "Caesar Salad with Chicken & Crispy Bacon": { ru: "Салат «Цезарь» с курицей и хрустящим беконом", pl: "Sałatka Cezar z kurczakiem i chrupiącym boczkiem" },
+    "Caesar Salad with Shrimp & Crispy Bacon": { ru: "Салат «Цезарь» с креветками и хрустящим беконом", pl: "Sałatka Cezar z krewetkami i chrupiącym boczkiem" },
+    "Borscht with Beef Cheeks": { ru: "Борщ с говяжьими щёчками", pl: "Barszcz z policzkami wołowymi" },
+    "Chicken Broth with Turkey": { ru: "Куриный бульон с индейкой", pl: "Rosół drobiowy z indykiem" },
+    "Philadelphia Grand Roll": { ru: "Ролл «Филадельфия Гранд»", pl: "Philadelphia Grand Roll" },
+    "Philadelphia with Mango": { ru: "Филадельфия с манго", pl: "Philadelphia z mango" },
+    "Philadelphia with Eel": { ru: "Филадельфия с угрём", pl: "Philadelphia z węgorzem" },
+    "Volcano Roll": { ru: "Ролл «Вулкан»", pl: "Volcano Roll" },
+    "Tiger Roll": { ru: "Ролл «Тигр»", pl: "Tiger Roll" },
+    "California Roll": { ru: "Ролл «Калифорния»", pl: "California Roll" },
+    "Ebi Tempura Roll": { ru: "Ролл «Эби темпура»", pl: "Ebi Tempura Roll" },
+    "Bonito Roll": { ru: "Ролл «Бонито»", pl: "Bonito Roll" },
+    "Brownie with Ice Cream": { ru: "Брауни с мороженым", pl: "Brownie z lodami" },
+    "Honey Cake": { ru: "Медовик", pl: "Miodownik" },
+    "Strudel": { ru: "Штрудель", pl: "Strudel" },
+    "Pineapple & Mint": { ru: "Ананас и мята", pl: "Ananas i mięta" },
+    "Kiwi & Basil": { ru: "Киви и базилик", pl: "Kiwi i bazylia" },
+    "Raspberry": { ru: "Малина", pl: "Malina" },
+    "Fresh Grapefruit": { ru: "Грейпфрутовый фреш", pl: "Świeży sok grejpfrutowy" },
+    "Fresh Orange": { ru: "Апельсиновый фреш", pl: "Świeży sok pomarańczowy" },
+    "Cappy Apple": { ru: "Cappy яблочный", pl: "Cappy jabłkowy" },
+    "Cappy Orange": { ru: "Cappy апельсиновый", pl: "Cappy pomarańczowy" },
+    "Americano": { ru: "Американо", pl: "Americano" },
+    "Cappuccino": { ru: "Капучино", pl: "Cappuccino" },
+    "Cappuccino — plant milk": { ru: "Капучино на растительном молоке", pl: "Cappuccino z napojem roślinnym" },
+    "Double Espresso": { ru: "Двойной эспрессо", pl: "Podwójne espresso" },
+    "Espresso": { ru: "Эспрессо", pl: "Espresso" },
+    "Flat White": { ru: "Флэт уайт", pl: "Flat White" },
+    "Flat White — plant milk": { ru: "Флэт уайт на растительном молоке", pl: "Flat White z napojem roślinnym" },
+    "Latte": { ru: "Латте", pl: "Latte" },
+    "Latte — plant milk": { ru: "Латте на растительном молоке", pl: "Latte z napojem roślinnym" },
+    "Classic Tea": { ru: "Классический чай", pl: "Herbata klasyczna" },
+    "Jasmine, Kiwi & Pineapple": { ru: "Жасмин, киви и ананас", pl: "Jaśmin, kiwi i ananas" },
+    "Lychee & Strawberry": { ru: "Личи и клубника", pl: "Liczi i truskawka" },
+    "Passion Fruit & Peach": { ru: "Маракуйя и персик", pl: "Marakuja i brzoskwinia" },
+    "Шампанское": { pl: "Szampan", en: "Champagne" },
+    "Портвейн и херес": { pl: "Porto i sherry", en: "Port & sherry" },
+    "Водка": { pl: "Wódka", en: "Vodka" },
+    "Джин": { pl: "Gin", en: "Gin" },
+    "Ром": { pl: "Rum", en: "Rum" },
+    "Текила и мескаль": { pl: "Tequila i mezcal", en: "Tequila & mezcal" },
+    "Шотландский виски": { pl: "Szkocka whisky", en: "Scotch whisky" },
+    "Ирландский виски": { pl: "Irlandzka whiskey", en: "Irish whiskey" },
+    "Американский виски": { pl: "Amerykańska whiskey", en: "American whiskey" },
+    "Японский виски": { pl: "Japońska whisky", en: "Japanese whisky" },
+    "Коньяк": { pl: "Koniak", en: "Cognac" },
+    "Вермуты 80 мл / ликёры 40 мл": { pl: "Wermuty 80 ml / likiery 40 ml", en: "Vermouth 80 ml / liqueurs 40 ml" },
+    "Фреши": { pl: "Świeże soki", en: "Fresh juices" },
+    "Прохладительные напитки": { pl: "Napoje gazowane i soki", en: "Soft drinks" },
+    "Чай": { pl: "Herbata", en: "Tea" },
+    "40 мл": { pl: "40 ml", en: "40 ml" },
+    "По предварительному заказу наш шеф создаст персональное меню по вашему запросу.": { pl: "Na wcześniejsze zamówienie szef kuchni przygotuje dla Ciebie indywidualne menu.", en: "Our chef can prepare a custom menu on request when ordered in advance." },
     "бутылка": { pl: "butelka", en: "bottle" },
     "бутылка 0,7 л": { pl: "butelka 0,7 l", en: "0.7 l bottle" }
   };
@@ -149,10 +209,10 @@
   const normalize = (value) => String(value || "").replace(/\s+/g, " ").trim();
 
   const translate = (value, lang) => {
-    if (lang === "ru") return value;
     const key = normalize(value);
     if (!key) return value;
     if (copy[key]?.[lang]) return copy[key][lang];
+    if (lang === "ru") return value;
     const count = key.match(/^(\d+)\s+поз\.$/);
     if (count) return lang === "pl" ? `${count[1]} poz.` : `${count[1]} items`;
     return value;
