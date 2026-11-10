@@ -7758,13 +7758,22 @@ body.is-booking-open {
   text-transform: uppercase;
 }
 
-.menu-catalog--bar .menu-catalog__media {
+.menu-catalog--bar .menu-catalog__media--product {
+  background: #080707;
+}
+
+.menu-catalog--bar .menu-catalog__media--product img {
+  object-fit: contain;
+  filter: none;
+}
+
+.menu-catalog--bar .menu-catalog__media:not(.menu-catalog__media--product) {
   display: grid;
   place-items: center;
   background: #030303;
 }
 
-.menu-catalog--bar .menu-catalog__media img {
+.menu-catalog--bar .menu-catalog__media:not(.menu-catalog__media--product) img {
   object-fit: contain;
   object-position: 50% 50%;
   scale: 1.65;
@@ -7813,6 +7822,23 @@ body.is-booking-open {
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.05;
+}
+
+.menu-catalog__item-description {
+  margin: -8px 0 16px;
+  color: rgba(236, 231, 219, 0.72);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.menu-page #non-alcoholic {
+  scroll-margin-top: 84px;
+}
+
+@media (max-width: 680px) {
+  .menu-page #non-alcoholic {
+    scroll-margin-top: 184px;
+  }
 }
 
 .menu-catalog__prices {

@@ -18,6 +18,9 @@
       .replace(/^-|-$/g, "");
 
   const placeholderIcon = (kind) => {
+    if (kind === "hookah") {
+      return '<svg class="menu-catalog__placeholder-icon" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:0.55"><path d="M9 3h6l-1 3h-4L9 3ZM12 6v8m-2 0h4l2 4a2 2 0 0 1-2 3h-4a2 2 0 0 1-2-3l2-4Zm4-4h3a3 3 0 0 1 3 3v3m-3 0h3M8 8h8"/></svg>';
+    }
     if (kind === "cocktail") {
       return '<svg class="menu-catalog__placeholder-icon" viewBox="0 0 120 120" aria-hidden="true"><path d="M21 22h78L68 62v28h18v8H34v-8h18V62L21 22Z"/><path d="M33 32h54L61 55h-2L33 32Z"/><path d="M78 16c8 2 14 8 17 17"/></svg>';
     }
@@ -29,7 +32,9 @@
 
   const createPlaceholderMedia = (group) => {
     const figure = document.createElement("figure");
-    const kind = group.key === "COCKTAILS"
+    const kind = group === menu.hookah
+      ? "hookah"
+      : group.key === "COCKTAILS"
       ? "cocktail"
       : menu.kitchen.groups.includes(group)
         ? "kitchen"
@@ -39,7 +44,7 @@
       <span class="menu-catalog__placeholder-orbit" aria-hidden="true"></span>
       ${placeholderIcon(kind)}
       <img class="menu-catalog__placeholder-logo" src="assets/angels-wordmark-v2.webp" alt="" width="800" height="396" loading="lazy" decoding="async" />
-      <span class="menu-catalog__placeholder-note">photo coming soon</span>
+      ${kind === "hookah" ? "" : '<span class="menu-catalog__placeholder-note">Фото скоро</span>'}
     `;
     return figure;
   };
@@ -47,11 +52,25 @@
   const getItemCategory = (subgroup, group) =>
     (subgroup.title || group.title).replace(/\s*[·•]\s*.*$/, "").trim();
 
+  const createItemMedia = (item, group) => {
+    if (!item.image) return createPlaceholderMedia(group);
+
+    const figure = document.createElement("figure");
+    figure.className = "menu-catalog__media menu-catalog__media--product";
+    const image = document.createElement("img");
+    image.src = item.image;
+    image.alt = item.name;
+    image.loading = "lazy";
+    image.decoding = "async";
+    figure.append(image);
+    return figure;
+  };
+
   const createItem = (item, group, subgroup) => {
     const row = document.createElement("li");
     row.className = "menu-catalog__item";
 
-    const media = createPlaceholderMedia(group);
+    const media = createItemMedia(item, group);
 
     const body = document.createElement("div");
     body.className = "menu-catalog__item-body";
@@ -81,7 +100,14 @@
       prices.append(value);
     });
 
-    body.append(category, name, prices);
+    body.append(category, name);
+    if (item.description) {
+      const description = document.createElement("p");
+      description.className = "menu-catalog__item-description";
+      description.textContent = item.description;
+      body.append(description);
+    }
+    body.append(prices);
     row.append(media, body);
     return row;
   };
@@ -143,10 +169,11 @@
 
   renderCatalog("#bar-catalog", barGroups, { sectionId: "bar", openKeys: ["COCKTAILS"] });
   renderCatalog("#kitchen-catalog", menu.kitchen.groups, { sectionId: "kitchen", openAll: true });
-  renderCatalog("#non-alcoholic-catalog", zeroProofGroups, {
+  renderCatalog("#non-alcoholic", zeroProofGroups, {
     sectionId: "non-alcoholic",
     openAll: true,
   });
+  document.querySelector("#hookah-catalog")?.append(createSubgroup(menu.hookah, menu.hookah));
 
   window.ANGELS_I18N?.apply(document);
 
@@ -192,7 +219,8 @@
   const renderSecondaryNav = (sectionId) => {
     if (!secondaryNav || !secondaryNavTrack) return;
 
-    if (!sectionId) {
+    const groups = getSectionGroups(sectionId);
+    if (!groups.length) {
       secondaryNav.classList.remove("is-visible");
       secondaryNav.setAttribute("aria-hidden", "true");
       renderedSecondarySection = null;
@@ -202,7 +230,6 @@
 
     if (renderedSecondarySection === sectionId) return;
 
-    const groups = getSectionGroups(sectionId);
     const sectionTitle = document.querySelector(`#${sectionId} h2`)?.textContent?.trim() || "меню";
     const fragment = document.createDocumentFragment();
 
@@ -244,7 +271,7 @@
     };
 
     const updateActiveQuickNav = () => {
-      const activationLine = window.scrollY + (window.innerWidth <= 680 ? 184 : 150);
+      const activationLine = window.scrollY + (window.innerWidth <= 680 ? 188 : 150);
       let activeId = null;
 
       quickNavSections.forEach(({ section }) => {

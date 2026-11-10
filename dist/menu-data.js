@@ -1,6 +1,18 @@
 window.ANGELS_MENU = {
   "currency": "PLN",
   "source": "Angels_menu_items_prices.xlsx",
+  "hookah": {
+    "key": "HOOKAH",
+    "title": "Кальяны",
+    "items": [
+      { "name": "Original", "prices": [{ "value": 200 }] },
+      { "name": "Exclusive", "description": "Max Royal и Wookah", "prices": [{ "value": 250 }] },
+      { "name": "Fruit", "prices": [{ "value": 300 }] },
+      { "name": "Shef Ice Cube", "prices": [{ "value": 350 }] },
+      { "name": "Shef Clase Azul", "prices": [{ "value": 350 }] },
+      { "name": "Mansory", "prices": [{ "value": 1000 }] }
+    ]
+  },
   "kitchen": {
     "groups": [
       {
@@ -292,6 +304,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "1800 Tequila Silk",
+                "image": "assets/cocktail-1800-tequila-silk.webp",
                 "prices": [
                   {
                     "label": null,
@@ -310,6 +323,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Angel Nostalgia",
+                "image": "assets/cocktail-angel-nostalgia.webp",
                 "prices": [
                   {
                     "label": null,
@@ -319,6 +333,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Angel's Secret Martini",
+                "image": "assets/cocktail-secret-martini.webp",
                 "prices": [
                   {
                     "label": null,
@@ -346,6 +361,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Garden Royal",
+                "image": "assets/cocktail-garden-royal.webp",
                 "prices": [
                   {
                     "label": null,
@@ -364,6 +380,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gin Apple",
+                "image": "assets/cocktail-gin-apple.webp",
                 "prices": [
                   {
                     "label": null,
@@ -409,6 +426,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Old Fashioned Premium",
+                "image": "assets/cocktail-old-fashioned-premium.webp",
                 "prices": [
                   {
                     "label": null,
@@ -418,6 +436,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strawberry Basil Smash",
+                "image": "assets/cocktail-strawberry-basil-smash.webp",
                 "prices": [
                   {
                     "label": null,
@@ -427,6 +446,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strawberry Chocolate",
+                "image": "assets/cocktail-strawberry-chocolate.webp",
                 "prices": [
                   {
                     "label": null,
@@ -436,6 +456,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Sweet Tai",
+                "image": "assets/cocktail-sweet-tai.webp",
                 "prices": [
                   {
                     "label": null,
@@ -445,6 +466,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Velvet Rose",
+                "image": "assets/cocktail-velvet-rose.webp",
                 "prices": [
                   {
                     "label": null,

@@ -9,12 +9,12 @@
     <meta name="format-detection" content="telephone=no" />
     <meta
       name="description"
-      content="Меню Angel's Варшава: бар, кухня и безалкогольные напитки."
+      content="Меню Angel's Варшава: бар, кухня и кальяны."
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <meta property="og:title" content="Меню Angel's — бар и кухня" />
-    <meta property="og:description" content="Авторские коктейли, кухня и безалкогольные напитки Angel's в Варшаве." />
+    <meta property="og:title" content="Меню Angel's — бар, кухня и кальяны" />
+    <meta property="og:description" content="Авторские коктейли, кухня и кальяны Angel's в Варшаве." />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Cpath d='M10 45 28 14h8l18 31h-9l-4-8H23l-4 8Zm17-16h10l-5-10Z' fill='%23ece7db'/%3E%3C/svg%3E"
@@ -26,7 +26,7 @@
       rel="stylesheet"
     />
     <title>Меню — Angel's Варшава</title>
-    <link rel="stylesheet" href="styles.css?v=20261104-language-select" />
+    <link rel="stylesheet" href="styles.css?v=20261110-menu" />
   </head>
   <body class="menu-page">
     <header class="menu-page__header">
@@ -66,12 +66,11 @@
         </svg>
         <span>Кухня</span>
       </a>
-      <a href="#non-alcoholic">
+      <a href="#hookah">
         <svg class="menu-page__quick-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 5h10l-1 15H8L7 5ZM6 5h12M9 9h6" />
-          <path d="M14 5c.4-2 1.8-3 4-3" />
+          <path d="M9 3h6l-1 3h-4L9 3ZM12 6v8m-2 0h4l2 4a2 2 0 0 1-2 3h-4a2 2 0 0 1-2-3l2-4Zm4-4h3a3 3 0 0 1 3 3v3m-3 0h3M8 8h8"/>
         </svg>
-        <span>Без алкоголя</span>
+        <span>Кальяны</span>
       </a>
     </nav>
 
@@ -87,7 +86,7 @@
         <nav class="menu-page__nav" aria-label="Разделы меню">
           <a href="#bar"><span>01</span><strong>Бар</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
           <a href="#kitchen"><span>02</span><strong>Кухня</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
-          <a href="#non-alcoholic"><span>03</span><strong>Безалкогольные напитки</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
+          <a href="#hookah"><span>03</span><strong>Кальяны</strong><svg class="icon-arrow menu-page__nav-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
         </nav>
       </section>
 
@@ -97,11 +96,12 @@
             <span class="menu-page__number">01</span>
             <div>
               <h2 id="bar-title">Бар</h2>
-              <p>Авторские коктейли, шампанское, вино и крепкий алкоголь. Все позиции и цены — из актуальной карты Angel's.</p>
+              <p>Авторские коктейли, вина, крепкие и безалкогольные напитки, кофе и чай.</p>
             </div>
           </header>
 
           <div class="menu-catalog menu-catalog--bar" id="bar-catalog" aria-label="Барная карта Angel's"></div>
+          <div class="menu-catalog menu-catalog--compact" id="non-alcoholic" aria-label="Безалкогольные напитки Angel's"></div>
           <noscript><p class="menu-catalog__noscript">Для просмотра полного меню включите JavaScript.</p></noscript>
         </div>
       </section>
@@ -120,16 +120,15 @@
         </div>
       </section>
 
-      <section class="menu-page__section" id="non-alcoholic" aria-labelledby="non-alcoholic-title">
+      <section class="menu-page__section" id="hookah" aria-labelledby="hookah-title">
         <div class="menu-page__section-inner">
           <header class="menu-page__section-heading">
             <span class="menu-page__number">03</span>
             <div>
-              <h2 id="non-alcoholic-title">Без алкоголя</h2>
-              <p>Безалкогольные коктейли, лимонады, фреши, вода, кофе и чай.</p>
+              <h2 id="hookah-title">Кальяны</h2>
             </div>
           </header>
-          <div class="menu-catalog menu-catalog--compact" id="non-alcoholic-catalog" aria-label="Безалкогольные напитки Angel's"></div>
+          <div class="menu-catalog" id="hookah-catalog"></div>
         </div>
       </section>
 
@@ -238,9 +237,9 @@
       </section>
     </div>
 
-    <script src="i18n.js?v=20261104-language-select"></script>
-    <script src="menu-data.js"></script>
-    <script src="menu-page.js?v=20261104-1"></script>
+    <script src="i18n.js?v=20261110-menu"></script>
+    <script src="menu-data.js?v=20261110-menu"></script>
+    <script src="menu-page.js?v=20261110-menu"></script>
     <script src="booking.js?v=20261104-1"></script>
   </body>
 </html>
