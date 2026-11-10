@@ -33,6 +33,10 @@ jobs:
         with:
           path: dist
 
+      # Pages can take a few seconds to recognize a newly uploaded artifact.
+      - name: Wait for Pages artifact availability
+        run: sleep 20
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
