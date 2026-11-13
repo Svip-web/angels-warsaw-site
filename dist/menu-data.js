@@ -62,6 +62,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Tempura Shrimp",
+                "image": "assets/kitchen-tempura-shrimp.webp",
                 "prices": [
                   {
                     "label": null,
@@ -71,6 +72,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Fruit & Berry Platter",
+                "image": "assets/kitchen-fruit-berry-platter.webp",
                 "prices": [
                   {
                     "label": null,
@@ -80,6 +82,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Antipasti",
+                "image": "assets/kitchen-antipasti.webp",
                 "prices": [
                   {
                     "label": null,
@@ -147,6 +150,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Borscht with Beef Cheeks",
+                "image": "assets/kitchen-borscht-beef-cheeks.webp",
                 "prices": [
                   {
                     "label": null,
@@ -156,6 +160,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Chicken Broth with Turkey",
+                "image": "assets/kitchen-chicken-broth-turkey.webp",
                 "prices": [
                   {
                     "label": null,
@@ -176,6 +181,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Philadelphia Grand Roll",
+                "image": "assets/kitchen-philadelphia-grand-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -185,6 +191,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Philadelphia with Mango",
+                "image": "assets/kitchen-philadelphia-mango.webp",
                 "prices": [
                   {
                     "label": null,
@@ -194,6 +201,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Philadelphia with Eel",
+                "image": "assets/kitchen-philadelphia-eel.webp",
                 "prices": [
                   {
                     "label": null,
@@ -203,6 +211,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Volcano Roll",
+                "image": "assets/kitchen-volcano-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -212,6 +221,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Tiger Roll",
+                "image": "assets/kitchen-tiger-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -221,6 +231,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "California Roll",
+                "image": "assets/kitchen-california-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -230,6 +241,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Ebi Tempura Roll",
+                "image": "assets/kitchen-ebi-tempura-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -239,6 +251,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bonito Roll",
+                "image": "assets/kitchen-bonito-roll.webp",
                 "prices": [
                   {
                     "label": null,
@@ -277,6 +290,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strudel",
+                "image": "assets/kitchen-strudel.webp",
                 "prices": [
                   {
                     "label": null,
