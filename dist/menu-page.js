@@ -4,11 +4,12 @@
   const menu = window.ANGELS_MENU;
   if (!menu) return;
 
-  const formatPrice = (value) =>
-    new Intl.NumberFormat("pl-PL", {
-      minimumFractionDigits: Number.isInteger(value) ? 0 : 1,
-      maximumFractionDigits: 2,
-    }).format(value);
+  const wholePrice = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 2 });
+  const fractionalPrice = new Intl.NumberFormat("pl-PL", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2,
+  });
+  const formatPrice = (value) => (Number.isInteger(value) ? wholePrice : fractionalPrice).format(value);
 
   const slugify = (value) =>
     value
@@ -141,10 +142,24 @@
     summary.append(title, meta);
     details.append(summary);
 
-    const body = document.createElement("div");
-    body.className = "menu-catalog__group-body";
-    group.subgroups.forEach((subgroup) => body.append(createSubgroup(subgroup, group)));
-    details.append(body);
+    const renderBody = () => {
+      const body = document.createElement("div");
+      body.className = "menu-catalog__group-body";
+      group.subgroups.forEach((subgroup) => body.append(createSubgroup(subgroup, group)));
+      details.append(body);
+    };
+
+    if (open) {
+      renderBody();
+    } else {
+      const renderWhenOpened = () => {
+        if (!details.open) return;
+        renderBody();
+        details.removeEventListener("toggle", renderWhenOpened);
+      };
+      details.addEventListener("toggle", renderWhenOpened);
+    }
+
     return details;
   };
 
@@ -153,8 +168,9 @@
     if (!target) return;
     const fragment = document.createDocumentFragment();
     groups.forEach((group, index) => {
-      const open = options.openAll || options.openKeys?.includes(group.key) || index === 0;
       const groupId = `${options.sectionId}-${slugify(group.key)}`;
+      const open = options.openAll || options.openKeys?.includes(group.key) ||
+        index === 0 || location.hash === `#${groupId}`;
       fragment.append(createGroup(group, open, groupId));
     });
     target.replaceChildren(fragment);
@@ -175,8 +191,6 @@
   });
   document.querySelector("#hookah-catalog")?.append(createSubgroup(menu.hookah, menu.hookah));
 
-  window.ANGELS_I18N?.apply(document);
-
   const note = document.querySelector("#kitchen-note");
   if (note && menu.kitchen.notes.length) note.textContent = menu.kitchen.notes[0];
 
@@ -190,11 +204,12 @@
   let renderedSecondarySection = null;
   let activeSecondaryId = null;
 
-  const getSectionGroups = (sectionId) =>
-    Array.from(document.getElementById(sectionId)?.querySelectorAll(".menu-catalog__group") || []);
+  const sectionGroups = new Map(quickNavSections.map(({ section }) => [
+    section.id, Array.from(section.querySelectorAll(".menu-catalog__group")),
+  ]));
 
   const setActiveSecondaryNav = (groupId) => {
-    if (!secondaryNavTrack) return;
+    if (!secondaryNavTrack || activeSecondaryId === groupId) return;
 
     const links = Array.from(secondaryNavTrack.querySelectorAll("a"));
     const nextActiveLink = links.find((link) => link.hash === `#${groupId}`);
@@ -206,8 +221,8 @@
       else link.removeAttribute("aria-current");
     });
 
-    if (!nextActiveLink || activeSecondaryId === groupId) return;
     activeSecondaryId = groupId;
+    if (!nextActiveLink) return;
 
     const targetLeft = nextActiveLink.offsetLeft - (secondaryNavTrack.clientWidth - nextActiveLink.clientWidth) / 2;
     secondaryNavTrack.scrollTo({
@@ -217,18 +232,16 @@
   };
 
   const renderSecondaryNav = (sectionId) => {
-    if (!secondaryNav || !secondaryNavTrack) return;
+    if (!secondaryNav || !secondaryNavTrack || renderedSecondarySection === sectionId) return;
 
-    const groups = getSectionGroups(sectionId);
-    if (!groups.length) {
+    renderedSecondarySection = sectionId;
+    activeSecondaryId = null;
+    const groups = sectionGroups.get(sectionId);
+    if (!groups?.length) {
       secondaryNav.classList.remove("is-visible");
       secondaryNav.setAttribute("aria-hidden", "true");
-      renderedSecondarySection = null;
-      activeSecondaryId = null;
       return;
     }
-
-    if (renderedSecondarySection === sectionId) return;
 
     const sectionTitle = document.querySelector(`#${sectionId} h2`)?.textContent?.trim() || "меню";
     const fragment = document.createDocumentFragment();
@@ -256,12 +269,13 @@
     secondaryNav.setAttribute("aria-label", `Категории раздела ${sectionTitle}`);
     secondaryNav.setAttribute("aria-hidden", "false");
     secondaryNav.classList.add("is-visible");
-    renderedSecondarySection = sectionId;
-    activeSecondaryId = null;
   };
 
   if (quickNavSections.length) {
+    let activeQuickId = null;
     const setActiveQuickNav = (activeId) => {
+      if (activeQuickId === activeId) return;
+      activeQuickId = activeId;
       quickNavSections.forEach(({ link, section }) => {
         const isActive = section.id === activeId;
         link.classList.toggle("is-active", isActive);
@@ -282,7 +296,7 @@
       renderSecondaryNav(activeId);
 
       if (activeId) {
-        const groups = getSectionGroups(activeId);
+        const groups = sectionGroups.get(activeId);
         let activeGroupId = groups[0]?.id || null;
         groups.forEach((group) => {
           if (group.offsetTop <= activationLine) activeGroupId = group.id;

@@ -16,7 +16,8 @@ const scrollProgress = document.querySelector(".scroll-indicator span");
 const revealThreshold = Math.max(120, Math.min(180, window.innerHeight * 0.18));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const mobileViewport = window.matchMedia("(max-width: 680px)");
-const saveData = navigator.connection?.saveData === true;
+const saveData = navigator.connection?.saveData === true ||
+  window.matchMedia("(prefers-reduced-data: reduce)").matches;
 
 let previousScrollY = window.scrollY;
 let frameRequested = false;
@@ -29,6 +30,8 @@ let mobileScrollIdleTimer = 0;
 let heroRevealSettleTimer = 0;
 let syncContactVideoPlayback = () => {};
 let stableHeroWidth = 0;
+let stableHeroHeight = 0;
+let wantsBackgroundVideo = false;
 let isMobileRevealLocked = false;
 let mobileRevealLockTimer = 0;
 const mobileRevealLockMs = 1000;
@@ -40,7 +43,8 @@ const mobileRevealLockMs = 1000;
 function lockHeroHeight() {
   if (window.innerWidth === stableHeroWidth) return;
   stableHeroWidth = window.innerWidth;
-  document.documentElement.style.setProperty("--hero-stable-height", `${window.innerHeight}px`);
+  stableHeroHeight = window.innerHeight;
+  document.documentElement.style.setProperty("--hero-stable-height", `${stableHeroHeight}px`);
 }
 
 lockHeroHeight();
@@ -54,16 +58,24 @@ function hideBackgroundVideo() {
   backgroundVideo.classList.remove("is-ready");
 }
 
-function syncBackgroundVideo() {
-  if (document.hidden || prefersReducedMotion) {
-    backgroundVideo.pause();
+function shouldPlayBackgroundVideo(scrollY = window.scrollY) {
+  const playbackLimit = mobileViewport.matches ? stableHeroHeight + 180 : window.innerHeight * 1.8;
+  return !document.hidden && !prefersReducedMotion && !saveData && scrollY <= playbackLimit;
+}
+
+function syncBackgroundVideo(shouldPlay = shouldPlayBackgroundVideo()) {
+  wantsBackgroundVideo = shouldPlay;
+  if (!shouldPlay) {
+    if (!backgroundVideo.paused) backgroundVideo.pause();
     return;
   }
 
-  backgroundVideo.muted = true;
-  backgroundVideo.defaultMuted = true;
-  backgroundVideo.playsInline = true;
-  if (backgroundVideo.preload !== "auto") backgroundVideo.preload = "auto";
+  const source = mobileViewport.matches ? backgroundVideo.dataset.mobileSrc : backgroundVideo.dataset.desktopSrc;
+  if (backgroundVideo.getAttribute("src") !== source) {
+    hideBackgroundVideo();
+    backgroundVideo.muted = true;
+    backgroundVideo.src = source;
+  }
   if (backgroundVideo.paused) backgroundVideo.play().catch(hideBackgroundVideo);
 }
 
@@ -147,7 +159,6 @@ function pauseHeavyHeroWorkDuringMobileScroll() {
   window.clearTimeout(mobileScrollIdleTimer);
   mobileScrollIdleTimer = window.setTimeout(() => {
     isMobileScrollActive = false;
-    syncBackgroundVideo();
     syncContactVideoPlayback();
   }, 520);
 }
@@ -160,7 +171,8 @@ function updateFromScroll() {
 
   syncHeroDormancy(currentScrollY);
   updateScrollProgress(currentScrollY);
-  if (!mobileViewport.matches) syncBackgroundVideo();
+  const shouldPlay = shouldPlayBackgroundVideo(currentScrollY);
+  if (wantsBackgroundVideo !== shouldPlay) syncBackgroundVideo(shouldPlay);
   previousScrollY = currentScrollY;
   frameRequested = false;
 }
@@ -239,7 +251,10 @@ function getHashTarget() {
 
 function syncDeepLinkPosition(target, behavior = "auto") {
   revealHero(false);
-  target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : behavior, block: "start" });
+  target.scrollIntoView({
+    behavior: prefersReducedMotion || behavior === "auto" ? "instant" : behavior,
+    block: "start",
+  });
   previousScrollY = window.scrollY;
   syncHeroDormancy(previousScrollY);
   updateScrollProgress(previousScrollY);
@@ -435,17 +450,16 @@ document.addEventListener("keydown", (event) => {
 });
 
 backgroundVideo.addEventListener("playing", showBackgroundVideo);
-backgroundVideo.addEventListener("loadeddata", showBackgroundVideo, { once: true });
+backgroundVideo.addEventListener("loadeddata", showBackgroundVideo);
 backgroundVideo.addEventListener("waiting", hideBackgroundVideo);
 backgroundVideo.addEventListener("stalled", hideBackgroundVideo);
 backgroundVideo.addEventListener("pause", () => {
-  if (!document.hidden && !prefersReducedMotion) {
-    window.requestAnimationFrame(syncBackgroundVideo);
-  }
+  if (shouldPlayBackgroundVideo()) window.requestAnimationFrame(() => syncBackgroundVideo());
 });
 document.addEventListener("visibilitychange", () => {
   syncBackgroundVideo();
 });
+window.addEventListener("resize", () => syncBackgroundVideo(), { passive: true });
 
 if (contactVideo) {
   let contactVideoIsNear = false;
@@ -460,11 +474,6 @@ if (contactVideo) {
     ) {
       contactVideo.pause();
       return;
-    }
-
-    if (contactVideo.preload === "none") {
-      contactVideo.preload = "metadata";
-      contactVideo.load();
     }
 
     if (contactVideo.paused) contactVideo.play().catch(() => {});
@@ -524,13 +533,7 @@ if (contactMapFrame) {
   }
 }
 
-if (prefersReducedMotion) {
-  backgroundVideo.preload = "none";
-  backgroundVideo.pause();
-} else {
-  backgroundVideo.preload = "auto";
-  syncBackgroundVideo();
-}
+syncBackgroundVideo();
 
 const revealElements = document.querySelectorAll("[data-reveal]");
 

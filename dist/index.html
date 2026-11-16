@@ -24,10 +24,11 @@
       as="image"
       href="assets/intro-sky-editorial-v3.webp"
       type="image/webp"
+      media="(min-width: 681px)"
       fetchpriority="high"
     />
     <link rel="preload" as="image" href="assets/fresco-touch-v2.webp" type="image/webp" media="(min-width: 681px)" />
-    <link rel="preload" as="image" href="assets/fresco-sky-mobile-v6.webp" type="image/webp" media="(max-width: 680px)" />
+    <link rel="preload" as="image" href="assets/fresco-sky-mobile-v6.webp" type="image/webp" media="(max-width: 680px)" fetchpriority="high" />
     <link rel="preload" as="image" href="assets/fresco-adam-mobile.webp" type="image/webp" media="(max-width: 680px)" />
     <link rel="preload" as="image" href="assets/fresco-angels-mobile.webp" type="image/webp" media="(max-width: 680px)" />
     <link rel="preload" as="image" href="assets/angels-background-poster.webp" type="image/webp" />
@@ -39,7 +40,10 @@
       rel="stylesheet"
     />
     <title>Angel's — Варшава</title>
-    <link rel="stylesheet" href="styles.css?v=20261104-scroll-reveal" />
+    <link rel="stylesheet" href="styles.css?v=20261116" />
+    <script defer src="i18n.js?v=20261116"></script>
+    <script defer src="app.js?v=20261116"></script>
+    <script defer src="booking.js?v=20261104-1"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -65,7 +69,6 @@
           alt=""
           width="1672"
           height="941"
-          fetchpriority="high"
           decoding="async"
         />
         <div class="intro-sky__shade"></div>
@@ -73,22 +76,31 @@
 
       <div class="intro-fresco" aria-hidden="true">
         <span class="intro-fresco__half intro-fresco__half--left">
-          <img src="assets/fresco-touch-v2.webp" alt="" width="1672" height="941" decoding="sync" />
+          <picture>
+            <source media="(min-width: 681px)" srcset="assets/fresco-touch-v2.webp" />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" width="1672" height="941" decoding="async" />
+          </picture>
         </span>
         <span class="intro-fresco__half intro-fresco__half--right">
-          <img src="assets/fresco-touch-v2.webp" alt="" width="1672" height="941" decoding="sync" />
+          <picture>
+            <source media="(min-width: 681px)" srcset="assets/fresco-touch-v2.webp" />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" width="1672" height="941" decoding="async" />
+          </picture>
         </span>
       </div>
 
       <div class="intro-fresco-mobile" aria-hidden="true">
-        <img
-          class="intro-fresco-mobile__scene"
-          src="assets/fresco-sky-mobile-v6.webp"
-          alt=""
-          width="853"
-          height="1844"
-          decoding="sync"
-        />
+        <picture>
+          <source media="(max-width: 680px)" srcset="assets/fresco-sky-mobile-v6.webp" />
+          <img
+            class="intro-fresco-mobile__scene"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+            alt=""
+            width="853"
+            height="1844"
+            decoding="async"
+          />
+        </picture>
         <span class="intro-fresco-mobile__figure intro-fresco-mobile__figure--adam"></span>
         <span class="intro-fresco-mobile__figure intro-fresco-mobile__figure--angels"></span>
       </div>
@@ -104,20 +116,13 @@
         />
         <video
           class="reveal__background"
-          autoplay
           muted
           loop
           playsinline
-          preload="auto"
-          poster="assets/angels-background-poster.webp"
-        >
-          <source
-            src="assets/angels-hero-mobile-v3.mp4"
-            type="video/mp4"
-            media="(max-width: 680px)"
-          />
-          <source src="assets/angels-hero-web-v3.mp4" type="video/mp4" />
-        </video>
+          preload="none"
+          data-mobile-src="assets/angels-hero-mobile-v3.mp4?v=20261116"
+          data-desktop-src="assets/angels-hero-web-v3.mp4?v=20261116"
+        ></video>
         <div class="reveal__shade"></div>
       </div>
 
@@ -514,7 +519,7 @@
         <div class="section-shell contact__lead">
           <div class="contact__media" aria-hidden="true">
             <video class="contact__video" muted loop playsinline preload="none" poster="assets/mediabank-cocktail-poster.webp">
-              <source src="assets/mediabank-cocktail.mp4" type="video/mp4" />
+              <source src="assets/mediabank-cocktail.mp4?v=20261116" type="video/mp4" />
             </video>
           </div>
           <div class="contact__content">
@@ -775,8 +780,5 @@
     </div>
 
     <div class="scroll-indicator" aria-hidden="true"><span></span></div>
-    <script src="i18n.js?v=20261110-original-menu-names"></script>
-    <script src="app.js?v=20261104-scroll-reveal"></script>
-    <script src="booking.js?v=20261104-1"></script>
   </body>
 </html>

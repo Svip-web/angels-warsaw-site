@@ -190,7 +190,8 @@
     const translated = translate(trimmed, current);
     const leading = original.match(/^\s*/)?.[0] || "";
     const trailing = original.match(/\s*$/)?.[0] || "";
-    node.nodeValue = `${leading}${translated}${trailing}`;
+    const value = `${leading}${translated}${trailing}`;
+    if (node.nodeValue !== value) node.nodeValue = value;
   }
 
   function translateAttributes(element) {
@@ -212,6 +213,7 @@
     nodes.forEach(translateTextNode);
     if (root.nodeType === Node.ELEMENT_NODE) translateAttributes(root);
     root.querySelectorAll?.("[aria-label], [title], [placeholder], meta[content]").forEach(translateAttributes);
+    if (root !== document) return;
     document.documentElement.lang = current;
     document.body.dataset.lang = current;
     document.querySelectorAll('[data-language-select]').forEach((select) => {
