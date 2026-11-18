@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Angels local preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "port": 4173,
+      "autoPort": true
+    }
+  ]
+}

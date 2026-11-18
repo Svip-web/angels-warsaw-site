@@ -8,8 +8,18 @@ window.ANGELS_MENU = {
       { "name": "Original", "prices": [{ "value": 200 }] },
       { "name": "Exclusive", "description": "Max Royal и Wookah", "prices": [{ "value": 250 }] },
       { "name": "Fruit", "prices": [{ "value": 300 }] },
-      { "name": "Shef Ice Cube", "prices": [{ "value": 350 }] },
-      { "name": "Shef Clase Azul", "prices": [{ "value": 350 }] },
+      {
+        "name": "Shef Ice Cube",
+        "image": "assets/hookah-ice-cube-poster.webp",
+        "video": "assets/hookah-ice-cube.mp4",
+        "prices": [{ "value": 350 }]
+      },
+      {
+        "name": "Shef Clase Azul",
+        "image": "assets/hookah-clase-azul-poster.webp",
+        "video": "assets/hookah-clase-azul.mp4",
+        "prices": [{ "value": 350 }]
+      },
       { "name": "Mansory", "prices": [{ "value": 1000 }] }
     ]
   },
@@ -87,24 +97,6 @@ window.ANGELS_MENU = {
                   {
                     "label": null,
                     "value": 400
-                  }
-                ]
-              },
-              {
-                "name": "Red Caviar (per 100 g)",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 350
-                  }
-                ]
-              },
-              {
-                "name": "Black Caviar (per 100 g)",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 1000
                   }
                 ]
               }

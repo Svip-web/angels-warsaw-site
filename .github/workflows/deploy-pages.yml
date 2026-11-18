@@ -25,6 +25,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Prepare browser asset versions
+        run: npm run prepare:site
+
+      - name: Check site before publishing
+        run: npm run check
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

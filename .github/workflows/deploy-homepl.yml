@@ -1,0 +1,68 @@
+name: Publish Angel's site to home.pl
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview the file changes without uploading them
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+    paths:
+      - 'dist/**'
+      - 'scripts/**'
+      - '.github/workflows/deploy-homepl.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: homepl-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.HOMEPL_PUBLISH_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: homepl
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run prepare:site
+      - run: npm run check
+      - name: Check hosting configuration
+        env:
+          FTP_HOST: ${{ vars.HOMEPL_HOST }}
+          FTP_DIRECTORY: ${{ vars.HOMEPL_DIRECTORY }}
+          FTP_USERNAME: ${{ secrets.HOMEPL_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.HOMEPL_FTP_PASSWORD }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from "node:assert/strict";
+          for (const key of ["FTP_HOST", "FTP_DIRECTORY", "FTP_USERNAME", "FTP_PASSWORD"]) {
+            assert.ok(process.env[key]?.trim(), `Missing hosting setting ${key}`);
+          }
+          const directory = process.env.FTP_DIRECTORY;
+          assert.ok(directory.endsWith("/"), "FTP_DIRECTORY must end with /");
+          assert.ok(!directory.split("/").includes(".."), "FTP_DIRECTORY must identify one directory");
+          console.log("Hosting settings are present.");
+          NODE
+      - name: Upload the checked static site
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.4.0
+        with:
+          server: ${{ vars.HOMEPL_HOST }}
+          username: ${{ secrets.HOMEPL_FTP_USERNAME }}
+          password: ${{ secrets.HOMEPL_FTP_PASSWORD }}
+          protocol: ftps
+          port: ${{ vars.HOMEPL_PORT || '21' }}
+          security: strict
+          local-dir: ./dist/
+          server-dir: ${{ vars.HOMEPL_DIRECTORY }}
+          state-name: .angels-ftp-sync.json
+          dangerous-clean-slate: false
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          log-level: minimal

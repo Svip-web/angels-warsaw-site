@@ -4,4 +4,5 @@ local-server.log
 local-server-error.log
 source-assets/
 tmp/
+releases/
 mediabank-preview.png

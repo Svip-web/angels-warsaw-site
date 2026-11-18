@@ -53,7 +53,59 @@
   const getItemCategory = (subgroup, group) =>
     (subgroup.title || group.title).replace(/\s*[·•]\s*.*$/, "").trim();
 
+  const automaticVideo = !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !window.matchMedia("(prefers-reduced-data: reduce)").matches &&
+    navigator.connection?.saveData !== true;
+  const visibleVideos = new Set();
+
+  const syncVideo = (video) => {
+    if (document.hidden || !visibleVideos.has(video)) {
+      video.pause();
+      return;
+    }
+    if (!video.getAttribute("src")) video.src = video.dataset.src;
+    if (automaticVideo && video.paused) {
+      video.play().catch(() => {
+        if (visibleVideos.has(video) && !document.hidden) video.controls = true;
+      });
+    }
+  };
+  const videoObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) visibleVideos.add(target);
+        else visibleVideos.delete(target);
+        syncVideo(target);
+      });
+    }, { threshold: 0.15 })
+    : null;
+
+  document.addEventListener("visibilitychange", () => visibleVideos.forEach(syncVideo));
+
   const createItemMedia = (item, group) => {
+    if (item.video) {
+      const figure = document.createElement("figure");
+      figure.className = "menu-catalog__media menu-catalog__media--video";
+      const video = document.createElement("video");
+      video.dataset.src = item.video;
+      video.poster = item.image || "";
+      video.width = 720;
+      video.height = 900;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = "none";
+      video.controls = !automaticVideo;
+      video.setAttribute("aria-label", item.name);
+      figure.append(video);
+      if (videoObserver) videoObserver.observe(video);
+      else {
+        visibleVideos.add(video);
+        syncVideo(video);
+      }
+      return figure;
+    }
     if (!item.image) return createPlaceholderMedia(group);
 
     const figure = document.createElement("figure");

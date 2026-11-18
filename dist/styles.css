@@ -7676,6 +7676,21 @@ body.is-booking-open {
   transition: transform 600ms var(--ease-cinematic), filter 240ms ease;
 }
 
+#hookah-catalog .menu-catalog__media {
+  aspect-ratio: 4 / 5;
+}
+
+.menu-catalog__media--video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-catalog__media--video::after {
+  display: none;
+}
+
 .menu-catalog__media--placeholder {
   isolation: isolate;
   display: grid;

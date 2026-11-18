@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node serve.mjs"
+    "start": "node serve.mjs",
+    "check": "node scripts/check-site.mjs",
+    "prepare:site": "node scripts/stamp-assets.mjs",
+    "package": "pwsh -NoProfile -File scripts/package-site.ps1"
   }
 }
