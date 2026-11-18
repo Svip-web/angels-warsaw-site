@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Canonical address for the production website. Technical previews are unchanged.
+RewriteCond %{HTTP_HOST} ^www\.angelskaraoke\.pl$ [NC]
+RewriteRule ^ https://angelskaraoke.pl%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{HTTP_HOST} ^angelskaraoke\.pl$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://angelskaraoke.pl%{REQUEST_URI} [R=301,L,NE]
