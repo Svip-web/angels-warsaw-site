@@ -41,11 +41,13 @@
 | Variable | Значение |
 | --- | --- |
 | `HOMEPL_HOST` | `serwer2389562.home.pl` |
-| `HOMEPL_DIRECTORY` | Проверенный путь для сайта, например `/public_html/angels-site/` |
+| `HOMEPL_DIRECTORY` | `./` для ограниченного FTP-пользователя `github-deploy@angelskaraoke.com` |
 | `HOMEPL_PORT` | Порт explicit FTPS, обычно `21` |
 
-Путь приведён как пример. Фактический путь зависит от корневого каталога
-FTP-пользователя и должен быть проверен в WebFTP.
+FTP-пользователь ограничен каталогом `/angels-site`, который соответствует
+`/public_html/angels-site` в WebFTP. Поэтому для этого пользователя загружайте
+файлы в `./`, без повторения полного пути. Для другого FTP-пользователя путь
+нужно проверить отдельно.
 
 В Environment secrets добавьте
 
