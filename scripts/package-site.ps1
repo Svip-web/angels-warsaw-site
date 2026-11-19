@@ -24,7 +24,8 @@ Compress-Archive -LiteralPath $webFiles -DestinationPath $webArchive -Compressio
 
 $clientFiles = @(
   'dist', '.claude', '.github', 'scripts', '.gitignore',
-  'package.json', 'serve.mjs', 'CLAUDE.md', 'EDITING-GUIDE-ru.md', 'PUBLISHING-GUIDE-ru.md', 'HOSTING-STATUS.md'
+  'package.json', 'serve.mjs', 'CLAUDE.md', 'CLAUDE-CLIENT-GUIDE-ru.txt',
+  'EDITING-GUIDE-ru.md', 'PUBLISHING-GUIDE-ru.md', 'HOSTING-STATUS.md'
 ) | ForEach-Object { Join-Path $projectRoot $_ }
 Compress-Archive -LiteralPath $clientFiles -DestinationPath $clientArchive -CompressionLevel Optimal
 
