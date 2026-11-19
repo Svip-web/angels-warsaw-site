@@ -16,8 +16,8 @@ window.ANGELS_MENU = {
       },
       {
         "name": "Shef Clase Azul",
-        "image": "assets/hookah-clase-azul-poster.webp",
-        "video": "assets/hookah-clase-azul.mp4",
+        "image": "assets/hookah-clase-azul-v2-poster.webp",
+        "video": "assets/hookah-clase-azul-v2.mp4",
         "prices": [{ "value": 350 }]
       },
       { "name": "Mansory", "prices": [{ "value": 1000 }] }
