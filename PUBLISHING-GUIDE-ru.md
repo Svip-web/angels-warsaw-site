@@ -30,6 +30,11 @@ GitHub-аккаунт клиента и его Claude Code.
 Для локальной работы можно открыть распакованный проект в Claude Code
 и запустить просмотр из конфигурации Angels local preview.
 Для браузерной работы клиент подключает GitHub на https://claude.ai/code.
+Сначала примите приглашение в репозиторий, войдя в свой GitHub-аккаунт:
+https://github.com/Svip-web/angels-warsaw-site/invitations.
+Затем в Claude Code подключите этот аккаунт и выберите
+`Svip-web/angels-warsaw-site`. Подключение собственного GitHub к Claude
+клиент выполняет в своём аккаунте; передавать пароли не требуется.
 Изменения из Claude сначала появляются в отдельной ветке.
 После просмотра и успешных проверок их объединяют с `main` через
 `Merge pull request`. GitHub Actions автоматически загружает сайт на home.pl.

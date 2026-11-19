@@ -71,6 +71,16 @@ window.ANGELS_MENU = {
             "title": "",
             "items": [
               {
+                "name": "Salmon Tartare",
+                "image": "assets/kitchen-salmon-tartare.webp",
+                "prices": [{ "value": 120 }]
+              },
+              {
+                "name": "Beef Tartare",
+                "image": "assets/kitchen-beef-tartare.webp",
+                "prices": [{ "value": 120 }]
+              },
+              {
                 "name": "Tempura Shrimp",
                 "image": "assets/kitchen-tempura-shrimp.webp",
                 "prices": [
@@ -99,6 +109,21 @@ window.ANGELS_MENU = {
                     "value": 400
                   }
                 ]
+              },
+              {
+                "name": "Mixed Olives",
+                "image": "assets/kitchen-mixed-olives.webp",
+                "prices": [{ "value": 40 }]
+              },
+              {
+                "name": "Salted Pistachios",
+                "image": "assets/kitchen-salted-pistachios.webp",
+                "prices": [{ "value": 30 }]
+              },
+              {
+                "name": "Mini Grissini",
+                "image": "assets/kitchen-mini-grissini.webp",
+                "prices": [{ "value": 30 }]
               }
             ]
           }
@@ -263,11 +288,12 @@ window.ANGELS_MENU = {
             "title": "",
             "items": [
               {
-                "name": "Brownie with Ice Cream",
+                "name": "Glazed Curd Bars",
+                "image": "assets/kitchen-glazed-curd-bars.webp",
                 "prices": [
                   {
                     "label": null,
-                    "value": 50
+                    "value": 90
                   }
                 ]
               },
