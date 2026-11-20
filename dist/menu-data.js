@@ -106,7 +106,7 @@ window.ANGELS_MENU = {
                 "prices": [
                   {
                     "label": null,
-                    "value": 350
+                    "value": 400
                   }
                 ]
               },
@@ -167,7 +167,7 @@ window.ANGELS_MENU = {
                 "name": "Grand Cold Platter",
                 "names": {"ru": "Большой холодный сет", "pl": "Zimny zestaw do wódki", "uk": "Великий холодний сет"},
                 "image": "assets/kitchen-grand-cold-platter.webp",
-                "prices": [{ "value": 600 }]
+                "prices": [{ "value": 650 }]
               }
             ]
           }
