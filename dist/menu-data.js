@@ -328,8 +328,8 @@ window.ANGELS_MENU = {
   "bar": {
     "groups": [
       {
-        "key": "COCKTAILS",
-        "title": "Коктейли",
+        "key": "SIGNATURE COCKTAILS",
+        "title": "Авторские коктейли",
         "subgroups": [
           {
             "title": "Авторские коктейли Angel's",
@@ -337,15 +337,6 @@ window.ANGELS_MENU = {
               {
                 "name": "1800 Tequila Silk",
                 "image": "assets/cocktail-1800-tequila-silk.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Amaretto Sour",
                 "prices": [
                   {
                     "label": null,
@@ -412,24 +403,6 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Limoncello Spritz",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Lychee Martini",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
                 "name": "Old Fashioned Premium",
                 "image": "assets/cocktail-old-fashioned-premium.webp",
                 "prices": [
@@ -480,10 +453,25 @@ window.ANGELS_MENU = {
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "key": "CLASSIC COCKTAILS",
+        "title": "Классические коктейли",
+        "subgroups": [
           {
             "title": "Классические коктейли",
             "items": [
+              {
+                "name": "Amaretto Sour",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
               {
                 "name": "Aperol Spritz",
                 "prices": [
@@ -611,7 +599,25 @@ window.ANGELS_MENU = {
                 ]
               },
               {
+                "name": "Limoncello Spritz",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
                 "name": "Long Island Iced Tea",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Lychee Martini",
                 "prices": [
                   {
                     "label": null,

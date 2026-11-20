@@ -35,7 +35,7 @@
     const figure = document.createElement("figure");
     const kind = group === menu.hookah
       ? "hookah"
-      : group.key === "COCKTAILS"
+      : ["CLASSIC COCKTAILS", "SIGNATURE COCKTAILS"].includes(group.key)
       ? "cocktail"
       : menu.kitchen.groups.includes(group)
         ? "kitchen"
@@ -235,7 +235,7 @@
     ["NON-ALCOHOLIC", "COFFEE & TEA"].includes(group.key),
   );
 
-  renderCatalog("#bar-catalog", barGroups, { sectionId: "bar", openKeys: ["COCKTAILS"] });
+  renderCatalog("#bar-catalog", barGroups, { sectionId: "bar", openKeys: ["CLASSIC COCKTAILS", "SIGNATURE COCKTAILS"] });
   renderCatalog("#kitchen-catalog", menu.kitchen.groups, { sectionId: "kitchen", openAll: true });
   renderCatalog("#non-alcoholic", zeroProofGroups, {
     sectionId: "non-alcoholic",
