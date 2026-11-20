@@ -647,6 +647,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Mai Tai",
+                "image": "assets/cocktail-mai-tai.webp",
                 "prices": [
                   {
                     "label": null,
@@ -656,6 +657,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Manhattan",
+                "image": "assets/cocktail-manhattan.webp",
                 "prices": [
                   {
                     "label": null,
@@ -665,6 +667,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Margarita",
+                "image": "assets/cocktail-margarita.webp",
                 "prices": [
                   {
                     "label": null,
@@ -674,6 +677,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Martinez",
+                "image": "assets/cocktail-martinez.webp",
                 "prices": [
                   {
                     "label": null,
@@ -683,6 +687,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Mojito",
+                "image": "assets/cocktail-mojito.webp",
                 "prices": [
                   {
                     "label": null,
@@ -692,6 +697,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Negroni",
+                "image": "assets/cocktail-negroni.webp",
                 "prices": [
                   {
                     "label": null,
@@ -701,6 +707,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "NY Sour",
+                "image": "assets/cocktail-ny-sour.webp",
                 "prices": [
                   {
                     "label": null,
@@ -710,6 +717,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Old Fashioned",
+                "image": "assets/cocktail-old-fashioned.webp",
                 "prices": [
                   {
                     "label": null,
@@ -719,6 +727,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Penicillin",
+                "image": "assets/cocktail-penicillin.webp",
                 "prices": [
                   {
                     "label": null,
@@ -728,6 +737,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Porn Star Martini",
+                "image": "assets/cocktail-porn-star-martini.webp",
                 "prices": [
                   {
                     "label": null,
