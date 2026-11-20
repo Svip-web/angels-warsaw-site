@@ -165,6 +165,110 @@
     return row;
   };
 
+  // Drink sections shown as a text price list instead of product cards.
+  const textListGroups = new Set([
+    "CHAMPAGNE & SPARKLING",
+    "WINE",
+    "SPIRITS",
+    "VERMOUTHS & LIQUEURS",
+    "BEER",
+    "NON-ALCOHOLIC",
+    "COFFEE & TEA",
+  ]);
+  // Non-alcoholic positions that keep their product cards.
+  const keepCardItems = new Set([
+    "Mojito 0%",
+    "Aperol Spritz 0%",
+    "Prosecco Abbazia 0%",
+    "Pineapple & Mint",
+    "Kiwi & Basil",
+    "Raspberry",
+    "Fresh Grapefruit",
+    "Fresh Orange",
+  ]);
+  const isTextItem = (item, group) => textListGroups.has(group.key) && !keepCardItems.has(item.name);
+
+  const labelsOf = (item) => item.prices.map((price) => price.label || "").join("|");
+
+  const createPriceText = (price, withLabel) => {
+    const cell = document.createElement("span");
+    cell.className = "menu-list__price";
+    if (withLabel && price.label) {
+      const label = document.createElement("small");
+      label.textContent = price.label;
+      cell.append(label);
+    }
+    const amount = document.createElement("strong");
+    amount.textContent = `${formatPrice(price.value)} zł`;
+    cell.append(amount);
+    return cell;
+  };
+
+  const createTextSubgroup = (subgroup, group, items) => {
+    const block = document.createElement("section");
+    block.className = "menu-catalog__subgroup menu-catalog__subgroup--list";
+
+    // Items that share two or more labelled prices (40 мл / бутылка 0,7 л) get price columns.
+    const firstLabels = labelsOf(items[0]);
+    const columns = items[0].prices.length > 1 && items[0].prices.every((price) => price.label) &&
+      items.every((item) => labelsOf(item) === firstLabels)
+      ? items[0].prices.map((price) => price.label)
+      : null;
+
+    const [mainTitle, ...noteParts] = (subgroup.title || group.title).split(/\s*·\s*/);
+    const head = document.createElement("header");
+    head.className = "menu-list__head";
+    const titleWrap = document.createElement("div");
+    titleWrap.className = "menu-list__title";
+    if (mainTitle && mainTitle !== group.title) {
+      const heading = document.createElement("h4");
+      heading.textContent = mainTitle;
+      titleWrap.append(heading);
+    }
+    const noteText = columns ? "" : noteParts.join(" · ");
+    if (noteText) {
+      const note = document.createElement("small");
+      note.textContent = noteText;
+      titleWrap.append(note);
+    }
+    head.append(titleWrap);
+    if (columns) {
+      block.classList.add("menu-catalog__subgroup--columns");
+      block.style.setProperty("--price-columns", columns.length);
+      columns.forEach((label) => {
+        const columnLabel = document.createElement("span");
+        columnLabel.className = "menu-list__column";
+        columnLabel.textContent = label;
+        head.append(columnLabel);
+      });
+    }
+    if (titleWrap.childNodes.length || columns) block.append(head);
+
+    const list = document.createElement("ul");
+    list.className = "menu-list";
+    items.forEach((item) => {
+      const row = document.createElement("li");
+      row.className = "menu-list__item";
+      const name = document.createElement("span");
+      name.className = "menu-list__name";
+      name.textContent = item.name;
+      if (item.description) {
+        const description = document.createElement("small");
+        description.className = "menu-list__description";
+        description.textContent = item.description;
+        name.append(description);
+      }
+      const leader = document.createElement("span");
+      leader.className = "menu-list__leader";
+      leader.setAttribute("aria-hidden", "true");
+      row.append(name, leader);
+      item.prices.forEach((price) => row.append(createPriceText(price, !columns)));
+      list.append(row);
+    });
+    block.append(list);
+    return block;
+  };
+
   const createSubgroup = (subgroup, group) => {
     const block = document.createElement("section");
     block.className = "menu-catalog__subgroup";
@@ -197,7 +301,23 @@
     const renderBody = () => {
       const body = document.createElement("div");
       body.className = "menu-catalog__group-body";
-      group.subgroups.forEach((subgroup) => body.append(createSubgroup(subgroup, group)));
+      let listColumns = null;
+      group.subgroups.forEach((subgroup) => {
+        const cardItems = subgroup.items.filter((item) => !isTextItem(item, group));
+        const textItems = subgroup.items.filter((item) => isTextItem(item, group));
+        if (cardItems.length) {
+          listColumns = null;
+          body.append(createSubgroup({ ...subgroup, items: cardItems }, group));
+        }
+        if (textItems.length) {
+          if (!listColumns) {
+            listColumns = document.createElement("div");
+            listColumns.className = "menu-list-columns";
+            body.append(listColumns);
+          }
+          listColumns.append(createTextSubgroup(subgroup, group, textItems));
+        }
+      });
       details.append(body);
     };
 

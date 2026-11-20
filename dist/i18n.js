@@ -163,6 +163,11 @@
     "По предварительному заказу наш шеф создаст персональное меню по вашему запросу.": { pl: "Na wcześniejsze zamówienie szef kuchni przygotuje dla Ciebie indywidualne menu.", en: "Our chef can prepare a custom menu on request when ordered in advance.", uk: "За попереднім замовленням наш шеф створить персональне меню на ваш запит." },
     "бутылка": { pl: "butelka", en: "bottle", uk: "пляшка" },
     "бутылка 0,7 л": { pl: "butelka 0,7 l", en: "0.7 l bottle", uk: "пляшка 0,7 л" },
+    "бутылка 0,75 л": { pl: "butelka 0,75 l", en: "0.75 l bottle", uk: "пляшка 0,75 л" },
+    "бутылка 0,33 л": { pl: "butelka 0,33 l", en: "0.33 l bottle", uk: "пляшка 0,33 л" },
+    "80 мл": { pl: "80 ml", en: "80 ml", uk: "80 мл" },
+    "0,25 л": { pl: "0,25 l", en: "0.25 l", uk: "0,25 л" },
+    "чайник": { pl: "dzbanek", en: "teapot", uk: "чайник" },
     // Ukrainian-only entries: attributes and labels without PL/EN versions
     "Angels — караоке и ночное пространство в Варшаве.": { uk: "Angels — караоке та нічний простір у Варшаві." },
     "Angel's — караоке и lounge bar в Варшаве": { uk: "Angel's — караоке та lounge bar у Варшаві" },
