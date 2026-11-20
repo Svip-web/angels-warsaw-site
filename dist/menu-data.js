@@ -396,7 +396,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Kiwi Spritz",
-                "image": "assets/cocktail-kiwi-spritz.webp",
+                "image": "assets/cocktail-kiwi-spritz-v2.webp",
                 "prices": [
                   {
                     "label": null,
