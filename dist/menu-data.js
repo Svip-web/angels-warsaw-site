@@ -374,15 +374,6 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Bellini",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
                 "name": "Bubble Margarita",
                 "prices": [
                   {
@@ -394,15 +385,6 @@ window.ANGELS_MENU = {
               {
                 "name": "Garden Royal",
                 "image": "assets/cocktail-garden-royal.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Garden Spritz",
                 "prices": [
                   {
                     "label": null,
@@ -440,15 +422,6 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Lychee Martini",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Lychee & Raspberry Spritz",
                 "prices": [
                   {
                     "label": null,
@@ -575,7 +548,7 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Espresso Martini",
+                "name": "Daiquiri",
                 "prices": [
                   {
                     "label": null,
@@ -584,7 +557,7 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Fiero Spritz",
+                "name": "Espresso Martini",
                 "prices": [
                   {
                     "label": null,
@@ -603,15 +576,6 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gin Sour",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Hemingway Daiquiri",
                 "prices": [
                   {
                     "label": null,
