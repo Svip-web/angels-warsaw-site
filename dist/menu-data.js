@@ -1858,6 +1858,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Mojito 0%",
+                "image": "assets/drink-mojito-0.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1867,6 +1868,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Aperol Spritz 0%",
+                "image": "assets/drink-aperol-spritz-0.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1876,6 +1878,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Prosecco Abbazia 0%",
+                "image": "assets/drink-prosecco-abbazia-0.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1890,6 +1893,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Pineapple & Mint",
+                "image": "assets/drink-pineapple-mint.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1899,6 +1903,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Kiwi & Basil",
+                "image": "assets/drink-kiwi-basil.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1908,6 +1913,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Raspberry",
+                "image": "assets/drink-raspberry.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1922,6 +1928,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Fresh Grapefruit",
+                "image": "assets/drink-fresh-grapefruit.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1931,6 +1938,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Fresh Orange",
+                "image": "assets/drink-fresh-orange.webp",
                 "prices": [
                   {
                     "label": null,
