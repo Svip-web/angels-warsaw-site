@@ -919,7 +919,7 @@ window.ANGELS_MENU = {
             "title": "Игристое вино",
             "items": [
               {
-                "name": "Montelvini Prosecco (150 ml)",
+                "name": "Montelvini Prosecco (125 ml)",
                 "prices": [
                   {
                     "label": "бокал",
@@ -1258,7 +1258,7 @@ window.ANGELS_MENU = {
             ]
           },
           {
-            "title": "Текила и мескаль · 40 мл / бутылка 0,7 л",
+            "title": "Текила · 40 мл / бутылка 0,7 л",
             "items": [
               {
                 "name": "1800 Silver",
@@ -1606,7 +1606,57 @@ window.ANGELS_MENU = {
         "title": "Вермуты и ликёры",
         "subgroups": [
           {
-            "title": "Вермуты 80 мл / ликёры 40 мл",
+            "title": "Вермуты · 80 мл",
+            "items": [
+              {
+                "name": "Lillet Blanc",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 30
+                  }
+                ]
+              },
+              {
+                "name": "Martini Bianco",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 35
+                  }
+                ]
+              },
+              {
+                "name": "Martini Extra Dry",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 35
+                  }
+                ]
+              },
+              {
+                "name": "Martini Fiero",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 35
+                  }
+                ]
+              },
+              {
+                "name": "Martini Rosso",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 35
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Ликёры · 40 мл",
             "items": [
               {
                 "name": "Aperol",
@@ -1699,52 +1749,7 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Lillet Blanc",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 30
-                  }
-                ]
-              },
-              {
                 "name": "Limoncello",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 35
-                  }
-                ]
-              },
-              {
-                "name": "Martini Bianco",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 35
-                  }
-                ]
-              },
-              {
-                "name": "Martini Extra Dry",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 35
-                  }
-                ]
-              },
-              {
-                "name": "Martini Fiero",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 35
-                  }
-                ]
-              },
-              {
-                "name": "Martini Rosso",
                 "prices": [
                   {
                     "label": null,
@@ -2076,29 +2081,11 @@ window.ANGELS_MENU = {
             "title": "Кофе",
             "items": [
               {
-                "name": "Americano",
+                "name": "Espresso",
                 "prices": [
                   {
                     "label": null,
-                    "value": 18
-                  }
-                ]
-              },
-              {
-                "name": "Cappuccino",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 20
-                  }
-                ]
-              },
-              {
-                "name": "Cappuccino — plant milk",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 22
+                    "value": 15
                   }
                 ]
               },
@@ -2112,11 +2099,11 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Espresso",
+                "name": "Americano",
                 "prices": [
                   {
                     "label": null,
-                    "value": 15
+                    "value": 18
                   }
                 ]
               },
@@ -2131,6 +2118,24 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Flat White — plant milk",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 22
+                  }
+                ]
+              },
+              {
+                "name": "Cappuccino",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 20
+                  }
+                ]
+              },
+              {
+                "name": "Cappuccino — plant milk",
                 "prices": [
                   {
                     "label": null,
@@ -2162,7 +2167,61 @@ window.ANGELS_MENU = {
             "title": "Чай · чайник",
             "items": [
               {
-                "name": "Classic Tea",
+                "name": "Assam Bari",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Earl Grey",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Fancy Sencha",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Milky Oolong",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Jasmine Pearls",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Sweet Berries",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 40
+                  }
+                ]
+              },
+              {
+                "name": "Soft Peach",
                 "prices": [
                   {
                     "label": null,
