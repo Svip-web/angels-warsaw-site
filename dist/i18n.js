@@ -8,7 +8,7 @@
 
   const copy = {
     "Меню": { pl: "Menu", en: "Menu", uk: "Меню" },
-    "Бронь": { pl: "Rezerwuj", en: "Book", uk: "Резерв" },
+    "Бронь": { pl: "Rezerwuj", en: "Book", uk: "Бронювання" },
     "Забронировать": { pl: "Zarezerwuj", en: "Book now", uk: "Забронювати" },
     "Забронировать стол": { pl: "Zarezerwuj stolik", en: "Book a table", uk: "Забронювати столик" },
     "Забронировать вечер": { pl: "Zarezerwuj wieczór", en: "Book your evening", uk: "Забронювати вечір" },
