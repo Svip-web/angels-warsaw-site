@@ -2756,16 +2756,8 @@ a {
   transition: filter 500ms ease, transform 1.1s var(--ease-cinematic);
 }
 
-.menu-preview__card:nth-child(1) img {
-  object-position: 18% center;
-}
-
-.menu-preview__card:nth-child(2) img {
-  object-position: 62% center;
-}
-
-.menu-preview__card:nth-child(3) img {
-  object-position: 50% 42%;
+.menu-preview__media img {
+  object-position: center;
 }
 
 @media (hover: hover) {
@@ -3818,6 +3810,10 @@ a {
 
   .menu-preview__body p {
     min-height: 0;
+  }
+
+  .menu-preview__card:nth-child(1) .menu-preview__media img {
+    object-position: center 40%;
   }
 
   .special-grid {
