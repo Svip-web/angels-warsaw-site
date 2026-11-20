@@ -82,6 +82,18 @@
 
   document.addEventListener("visibilitychange", () => visibleVideos.forEach(syncVideo));
 
+  // Dish names can carry translations in item.names ({ ru, pl, uk }); item.name is English.
+  const localized = [];
+  const itemLabel = (item) => item.names?.[window.ANGELS_I18N?.lang] || item.name;
+  const bindLabel = (target, item, apply) => {
+    target.setAttribute("data-i18n-skip", "");
+    localized.push([target, item, apply]);
+    apply(target, itemLabel(item));
+  };
+  window.addEventListener("angels:languagechange", () => {
+    localized.forEach(([target, item, apply]) => apply(target, itemLabel(item)));
+  });
+
   const createItemMedia = (item, group) => {
     if (item.video) {
       const figure = document.createElement("figure");
@@ -97,7 +109,7 @@
       video.playsInline = true;
       video.preload = "none";
       video.controls = !automaticVideo;
-      video.setAttribute("aria-label", item.name);
+      bindLabel(video, item, (target, label) => target.setAttribute("aria-label", label));
       figure.append(video);
       if (videoObserver) videoObserver.observe(video);
       else {
@@ -112,7 +124,9 @@
     figure.className = "menu-catalog__media menu-catalog__media--product";
     const image = document.createElement("img");
     image.src = item.image;
-    image.alt = item.name;
+    bindLabel(image, item, (target, label) => {
+      target.alt = label;
+    });
     image.loading = "lazy";
     image.decoding = "async";
     figure.append(image);
@@ -134,7 +148,9 @@
 
     const name = document.createElement("h5");
     name.className = "menu-catalog__item-name";
-    name.textContent = item.name;
+    bindLabel(name, item, (target, label) => {
+      target.textContent = label;
+    });
 
     const prices = document.createElement("div");
     prices.className = "menu-catalog__prices";
@@ -251,7 +267,11 @@
       row.className = "menu-list__item";
       const name = document.createElement("span");
       name.className = "menu-list__name";
-      name.textContent = item.name;
+      const nameText = document.createTextNode("");
+      name.append(nameText);
+      bindLabel(name, item, (_, label) => {
+        nameText.nodeValue = label;
+      });
       if (item.description) {
         const description = document.createElement("small");
         description.className = "menu-list__description";

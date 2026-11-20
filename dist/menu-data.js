@@ -34,6 +34,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Gillardeau Oysters No. 2 — 1 pc",
+                "names": {"ru": "Устрицы Gillardeau № 2 — 1 шт.", "pl": "Ostrygi Gillardeau nr 2 — 1 szt.", "uk": "Устриці Gillardeau № 2 — 1 шт."},
                 "image": "assets/kitchen-oysters-gillardeau-1.webp",
                 "prices": [
                   {
@@ -44,6 +45,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gillardeau Oysters No. 2 — 6 pcs",
+                "names": {"ru": "Устрицы Gillardeau № 2 — 6 шт.", "pl": "Ostrygi Gillardeau nr 2 — 6 szt.", "uk": "Устриці Gillardeau № 2 — 6 шт."},
                 "image": "assets/kitchen-oysters-gillardeau-6.webp",
                 "prices": [
                   {
@@ -54,6 +56,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gillardeau Oysters No. 2 — 12 pcs",
+                "names": {"ru": "Устрицы Gillardeau № 2 — 12 шт.", "pl": "Ostrygi Gillardeau nr 2 — 12 szt.", "uk": "Устриці Gillardeau № 2 — 12 шт."},
                 "image": "assets/kitchen-oysters-gillardeau-12.webp",
                 "prices": [
                   {
@@ -75,16 +78,19 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Salmon Tartare",
+                "names": {"ru": "Тартар из лосося", "pl": "Tatar z łososia", "uk": "Тартар із лосося"},
                 "image": "assets/kitchen-salmon-tartare.webp",
                 "prices": [{ "value": 120 }]
               },
               {
                 "name": "Beef Tartare",
+                "names": {"ru": "Тартар из говядины", "pl": "Tatar wołowy", "uk": "Тартар з яловичини"},
                 "image": "assets/kitchen-beef-tartare.webp",
                 "prices": [{ "value": 120 }]
               },
               {
                 "name": "Tempura Shrimp",
+                "names": {"ru": "Креветки темпура", "pl": "Krewetki w tempurze", "uk": "Креветки темпура"},
                 "image": "assets/kitchen-tempura-shrimp.webp",
                 "prices": [
                   {
@@ -95,6 +101,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Fruit & Berry Platter",
+                "names": {"ru": "Фруктово-ягодная тарелка", "pl": "Talerz owocowo-jagodowy", "uk": "Фруктово-ягідна тарілка"},
                 "image": "assets/kitchen-fruit-berry-platter.webp",
                 "prices": [
                   {
@@ -105,28 +112,62 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Antipasti",
+                "names": {"ru": "Антипасти", "pl": "Antipasti", "uk": "Антипасті"},
                 "image": "assets/kitchen-antipasti.webp",
                 "prices": [
                   {
                     "label": null,
-                    "value": 400
+                    "value": 450
                   }
                 ]
               },
               {
                 "name": "Mixed Olives",
+                "names": {"ru": "Ассорти оливок", "pl": "Mieszanka oliwek", "uk": "Асорті оливок"},
                 "image": "assets/kitchen-mixed-olives.webp",
                 "prices": [{ "value": 40 }]
               },
               {
                 "name": "Salted Pistachios",
+                "names": {"ru": "Солёные фисташки", "pl": "Solone pistacje", "uk": "Солоні фісташки"},
                 "image": "assets/kitchen-salted-pistachios.webp",
                 "prices": [{ "value": 30 }]
               },
               {
                 "name": "Mini Grissini",
+                "names": {"ru": "Мини-гриссини", "pl": "Mini grissini", "uk": "Міні-гриссіні"},
                 "image": "assets/kitchen-mini-grissini.webp",
                 "prices": [{ "value": 30 }]
+              },
+              {
+                "name": "Jerky",
+                "names": {"ru": "Джерки", "pl": "Jerky", "uk": "Джерки"},
+                "image": "assets/kitchen-jerky.webp",
+                "prices": [{ "value": 150 }]
+              },
+              {
+                "name": "Herring Three Ways with Baby Potatoes",
+                "names": {"ru": "Сельдь в трёх характерах", "pl": "Trzy oblicza śledzia z ziemniaczkami", "uk": "Оселедець у трьох характерах"},
+                "image": "assets/kitchen-herring-three-ways.webp",
+                "prices": [{ "value": 150 }]
+              },
+              {
+                "name": "Salo Trio",
+                "names": {"ru": "Ассорти из сала", "pl": "Słoninowy trio specjał", "uk": "Асорті з сала"},
+                "image": "assets/kitchen-salo-trio.webp",
+                "prices": [{ "value": 130 }]
+              },
+              {
+                "name": "Pickles & Marinades",
+                "names": {"ru": "Соленья и маринады", "pl": "Kiszonki i marynaty", "uk": "Соління та маринади"},
+                "image": "assets/kitchen-pickles-marinades.webp",
+                "prices": [{ "value": 130 }]
+              },
+              {
+                "name": "Grand Cold Platter",
+                "names": {"ru": "Большой холодный сет", "pl": "Zimny zestaw do wódki", "uk": "Великий холодний сет"},
+                "image": "assets/kitchen-grand-cold-platter.webp",
+                "prices": [{ "value": 600 }]
               }
             ]
           }
@@ -141,6 +182,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Caesar Salad with Chicken & Crispy Bacon",
+                "names": {"ru": "Цезарь с курицей и хрустящим беконом", "pl": "Sałatka Cezar z kurczakiem i chrupiącym boczkiem", "uk": "Цезар із куркою та хрустким беконом"},
                 "image": "assets/kitchen-caesar-chicken.webp",
                 "prices": [
                   {
@@ -151,6 +193,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Caesar Salad with Shrimp & Crispy Bacon",
+                "names": {"ru": "Цезарь с креветками и хрустящим беконом", "pl": "Sałatka Cezar z krewetkami i chrupiącym boczkiem", "uk": "Цезар із креветками та хрустким беконом"},
                 "image": "assets/kitchen-caesar-shrimp.webp",
                 "prices": [
                   {
@@ -172,6 +215,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Borscht with Beef Cheeks",
+                "names": {"ru": "Борщ с говяжьими щёчками", "pl": "Barszcz z policzkami wołowymi", "uk": "Борщ із яловичими щічками"},
                 "image": "assets/kitchen-borscht-beef-cheeks.webp",
                 "prices": [
                   {
@@ -182,6 +226,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Chicken Broth with Turkey",
+                "names": {"ru": "Куриный бульон с индейкой", "pl": "Rosół drobiowy z indykiem", "uk": "Курячий бульйон з індичкою"},
                 "image": "assets/kitchen-chicken-broth-turkey.webp",
                 "prices": [
                   {
@@ -203,6 +248,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Philadelphia Grand Roll",
+                "names": {"ru": "Ролл Филадельфия Гранд", "pl": "Philadelphia Grand Roll", "uk": "Рол Філадельфія Гранд"},
                 "image": "assets/kitchen-philadelphia-grand-roll.webp",
                 "prices": [
                   {
@@ -213,6 +259,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Philadelphia with Mango",
+                "names": {"ru": "Филадельфия с манго", "pl": "Philadelphia z mango", "uk": "Філадельфія з манго"},
                 "image": "assets/kitchen-philadelphia-mango.webp",
                 "prices": [
                   {
@@ -223,6 +270,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Philadelphia with Eel",
+                "names": {"ru": "Филадельфия с угрём", "pl": "Philadelphia z węgorzem", "uk": "Філадельфія з вугрем"},
                 "image": "assets/kitchen-philadelphia-eel.webp",
                 "prices": [
                   {
@@ -233,6 +281,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Volcano Roll",
+                "names": {"ru": "Ролл Вулкан", "pl": "Volcano Roll", "uk": "Рол Вулкан"},
                 "image": "assets/kitchen-volcano-roll.webp",
                 "prices": [
                   {
@@ -243,6 +292,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Tiger Roll",
+                "names": {"ru": "Ролл Тайгер", "pl": "Tiger Roll", "uk": "Рол Тайгер"},
                 "image": "assets/kitchen-tiger-roll-v2.webp",
                 "prices": [
                   {
@@ -253,6 +303,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "California Roll",
+                "names": {"ru": "Ролл Калифорния", "pl": "California Roll", "uk": "Рол Каліфорнія"},
                 "image": "assets/kitchen-california-roll.webp",
                 "prices": [
                   {
@@ -263,6 +314,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Ebi Tempura Roll",
+                "names": {"ru": "Ролл Эби темпура", "pl": "Ebi Tempura Roll", "uk": "Рол Ебі темпура"},
                 "image": "assets/kitchen-ebi-tempura-roll.webp",
                 "prices": [
                   {
@@ -273,6 +325,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bonito Roll",
+                "names": {"ru": "Ролл Бонито", "pl": "Bonito Roll", "uk": "Рол Боніто"},
                 "image": "assets/kitchen-bonito-roll.webp",
                 "prices": [
                   {
@@ -294,6 +347,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Glazed Curd Bars",
+                "names": {"ru": "Глазированные сырки", "pl": "Glazurowane serki twarogowe", "uk": "Глазуровані сирки"},
                 "image": "assets/kitchen-glazed-curd-bars.webp",
                 "prices": [
                   {
@@ -304,6 +358,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Honey Cake",
+                "names": {"ru": "Медовик", "pl": "Miodownik", "uk": "Медовик"},
                 "image": "assets/kitchen-honey-cake.webp",
                 "prices": [
                   {
@@ -314,6 +369,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strudel",
+                "names": {"ru": "Штрудель", "pl": "Strudel", "uk": "Штрудель"},
                 "image": "assets/kitchen-strudel.webp",
                 "prices": [
                   {
