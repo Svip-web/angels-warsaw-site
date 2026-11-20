@@ -328,22 +328,12 @@ window.ANGELS_MENU = {
   "bar": {
     "groups": [
       {
-        "key": "COCKTAILS",
-        "title": "Коктейли",
+        "key": "CLASSIC COCKTAILS",
+        "title": "Классические коктейли",
         "subgroups": [
           {
-            "title": "Авторские коктейли Angel's",
+            "title": "Классические коктейли",
             "items": [
-              {
-                "name": "1800 Tequila Silk",
-                "image": "assets/cocktail-1800-tequila-silk.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
               {
                 "name": "Amaretto Sour",
                 "prices": [
@@ -353,137 +343,6 @@ window.ANGELS_MENU = {
                   }
                 ]
               },
-              {
-                "name": "Angel Nostalgia",
-                "image": "assets/cocktail-angel-nostalgia.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Angel's Secret Martini",
-                "image": "assets/cocktail-secret-martini.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Bubble Margarita",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Garden Royal",
-                "image": "assets/cocktail-garden-royal.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Gin Apple",
-                "image": "assets/cocktail-gin-apple.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Kiwi Spritz",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Limoncello Spritz",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Lychee Martini",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Old Fashioned Premium",
-                "image": "assets/cocktail-old-fashioned-premium.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 130
-                  }
-                ]
-              },
-              {
-                "name": "Strawberry Basil Smash",
-                "image": "assets/cocktail-strawberry-basil-smash.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Strawberry Chocolate",
-                "image": "assets/cocktail-strawberry-chocolate.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 60
-                  }
-                ]
-              },
-              {
-                "name": "Sweet Tai",
-                "image": "assets/cocktail-sweet-tai.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 80
-                  }
-                ]
-              },
-              {
-                "name": "Velvet Rose",
-                "image": "assets/cocktail-velvet-rose.webp",
-                "prices": [
-                  {
-                    "label": null,
-                    "value": 80
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "title": "Классические коктейли",
-            "items": [
               {
                 "name": "Aperol Spritz",
                 "prices": [
@@ -611,7 +470,25 @@ window.ANGELS_MENU = {
                 ]
               },
               {
+                "name": "Limoncello Spritz",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
                 "name": "Long Island Iced Tea",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Lychee Martini",
                 "prices": [
                   {
                     "label": null,
@@ -742,6 +619,135 @@ window.ANGELS_MENU = {
                   {
                     "label": null,
                     "value": 60
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SIGNATURE COCKTAILS",
+        "title": "Авторские коктейли",
+        "subgroups": [
+          {
+            "title": "Авторские коктейли Angel's",
+            "items": [
+              {
+                "name": "1800 Tequila Silk",
+                "image": "assets/cocktail-1800-tequila-silk.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Angel Nostalgia",
+                "image": "assets/cocktail-angel-nostalgia.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Angel's Secret Martini",
+                "image": "assets/cocktail-secret-martini.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Bubble Margarita",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Garden Royal",
+                "image": "assets/cocktail-garden-royal.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Gin Apple",
+                "image": "assets/cocktail-gin-apple.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Kiwi Spritz",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Old Fashioned Premium",
+                "image": "assets/cocktail-old-fashioned-premium.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 130
+                  }
+                ]
+              },
+              {
+                "name": "Strawberry Basil Smash",
+                "image": "assets/cocktail-strawberry-basil-smash.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Strawberry Chocolate",
+                "image": "assets/cocktail-strawberry-chocolate.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 60
+                  }
+                ]
+              },
+              {
+                "name": "Sweet Tai",
+                "image": "assets/cocktail-sweet-tai.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 80
+                  }
+                ]
+              },
+              {
+                "name": "Velvet Rose",
+                "image": "assets/cocktail-velvet-rose.webp",
+                "prices": [
+                  {
+                    "label": null,
+                    "value": 80
                   }
                 ]
               }

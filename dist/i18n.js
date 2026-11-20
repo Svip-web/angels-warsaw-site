@@ -129,6 +129,7 @@
     "Коктейли": { pl: "Koktajle", en: "Cocktails", uk: "Коктейлі" },
     "Авторские коктейли Angel's": { pl: "Autorskie koktajle Angel's", en: "Angel's signature cocktails", uk: "Авторські коктейлі Angel's" },
     "Классические коктейли": { pl: "Klasyczne koktajle", en: "Classic cocktails", uk: "Класичні коктейлі" },
+    "Авторские коктейли": { pl: "Autorskie koktajle", en: "Signature cocktails", uk: "Авторські коктейлі" },
     "Шампанское и игристое": { pl: "Szampan i wina musujące", en: "Champagne & sparkling", uk: "Шампанське та ігристе" },
     "Игристое вино": { pl: "Wino musujące", en: "Sparkling wine", uk: "Ігристе вино" },
     "Вино": { pl: "Wino", en: "Wine", uk: "Вино" },
