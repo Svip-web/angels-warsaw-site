@@ -547,6 +547,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Daiquiri",
+                "image": "assets/cocktail-daiquiri.webp",
                 "prices": [
                   {
                     "label": null,
@@ -556,6 +557,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Espresso Martini",
+                "image": "assets/cocktail-espresso-martini.webp",
                 "prices": [
                   {
                     "label": null,
@@ -565,6 +567,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "French 75",
+                "image": "assets/cocktail-french-75.webp",
                 "prices": [
                   {
                     "label": null,
@@ -574,6 +577,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gin Sour",
+                "image": "assets/cocktail-gin-sour.webp",
                 "prices": [
                   {
                     "label": null,
@@ -583,6 +587,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Hugo Spritz",
+                "image": "assets/cocktail-hugo-spritz.webp",
                 "prices": [
                   {
                     "label": null,
@@ -592,6 +597,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Kyiv Mule",
+                "image": "assets/cocktail-kyiv-mule.webp",
                 "prices": [
                   {
                     "label": null,
@@ -601,6 +607,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Lillet Spritz",
+                "image": "assets/cocktail-lillet-spritz.webp",
                 "prices": [
                   {
                     "label": null,
@@ -610,6 +617,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Limoncello Spritz",
+                "image": "assets/cocktail-limoncello-spritz.webp",
                 "prices": [
                   {
                     "label": null,
@@ -619,6 +627,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Long Island Iced Tea",
+                "image": "assets/cocktail-long-island-iced-tea.webp",
                 "prices": [
                   {
                     "label": null,
@@ -628,6 +637,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Lychee Martini",
+                "image": "assets/cocktail-lychee-martini.webp",
                 "prices": [
                   {
                     "label": null,
