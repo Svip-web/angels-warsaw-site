@@ -747,6 +747,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Rum Sour",
+                "image": "assets/cocktail-rum-sour.webp",
                 "prices": [
                   {
                     "label": null,
@@ -756,6 +757,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Whiskey Sour",
+                "image": "assets/cocktail-whiskey-sour.webp",
                 "prices": [
                   {
                     "label": null,
@@ -765,6 +767,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "White Russian",
+                "image": "assets/cocktail-white-russian.webp",
                 "prices": [
                   {
                     "label": null,
@@ -774,6 +777,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Vodka Sour",
+                "image": "assets/cocktail-vodka-sour.webp",
                 "prices": [
                   {
                     "label": null,
