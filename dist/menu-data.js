@@ -243,7 +243,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Tiger Roll",
-                "image": "assets/kitchen-tiger-roll.webp",
+                "image": "assets/kitchen-tiger-roll-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -304,6 +304,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Honey Cake",
+                "image": "assets/kitchen-honey-cake.webp",
                 "prices": [
                   {
                     "label": null,
@@ -391,7 +392,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gin Apple",
-                "image": "assets/cocktail-gin-apple.webp",
+                "image": "assets/cocktail-gin-apple-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -482,7 +483,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Aperol Spritz",
-                "image": "assets/cocktail-aperol-spritz.webp",
+                "image": "assets/drink-aperol-spritz-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -692,7 +693,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Mojito",
-                "image": "assets/cocktail-mojito.webp",
+                "image": "assets/drink-mojito-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1858,7 +1859,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Mojito 0%",
-                "image": "assets/drink-mojito-0.webp",
+                "image": "assets/drink-mojito-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1868,7 +1869,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Aperol Spritz 0%",
-                "image": "assets/drink-aperol-spritz-0.webp",
+                "image": "assets/drink-aperol-spritz-v2.webp",
                 "prices": [
                   {
                     "label": null,
@@ -1878,7 +1879,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Prosecco Abbazia 0%",
-                "image": "assets/drink-prosecco-abbazia-0.webp",
+                "image": "assets/drink-prosecco-abbazia-0-v2.webp",
                 "prices": [
                   {
                     "label": null,
