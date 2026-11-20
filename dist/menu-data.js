@@ -34,6 +34,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Gillardeau Oysters No. 2 — 1 pc",
+                "image": "assets/kitchen-oysters-gillardeau-1.webp",
                 "prices": [
                   {
                     "label": null,
@@ -43,6 +44,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gillardeau Oysters No. 2 — 6 pcs",
+                "image": "assets/kitchen-oysters-gillardeau-6.webp",
                 "prices": [
                   {
                     "label": null,
@@ -52,6 +54,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Gillardeau Oysters No. 2 — 12 pcs",
+                "image": "assets/kitchen-oysters-gillardeau-12.webp",
                 "prices": [
                   {
                     "label": null,
@@ -138,6 +141,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Caesar Salad with Chicken & Crispy Bacon",
+                "image": "assets/kitchen-caesar-chicken.webp",
                 "prices": [
                   {
                     "label": null,
@@ -147,6 +151,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Caesar Salad with Shrimp & Crispy Bacon",
+                "image": "assets/kitchen-caesar-shrimp.webp",
                 "prices": [
                   {
                     "label": null,
