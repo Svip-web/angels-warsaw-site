@@ -366,6 +366,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bubble Margarita",
+                "image": "assets/cocktail-bubble-margarita.webp",
                 "prices": [
                   {
                     "label": null,
@@ -395,6 +396,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Kiwi Spritz",
+                "image": "assets/cocktail-kiwi-spritz.webp",
                 "prices": [
                   {
                     "label": null,
@@ -465,6 +467,7 @@ window.ANGELS_MENU = {
             "items": [
               {
                 "name": "Amaretto Sour",
+                "image": "assets/cocktail-amaretto-sour.webp",
                 "prices": [
                   {
                     "label": null,
@@ -474,6 +477,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Aperol Spritz",
+                "image": "assets/cocktail-aperol-spritz.webp",
                 "prices": [
                   {
                     "label": null,
@@ -483,6 +487,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "B-52",
+                "image": "assets/cocktail-b-52.webp",
                 "prices": [
                   {
                     "label": null,
@@ -492,6 +497,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Basil Smash",
+                "image": "assets/cocktail-basil-smash.webp",
                 "prices": [
                   {
                     "label": null,
@@ -501,6 +507,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bellini",
+                "image": "assets/cocktail-bellini.webp",
                 "prices": [
                   {
                     "label": null,
@@ -510,6 +517,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bloody Mary",
+                "image": "assets/cocktail-bloody-mary.webp",
                 "prices": [
                   {
                     "label": null,
@@ -519,6 +527,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Bloody Maria",
+                "image": "assets/cocktail-bloody-maria.webp",
                 "prices": [
                   {
                     "label": null,
@@ -528,6 +537,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Clover Club",
+                "image": "assets/cocktail-clover-club.webp",
                 "prices": [
                   {
                     "label": null,
