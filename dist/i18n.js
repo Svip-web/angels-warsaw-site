@@ -244,7 +244,11 @@
       ? localStorage.getItem("angels-language")
       : "ru";
 
+  const isSkipped = (node) =>
+    Boolean((node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement)?.closest("[data-i18n-skip]"));
+
   function translateTextNode(node) {
+    if (isSkipped(node)) return;
     if (!textOriginals.has(node)) textOriginals.set(node, node.nodeValue);
     const original = textOriginals.get(node);
     const trimmed = normalize(original);
@@ -257,6 +261,7 @@
   }
 
   function translateAttributes(element) {
+    if (isSkipped(element)) return;
     const names = ["aria-label", "title", "placeholder", "content", "alt"];
     if (!attributeOriginals.has(element)) attributeOriginals.set(element, new Map());
     const originals = attributeOriginals.get(element);
@@ -319,8 +324,61 @@
     });
   });
 
+  // A language link (?lang=…) counts as the visitor's choice for the next pages.
+  if (supported.includes(currentFromUrl)) {
+    try {
+      localStorage.setItem("angels-language", currentFromUrl);
+    } catch (error) {}
+  }
+
   apply(document);
   observer.observe(document.body, { childList: true, subtree: true });
+
+  // First-visit language selector. The inline script in <head> adds the class
+  // before the first paint when no language has been chosen yet.
+  const gate = document.querySelector("[data-language-gate]");
+  const root = document.documentElement;
+  if (gate && root.classList.contains("language-gate-open")) {
+    const options = [...gate.querySelectorAll("[data-gate-lang]")];
+    const scrollKeys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
+    const stop = (event) => event.stopPropagation();
+    const block = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+
+    gate.addEventListener("wheel", block, { passive: false });
+    gate.addEventListener("touchmove", block, { passive: false });
+    gate.addEventListener("touchstart", stop, { passive: true });
+    gate.addEventListener("keydown", (event) => {
+      event.stopPropagation();
+      if (event.key === "Tab") {
+        const index = options.indexOf(document.activeElement);
+        const next = index === -1 ? (event.shiftKey ? options.length - 1 : 0) : event.shiftKey ? index - 1 : index + 1;
+        event.preventDefault();
+        options[(next + options.length) % options.length].focus();
+      } else if (scrollKeys.includes(event.key)) {
+        event.preventDefault();
+        const index = Math.max(0, options.indexOf(document.activeElement));
+        const step = ["ArrowDown", "PageDown", "End"].includes(event.key) ? 1 : -1;
+        options[(index + step + options.length) % options.length].focus();
+      }
+    });
+
+    gate.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-gate-lang]");
+      if (!option) return;
+      setLanguage(option.dataset.gateLang);
+      gate.classList.add("is-closing");
+      root.classList.remove("language-gate-open");
+      option.blur();
+      window.setTimeout(() => gate.remove(), 600);
+    });
+
+    window.requestAnimationFrame(() => gate.focus({ preventScroll: true }));
+  } else {
+    gate?.remove();
+  }
 
   window.ANGELS_I18N = {
     get lang() { return current; },

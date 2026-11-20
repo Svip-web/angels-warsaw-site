@@ -26,13 +26,40 @@
       rel="stylesheet"
     />
     <title>Меню — Angel's Варшава</title>
-    <link rel="stylesheet" href="styles.css?v=3be0e7334df1" />
-    <script defer src="i18n.js?v=4f688186ca35"></script>
+    <script>
+      try {
+        if (!/(?:^|[?&])lang=/.test(location.search) && !["pl", "en", "uk", "ru"].includes(localStorage.getItem("angels-language"))) {
+          document.documentElement.classList.add("language-gate-open");
+        }
+      } catch (error) {}
+    </script>
+    <link rel="stylesheet" href="styles.css?v=923905e106ef" />
+    <script defer src="i18n.js?v=93dda13194de"></script>
     <script defer src="menu-data.js?v=59747dcc8565"></script>
     <script defer src="menu-page.js?v=d6da0c7bdfed"></script>
     <script defer src="booking.js?v=8bc9204e6e11"></script>
   </head>
   <body class="menu-page">
+    <div class="language-gate" data-language-gate data-i18n-skip role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="language-gate-title">
+      <div class="language-gate__inner">
+        <img class="language-gate__logo" src="assets/angels-wordmark-v2.webp" alt="Angel's" width="800" height="396" decoding="async" />
+        <p class="language-gate__title" id="language-gate-title">Język · Language · Мова · Язык</p>
+        <div class="language-gate__options">
+        <button class="language-gate__option" type="button" data-gate-lang="pl" lang="pl">
+          <span class="language-gate__flag"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="12" fill="#fff" /><rect y="12" width="24" height="12" fill="#dc143c" /></svg></span><span>Polski</span>
+        </button>
+        <button class="language-gate__option" type="button" data-gate-lang="en" lang="en">
+          <span class="language-gate__flag"><svg viewBox="15 0 30 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="language-gate-gb"><path d="M30 15h30v15zv15H0zH0V0zV0h30z" /></clipPath><rect width="60" height="30" fill="#012169" /><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6" /><path d="M0 0l60 30m0-30L0 30" clip-path="url(#language-gate-gb)" stroke="#c8102e" stroke-width="4" /><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10" /><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6" /></svg></span><span>English</span>
+        </button>
+        <button class="language-gate__option" type="button" data-gate-lang="uk" lang="uk">
+          <span class="language-gate__flag"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="12" fill="#0057b7" /><rect y="12" width="24" height="12" fill="#ffd700" /></svg></span><span>Українська</span>
+        </button>
+        <button class="language-gate__option" type="button" data-gate-lang="ru" lang="ru">
+          <span class="language-gate__flag"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="8" fill="#fff" /><rect y="8" width="24" height="8" fill="#0039a6" /><rect y="16" width="24" height="8" fill="#d52b1e" /></svg></span><span>Русский</span>
+        </button>
+        </div>
+      </div>
+    </div>
     <header class="menu-page__header">
       <div class="menu-page__header-start">
       <a class="menu-page__back" href="index.html#about" aria-label="Вернуться на главную">
@@ -40,10 +67,10 @@
       </a>
       <div class="menu-page__languages">
         <select data-language-select aria-label="Язык">
-          <option value="ru">RU</option>
           <option value="pl">PL</option>
           <option value="en">EN</option>
           <option value="uk" title="Українська 🇺🇦">UA</option>
+          <option value="ru">RU</option>
         </select>
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
       </div>
