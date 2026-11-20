@@ -2556,6 +2556,13 @@ a {
     display: inline;
   }
 
+  /* Keep the longer Ukrainian label "Бронювання" clear of the logo. */
+  html[lang="uk"] .header-booking {
+    padding-inline: 8px;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+  }
+
   .intro-header .header-logo,
   .site-header .header-logo {
     width: 72px;
@@ -5065,6 +5072,18 @@ a {
 
   .menu-page__booking-short {
     display: inline;
+  }
+
+  /* Ukrainian short label "Бронювання" is longer: widen the side columns and the button. */
+  html[lang="uk"] .menu-page__header {
+    grid-template-columns: 112px minmax(0, 1fr) 112px;
+  }
+
+  html[lang="uk"] .menu-page__booking {
+    width: auto;
+    max-width: 112px;
+    padding-inline: 12px;
+    white-space: nowrap;
   }
 
   .menu-page__header-start {
