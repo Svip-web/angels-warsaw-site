@@ -13,15 +13,19 @@ const bookingCopy = {
     ru: "Заполните обязательные поля.",
     pl: "Uzupełnij wymagane pola.",
     en: "Please complete the required fields.",
+    uk: "Заповніть обов’язкові поля.",
   },
-  sending: { ru: "Отправляем…", pl: "Wysyłamy…", en: "Sending…" },
+  sending: { ru: "Отправляем…", pl: "Wysyłamy…", en: "Sending…", uk: "Надсилаємо…" },
   failed: {
     ru: "Не удалось отправить заявку. Попробуйте ещё раз.",
     pl: "Nie udało się wysłać zgłoszenia. Spróbuj ponownie.",
     en: "We could not send your request. Please try again.",
+    uk: "Не вдалося надіслати заявку. Спробуйте ще раз.",
   },
-  sent: { ru: "Заявка отправлена ✓", pl: "Zgłoszenie wysłane ✓", en: "Request sent ✓" },
-  submit: { ru: "Отправить заявку", pl: "Wyślij zgłoszenie", en: "Send request" },
+  sent: { ru: "Заявка отправлена ✓", pl: "Zgłoszenie wysłane ✓", en: "Request sent ✓", uk: "Заявку надіслано ✓" },
+  submit: { ru: "Отправить заявку", pl: "Wyślij zgłoszenie", en: "Send request", uk: "Надіслати заявку" },
+  // Used instead of the server message for languages the booking API does not localise.
+  received: { uk: "Дякуємо! Ми отримали вашу заявку та зв’яжемося з вами найближчим часом." },
 };
 
 function bookingLanguage() {
@@ -134,20 +138,26 @@ bookingForm?.addEventListener("submit", async (event) => {
   bookingSubmit.querySelector("span").textContent = bookingText("sending");
 
   try {
-    const response = await fetch(bookingEndpoint, {
+    const send = (body) => fetch(bookingEndpoint, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(body),
     });
+    let response = await send(payload);
+    // If the booking API rejects the Ukrainian language code, resend once with a supported one.
+    if (payload.lang === "uk" && (response.status === 400 || response.status === 422)) {
+      response = await send({ ...payload, lang: "ru" });
+    }
     const result = await response.json().catch(() => ({}));
+    const localMessage = bookingCopy.received[bookingLanguage()];
 
     if (!response.ok || result.ok !== true) {
-      throw new Error(result.message || bookingText("failed"));
+      throw new Error(localMessage ? bookingText("failed") : result.message || bookingText("failed"));
     }
 
     bookingForm.reset();
     setBookingDateLimits();
-    setBookingStatus(result.message, "success");
+    setBookingStatus(localMessage || result.message, "success");
     bookingSubmit.querySelector("span").textContent = bookingText("sent");
     window.setTimeout(() => {
       bookingSubmit.querySelector("span").textContent = bookingText("submit");
