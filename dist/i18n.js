@@ -184,6 +184,10 @@
     "Афиша Cocktail Night в Angel's — каждый четверг коктейли 1+1": { pl: "Plakat Cocktail Night w Angel's — w każdy czwartek koktajle 1+1", en: "Cocktail Night poster at Angel's — cocktails 1+1 every Thursday", uk: "Афіша Cocktail Night в Angel's — щочетверга коктейлі 1+1" },
     "Гость с бокалом под конфетти на корпоративе в Angel's": { pl: "Gość z kieliszkiem w deszczu konfetti na imprezie firmowej w Angel's", en: "A guest with a glass under confetti at a corporate party at Angel's", uk: "Гість із келихом під конфеті на корпоративі в Angel's" },
     "Гость разрезает праздничный торт на закрытой вечеринке в Angel's": { pl: "Gość kroi tort na prywatnej imprezie w Angel's", en: "A guest cutting the cake at a private party at Angel's", uk: "Гість розрізає святковий торт на закритій вечірці в Angel's" },
+    "Отзыв гостя в Instagram: атмосфера, музыка и вокал на уровне": { pl: "Opinia gościa na Instagramie: atmosfera, muzyka i wokal na wysokim poziomie", en: "Guest review on Instagram: great atmosphere, music and vocals", uk: "Відгук гостя в Instagram: атмосфера, музика та вокал на рівні" },
+    "Отзыв Google о дне рождения в Angel's — 5 звёзд": { pl: "Opinia Google o urodzinach w Angel's — 5 gwiazdek", en: "Google review of a birthday at Angel's — 5 stars", uk: "Відгук Google про день народження в Angel's — 5 зірок" },
+    "Отзыв гостя в WhatsApp на польском и бронирование на субботу": { pl: "Opinia gościa na WhatsAppie i rezerwacja na sobotę", en: "Guest review on WhatsApp in Polish and a Saturday booking", uk: "Відгук гостя у WhatsApp польською та бронювання на суботу" },
+    "Отзыв гостя на английском: атмосфера, вокал и сервис": { pl: "Opinia gościa po angielsku: atmosfera, wokal i obsługa", en: "Guest review in English: atmosphere, singers and service", uk: "Відгук гостя англійською: атмосфера, вокал і сервіс" },
     // Ukrainian-only entries: attributes and labels without PL/EN versions
     "Angels — караоке и ночное пространство в Варшаве.": { uk: "Angels — караоке та нічний простір у Варшаві." },
     "Angel's — караоке и lounge bar в Варшаве": { uk: "Angel's — караоке та lounge bar у Варшаві" },
