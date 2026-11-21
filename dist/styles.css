@@ -6977,8 +6977,7 @@ body.is-booking-open {
 
 .menu-page__closing::before {
   z-index: -2;
-  background: url("assets/lounge-interior.jpg") center 58% / cover no-repeat;
-  filter: saturate(0.78) contrast(1.06);
+  background: #050404 url("assets/menu-closing-microphone.webp") center 78% / auto 175% no-repeat;
   transform: scale(1.015);
 }
 
@@ -6997,7 +6996,8 @@ body.is-booking-open {
 
 @media (max-width: 680px) {
   .menu-page__closing::before {
-    background-position: 43% center;
+    background-position: center bottom;
+    background-size: cover;
   }
 
   .menu-page__closing::after {
