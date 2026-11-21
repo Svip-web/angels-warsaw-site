@@ -183,6 +183,7 @@
     "Афиша Ladies Night в Angel's — каждый вторник с 22:00": { pl: "Plakat Ladies Night w Angel's — w każdy wtorek od 22:00", en: "Ladies Night poster at Angel's — every Tuesday from 22:00", uk: "Афіша Ladies Night в Angel's — щовівторка з 22:00" },
     "Афиша Cocktail Night в Angel's — каждый четверг коктейли 1+1": { pl: "Plakat Cocktail Night w Angel's — w każdy czwartek koktajle 1+1", en: "Cocktail Night poster at Angel's — cocktails 1+1 every Thursday", uk: "Афіша Cocktail Night в Angel's — щочетверга коктейлі 1+1" },
     "Гость с бокалом под конфетти на корпоративе в Angel's": { pl: "Gość z kieliszkiem w deszczu konfetti na imprezie firmowej w Angel's", en: "A guest with a glass under confetti at a corporate party at Angel's", uk: "Гість із келихом під конфеті на корпоративі в Angel's" },
+    "Гость разрезает праздничный торт на закрытой вечеринке в Angel's": { pl: "Gość kroi tort na prywatnej imprezie w Angel's", en: "A guest cutting the cake at a private party at Angel's", uk: "Гість розрізає святковий торт на закритій вечірці в Angel's" },
     // Ukrainian-only entries: attributes and labels without PL/EN versions
     "Angels — караоке и ночное пространство в Варшаве.": { uk: "Angels — караоке та нічний простір у Варшаві." },
     "Angel's — караоке и lounge bar в Варшаве": { uk: "Angel's — караоке та lounge bar у Варшаві" },
