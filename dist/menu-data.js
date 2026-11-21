@@ -7,7 +7,7 @@ window.ANGELS_MENU = {
     "items": [
       { "name": "Original", "image": "assets/hookah-original.webp", "prices": [{ "value": 200 }] },
       { "name": "Exclusive", "image": "assets/hookah-exclusive.webp", "description": "Max Royal и Wookah", "prices": [{ "value": 250 }] },
-      { "name": "Fruit", "image": "assets/hookah-fruit.webp", "prices": [{ "value": 300 }] },
+      { "name": "Fruit", "image": "assets/hookah-fruit-v2.webp", "prices": [{ "value": 300 }] },
       {
         "name": "Shef Ice Cube",
         "image": "assets/hookah-ice-cube-poster.webp",
