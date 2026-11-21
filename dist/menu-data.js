@@ -89,7 +89,7 @@ window.ANGELS_MENU = {
                 "prices": [{ "value": 120 }]
               },
               {
-                "name": "Tempura Shrimp",
+                "name": "Tempura Shrimps",
                 "names": {"ru": "Креветки темпура", "pl": "Krewetki w tempurze", "uk": "Креветки темпура"},
                 "image": "assets/kitchen-tempura-shrimp.webp",
                 "prices": [
@@ -100,8 +100,8 @@ window.ANGELS_MENU = {
                 ]
               },
               {
-                "name": "Fruit & Berry Platter",
-                "names": {"ru": "Фруктово-ягодная тарелка", "pl": "Talerz owocowo-jagodowy", "uk": "Фруктово-ягідна тарілка"},
+                "name": "Fruit & Berry Plateau",
+                "names": {"ru": "Фруктово-ягодное плато", "pl": "Talerz owocowo-jagodowy", "uk": "Фруктово-ягідне плато"},
                 "image": "assets/kitchen-fruit-berry-platter.webp",
                 "prices": [
                   {
@@ -129,7 +129,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Salted Pistachios",
-                "names": {"ru": "Солёные фисташки", "pl": "Solone pistacje", "uk": "Солоні фісташки"},
+                "names": {"ru": "Солёные фисташки", "pl": "Słone pistacje", "uk": "Солоні фісташки"},
                 "image": "assets/kitchen-salted-pistachios.webp",
                 "prices": [{ "value": 30 }]
               },
@@ -164,7 +164,7 @@ window.ANGELS_MENU = {
                 "prices": [{ "value": 130 }]
               },
               {
-                "name": "Grand Cold Platter",
+                "name": "Grand Cold Plateau",
                 "names": {"ru": "Большой холодный сет", "pl": "Zimny zestaw do wódki", "uk": "Великий холодний сет"},
                 "image": "assets/kitchen-grand-cold-platter.webp",
                 "prices": [{ "value": 650 }]
@@ -214,7 +214,7 @@ window.ANGELS_MENU = {
             "title": "",
             "items": [
               {
-                "name": "Borscht with Beef Cheeks",
+                "name": "Borsch with Beef Cheeks",
                 "names": {"ru": "Борщ с говяжьими щёчками", "pl": "Barszcz z policzkami wołowymi", "uk": "Борщ із яловичими щічками"},
                 "image": "assets/kitchen-borscht-beef-cheeks.webp",
                 "prices": [
@@ -369,7 +369,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strudel",
-                "names": {"ru": "Штрудель", "pl": "Strudel", "uk": "Штрудель"},
+                "names": {"ru": "Штрудель", "pl": "Sztrudel", "uk": "Штрудель"},
                 "image": "assets/kitchen-strudel.webp",
                 "prices": [
                   {
