@@ -147,7 +147,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Herring Three Ways with Baby Potatoes",
-                "names": {"ru": "Сельдь в трёх характерах", "pl": "Trzy oblicza śledzia z ziemniaczkami", "uk": "Оселедець у трьох характерах"},
+                "names": {"ru": "Сельдь в трёх характерах", "pl": "Trzy rodzaje śledzia z ziemniaczkami", "uk": "Оселедець у трьох характерах"},
                 "image": "assets/kitchen-herring-three-ways.webp",
                 "prices": [{ "value": 150 }]
               },
@@ -369,7 +369,7 @@ window.ANGELS_MENU = {
               },
               {
                 "name": "Strudel",
-                "names": {"ru": "Штрудель", "pl": "Sztrudel", "uk": "Штрудель"},
+                "names": {"ru": "Штрудель", "pl": "Strudel", "uk": "Штрудель"},
                 "image": "assets/kitchen-strudel.webp",
                 "prices": [
                   {
