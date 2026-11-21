@@ -5,9 +5,9 @@ window.ANGELS_MENU = {
     "key": "HOOKAH",
     "title": "Кальяны",
     "items": [
-      { "name": "Original", "prices": [{ "value": 200 }] },
-      { "name": "Exclusive", "description": "Max Royal и Wookah", "prices": [{ "value": 250 }] },
-      { "name": "Fruit", "prices": [{ "value": 300 }] },
+      { "name": "Original", "image": "assets/hookah-original.webp", "prices": [{ "value": 200 }] },
+      { "name": "Exclusive", "image": "assets/hookah-exclusive.webp", "description": "Max Royal и Wookah", "prices": [{ "value": 250 }] },
+      { "name": "Fruit", "image": "assets/hookah-fruit.webp", "prices": [{ "value": 300 }] },
       {
         "name": "Shef Ice Cube",
         "image": "assets/hookah-ice-cube-poster.webp",
@@ -20,7 +20,7 @@ window.ANGELS_MENU = {
         "video": "assets/hookah-clase-azul-v2.mp4",
         "prices": [{ "value": 350 }]
       },
-      { "name": "Mansory", "prices": [{ "value": 1000 }] }
+      { "name": "Mansory", "image": "assets/hookah-mansory.webp", "prices": [{ "value": 1000 }] }
     ]
   },
   "kitchen": {
