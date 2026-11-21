@@ -171,6 +171,15 @@
     "80 мл": { pl: "80 ml", en: "80 ml", uk: "80 мл" },
     "0,25 л": { pl: "0,25 l", en: "0.25 l", uk: "0,25 л" },
     "чайник": { pl: "dzbanek", en: "teapot", uk: "чайник" },
+    "Солист на сцене Angel's": { pl: "Wokalista na scenie Angel's", en: "A singer on stage at Angel's", uk: "Соліст на сцені Angel's" },
+    "Гостья с бокалом игристого в Angel's": { pl: "Gościni z kieliszkiem wina musującego w Angel's", en: "A guest with a glass of sparkling wine at Angel's", uk: "Гостя з келихом ігристого в Angel's" },
+    "Живая музыка с гитарой в Angel's": { pl: "Muzyka na żywo z gitarą w Angel's", en: "Live acoustic music at Angel's", uk: "Жива музика з гітарою в Angel's" },
+    "Подруги веселятся на вечеринке в Angel's": { pl: "Przyjaciółki bawią się na imprezie w Angel's", en: "Friends celebrating at a party at Angel's", uk: "Подруги веселяться на вечірці в Angel's" },
+    "Музыкант поёт под гитару в Angel's": { pl: "Muzyk śpiewa przy gitarze w Angel's", en: "A musician singing with a guitar at Angel's", uk: "Музикант співає під гітару в Angel's" },
+    "Гостья с бокалом шампанского посылает воздушный поцелуй в Angel's": { pl: "Gościni z kieliszkiem szampana przesyła całusa w Angel's", en: "A guest with champagne blowing a kiss at Angel's", uk: "Гостя з келихом шампанського надсилає повітряний поцілунок в Angel's" },
+    "Гостья танцует на празднике в Angel's": { pl: "Gościni tańczy na przyjęciu w Angel's", en: "A guest dancing at a celebration at Angel's", uk: "Гостя танцює на святі в Angel's" },
+    "Шоу с ангельскими крыльями в Angel's": { pl: "Pokaz z anielskimi skrzydłami w Angel's", en: "An angel-wings show at Angel's", uk: "Шоу з янгольськими крилами в Angel's" },
+    "Гости поют караоке за столом в Angel's": { pl: "Goście śpiewają karaoke przy stole w Angel's", en: "Guests singing karaoke at their table at Angel's", uk: "Гості співають караоке за столом в Angel's" },
     // Ukrainian-only entries: attributes and labels without PL/EN versions
     "Angels — караоке и ночное пространство в Варшаве.": { uk: "Angels — караоке та нічний простір у Варшаві." },
     "Angel's — караоке и lounge bar в Варшаве": { uk: "Angel's — караоке та lounge bar у Варшаві" },
@@ -236,9 +245,12 @@
       if (lang === "uk") return `${count[1]} поз.`;
       return lang === "pl" ? `${count[1]} poz.` : `${count[1]} items`;
     }
+    const position = key.match(/^(\d+) из (\d+)$/);
+    if (position) {
+      const word = { uk: "з", pl: "z", en: "of" }[lang];
+      if (word) return `${position[1]} ${word} ${position[2]}`;
+    }
     if (lang === "uk") {
-      const position = key.match(/^(\d+) из (\d+)$/);
-      if (position) return `${position[1]} з ${position[2]}`;
       const categories = key.match(/^Категории раздела (.+)$/);
       if (categories) return `Категорії розділу ${translate(categories[1], lang).toLowerCase()}`;
     }
