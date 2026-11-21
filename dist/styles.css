@@ -5343,7 +5343,7 @@ body.is-booking-open {
   border-right: 1px solid rgba(236, 231, 219, 0.14);
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.2), #090609 88%),
-    url("assets/angels-background-poster.webp") center / cover no-repeat;
+    url("assets/booking-neon-wings.webp") center 30% / cover no-repeat;
 }
 
 .booking-modal__eyebrow {
@@ -5558,7 +5558,7 @@ body.is-booking-open {
     padding: 62px 20px 28px;
     border-right: 0;
     border-bottom: 1px solid rgba(236, 231, 219, 0.14);
-    background-position: center 44%;
+    background-position: center 30%;
   }
 
   .booking-modal__intro h2 {
