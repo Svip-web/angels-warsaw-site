@@ -7,6 +7,8 @@ const bookingStatus = bookingModal?.querySelector(".booking-form__status");
 const bookingSubmit = bookingModal?.querySelector(".booking-form__submit");
 const bookingEndpoint = "https://angels-warsaw-booking-api.svip201517.chatgpt.site/api/booking";
 let bookingReturnFocus = null;
+let bookingStatusKey = "";
+let bookingButtonKey = "submit";
 
 const bookingCopy = {
   required: {
@@ -24,8 +26,18 @@ const bookingCopy = {
   },
   sent: { ru: "Заявка отправлена ✓", pl: "Zgłoszenie wysłane ✓", en: "Request sent ✓", uk: "Заявку надіслано ✓" },
   submit: { ru: "Отправить заявку", pl: "Wyślij zgłoszenie", en: "Send request", uk: "Надіслати заявку" },
-  // Used instead of the server message for languages the booking API does not localise.
-  received: { uk: "Дякуємо! Ми отримали вашу заявку та зв’яжемося з вами найближчим часом." },
+  received: {
+    ru: "Заявка отправлена. Мы свяжемся с вами в ближайшее время.",
+    pl: "Zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.",
+    en: "Your request has been sent. We will contact you shortly.",
+    uk: "Дякуємо! Ми отримали вашу заявку та зв’яжемося з вами найближчим часом.",
+  },
+  retry: {
+    ru: "Подождите немного и попробуйте снова.",
+    pl: "Odczekaj chwilę i spróbuj ponownie.",
+    en: "Please wait a moment and try again.",
+    uk: "Зачекайте трохи та спробуйте ще раз.",
+  },
 };
 
 function bookingLanguage() {
@@ -55,11 +67,23 @@ function setBookingDateLimits() {
   dateInput.max = toDateInputValue(latest);
 }
 
-function setBookingStatus(message = "", type = "") {
+function setBookingStatus(key = "", type = "") {
+  bookingStatusKey = key;
   if (!bookingStatus) return;
-  bookingStatus.textContent = message;
+  bookingStatus.textContent = bookingText(key);
   bookingStatus.dataset.state = type;
 }
+
+function setBookingButton(key) {
+  bookingButtonKey = key;
+  const label = bookingSubmit?.querySelector("span");
+  if (label) label.textContent = bookingText(key);
+}
+
+window.addEventListener("angels:languagechange", () => {
+  setBookingStatus(bookingStatusKey, bookingStatus?.dataset.state || "");
+  setBookingButton(bookingButtonKey);
+});
 
 function openBooking(source = null) {
   if (!bookingModal || !bookingDialog) return;
@@ -125,7 +149,7 @@ bookingForm?.addEventListener("submit", async (event) => {
 
   if (!bookingForm.checkValidity()) {
     bookingForm.reportValidity();
-    setBookingStatus(bookingText("required"), "error");
+    setBookingStatus("required", "error");
     return;
   }
 
@@ -135,7 +159,7 @@ bookingForm?.addEventListener("submit", async (event) => {
   payload.source = `${location.hostname}${location.pathname}`;
   bookingSubmit.disabled = true;
   bookingSubmit.classList.add("is-loading");
-  bookingSubmit.querySelector("span").textContent = bookingText("sending");
+  setBookingButton("sending");
 
   try {
     const send = (body) => fetch(bookingEndpoint, {
@@ -149,23 +173,24 @@ bookingForm?.addEventListener("submit", async (event) => {
       response = await send({ ...payload, lang: "ru" });
     }
     const result = await response.json().catch(() => ({}));
-    const localMessage = bookingCopy.received[bookingLanguage()];
-
     if (!response.ok || result.ok !== true) {
-      throw new Error(localMessage ? bookingText("failed") : result.message || bookingText("failed"));
+      const error = new Error("Booking request failed");
+      error.bookingKey = response.status === 429 ? "retry"
+        : [400, 422].includes(response.status) ? "required" : "failed";
+      throw error;
     }
 
     bookingForm.reset();
     setBookingDateLimits();
-    setBookingStatus(localMessage || result.message, "success");
-    bookingSubmit.querySelector("span").textContent = bookingText("sent");
+    setBookingStatus("received", "success");
+    setBookingButton("sent");
     window.setTimeout(() => {
-      bookingSubmit.querySelector("span").textContent = bookingText("submit");
+      setBookingButton("submit");
       bookingSubmit.disabled = false;
     }, 3200);
   } catch (error) {
-    setBookingStatus(error.message || bookingText("failed"), "error");
-    bookingSubmit.querySelector("span").textContent = bookingText("submit");
+    setBookingStatus(error.bookingKey || "failed", "error");
+    setBookingButton("submit");
     bookingSubmit.disabled = false;
   } finally {
     bookingSubmit.classList.remove("is-loading");
