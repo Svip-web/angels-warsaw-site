@@ -99,6 +99,17 @@ check(() => {
 });
 
 check(() => {
+  const e = environment({ saved: choice(false, true) });
+  const calls = Array.from(e.context.fbq.queue);
+  const initIndex = calls.findIndex((call) => call[0] === "init");
+  const grantIndex = calls.findIndex((call) => call[0] === "consent" && call[1] === "grant");
+  assert.ok(grantIndex >= 0 && grantIndex < initIndex, "Marketing grant must precede init in the real Pixel queue");
+  assert.ok(!calls.slice(0, initIndex).some((call) => call[0] === "consent" && call[1] === "revoke"), "Do not suspend init behind a revoked consent command");
+  e.choose("reject");
+  assert.equal(e.context.fbq.queue.at(-1)[1], "revoke", "Withdrawal must still revoke Meta consent");
+});
+
+check(() => {
   const e = environment({ saved: choice(true, true) });
   e.choose("reject");
   assert.equal(e.reloads, 1);
