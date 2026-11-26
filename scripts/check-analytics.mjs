@@ -17,7 +17,7 @@ class Element {
   append(node) { (this.children ||= []).push(node); }
 }
 
-function environment({ googleReady = true, saved, url = "https://angelskaraoke.pl/menu.html?lang=en" } = {}) {
+function environment({ saved, url = "https://angelskaraoke.pl/menu.html?lang=en" } = {}) {
   const location = new URL(url);
   let reloads = 0;
   location.reload = () => reloads++;
@@ -38,7 +38,7 @@ function environment({ googleReady = true, saved, url = "https://angelskaraoke.p
   context.window = context;
   context.ANGELS_I18N = { lang: "en" };
   context.addEventListener = globalEvents.addEventListener.bind(globalEvents);
-  vm.runInContext(googleReady ? source.replace("const GOOGLE_READY = false;", "const GOOGLE_READY = true;") : source, context);
+  vm.runInContext(source, context);
   const panel = body.children[0];
   const choose = (action) => panel.dispatch("click", { target: { closest: () => ({ dataset: { consentAction: action } }) } });
   const googleEvents = () => Array.from(context.dataLayer).filter((item) => item.event?.startsWith("angels_"));
@@ -115,9 +115,14 @@ check(() => {
 });
 
 check(() => {
-  const e = environment({ googleReady: false, saved: choice(true, true) });
-  assert.equal(e.context.ANGELS_ANALYTICS.googleReady, false);
-  assert.equal(e.head.children.some((n) => n.id === "angels-gtm"), false);
+  const e = environment({ saved: choice(true, true) });
+  assert.equal(e.context.ANGELS_ANALYTICS.googleReady, true);
+  assert.equal(e.head.children.filter((n) => n.id === "angels-gtm").length, 1);
+  assert.equal(e.head.children.find((n) => n.id === "angels-gtm").src, "https://www.googletagmanager.com/gtm.js?id=GTM-5Z32PTTB");
+  assert.equal(typeof e.context.gtag, "function");
+  assert.equal(Object.prototype.toString.call(e.context.dataLayer[0]), "[object Arguments]");
+  const settings = e.context.dataLayer.find((item) => item[0] === "set" && item[1]?.page_location);
+  assert.equal(settings[1].page_location, "https://angelskaraoke.pl/menu.html?lang=en");
   assert.equal(e.metaEvents().length, 2);
 });
 
