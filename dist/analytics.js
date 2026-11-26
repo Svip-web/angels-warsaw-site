@@ -3,7 +3,6 @@
   if (window.ANGELS_ANALYTICS) return;
 
   const GTM_ID = "GTM-5Z32PTTB";
-  const PIXEL_ID = "1583813716406623";
   // Website integration is active. GTM owns the GA4 tag configuration.
   const GOOGLE_READY = true;
   const STORAGE_KEY = "angels-consent-v1";
@@ -150,20 +149,8 @@
 
   function loadMeta() {
     if (!consent.marketing || !metaUrlIsSafe()) return;
-    if (metaLoaded) { window.fbq("consent", "grant"); return; }
-    metaLoaded = true;
-    if (!window.fbq) {
-      const fbq = function () { fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments); };
-      fbq.push = fbq; fbq.loaded = true; fbq.version = "2.0"; fbq.queue = [];
-      window.fbq = fbq;
-      window._fbq = fbq;
-    }
-    // This loader runs only after marketing opt-in. Grant before init so the
-    // real Pixel runtime cannot suspend init with a later grant stuck in its queue.
-    window.fbq("consent", "grant");
-    window.fbq("set", "autoConfig", false, PIXEL_ID);
-    window.fbq("init", PIXEL_ID);
-    injectScript("angels-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
+    // The actual Meta bootstrap and Pixel ID are visible in each page's <head>.
+    metaLoaded = window.ANGELS_META_PIXEL?.load() === true;
   }
 
   const events = {

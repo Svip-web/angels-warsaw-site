@@ -5,6 +5,9 @@ import vm from "node:vm";
 const root = new URL("../", import.meta.url);
 const source = readFileSync(new URL("dist/analytics.js", root), "utf8");
 const bookingSource = readFileSync(new URL("dist/booking.js", root), "utf8");
+const pixelSource = readFileSync(new URL("dist/index.html", root), "utf8")
+  .match(/<script id="angels-meta-pixel-code">([\s\S]*?)<\/script>/)?.[1];
+assert.ok(pixelSource, "The Pixel bootstrap must be present in the HTML source");
 
 class Element {
   constructor() { this.listeners = {}; this.dataset = {}; this.hidden = false; this.checked = false; this.isConnected = true; this.nodes = new Map(); }
@@ -38,6 +41,7 @@ function environment({ saved, url = "https://angelskaraoke.pl/menu.html?lang=en"
   context.window = context;
   context.ANGELS_I18N = { lang: "en" };
   context.addEventListener = globalEvents.addEventListener.bind(globalEvents);
+  vm.runInContext(pixelSource, context);
   vm.runInContext(source, context);
   const panel = body.children[0];
   const choose = (action) => panel.dispatch("click", { target: { closest: () => ({ dataset: { consentAction: action } }) } });
@@ -84,6 +88,8 @@ check(() => {
   e.choose("accept"); e.choose("accept");
   assert.deepEqual(e.googleEvents().map((x) => x.event), ["angels_page_view", "angels_view_menu", "angels_generate_lead"]);
   assert.deepEqual(e.metaEvents().map((x) => x[1]), ["PageView", "ViewMenu"]);
+  assert.equal(Array.from(e.context.fbq.queue).filter((call) => call[0] === "init").length, 1);
+  assert.equal(e.head.children.filter((node) => node.id === "angels-meta-pixel").length, 1);
 });
 
 check(() => {
@@ -181,7 +187,13 @@ check(() => {
     assert.ok(html.indexOf('src="i18n.js') < html.indexOf('src="analytics.js'), "Language must be initialized before tracking");
     assert.ok(html.indexOf('src="analytics.js') < html.indexOf('src="booking.js'), "Analytics must be available to the booking handler");
     assert.ok(!html.includes("facebook.com/tr?"));
+    const inline = html.match(/<script id="angels-meta-pixel-code">([\s\S]*?)<\/script>/)?.[1];
+    assert.equal(inline, pixelSource, "Both pages must use the same inline Pixel bootstrap");
+    assert.ok(inline.includes('"1583813716406623"'));
+    assert.equal([...inline.matchAll(/fbq\("init"/g)].length, 1, "Initialize the Pixel in one place only");
+    assert.ok(html.indexOf('id="angels-meta-pixel-code"') < html.indexOf("</head>"));
   }
+  assert.ok(!source.includes('fbq("init"'), "Do not duplicate the inline init in analytics.js");
 });
 
 console.log(`Analytics check passed: ${checks} consent, event, privacy and integration scenarios. No network or real bookings.`);
