@@ -24,7 +24,8 @@
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = gtag;
-  // Defaults precede all vendor scripts. No tracking script loads before opt-in.
+  // Advanced Consent Mode: load GTM immediately with denied defaults.
+  // Optional cookies and our explicit events still require the relevant opt-in.
   gtag("consent", "default", {
     analytics_storage: "denied", ad_storage: "denied",
     ad_user_data: "denied", ad_personalization: "denied",
@@ -117,7 +118,7 @@
   }
 
   function loadGoogle() {
-    if (!GOOGLE_READY || !consent.analytics || googleLoaded) return;
+    if (!GOOGLE_READY || googleLoaded) return;
     googleLoaded = true;
     // The container owns GA4. There is no second GA4 installation in the website.
     const context = parameters();
