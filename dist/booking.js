@@ -145,6 +145,7 @@ document.addEventListener("keydown", (event) => {
 
 bookingForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (bookingSubmit.disabled) return;
   setBookingStatus();
 
   if (!bookingForm.checkValidity()) {
@@ -180,6 +181,8 @@ bookingForm?.addEventListener("submit", async (event) => {
       throw error;
     }
 
+    // Honeypot responses are intentionally silent and are not real leads.
+    if (!String(payload.website || "").trim()) window.ANGELS_ANALYTICS?.bookingSuccess();
     bookingForm.reset();
     setBookingDateLimits();
     setBookingStatus("received", "success");
