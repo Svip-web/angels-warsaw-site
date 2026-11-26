@@ -57,26 +57,26 @@ function check(fn) { fn(); checks++; }
 
 check(() => {
   const e = environment();
-  assert.equal(e.head.children?.length || 0, 1);
+  assert.equal(e.head.children?.length || 0, 2);
   assert.equal(e.head.children[0].id, "angels-gtm");
   assert.equal(e.googleEvents().length, 2);
-  assert.equal(e.metaEvents().length, 0);
+  assert.equal(e.metaEvents().length, 2);
   assert.equal(e.context.dataLayer[0][0], "consent");
   for (const key of ["analytics_storage", "ad_storage", "ad_user_data", "ad_personalization"]) assert.equal(e.context.dataLayer[0][2][key], "denied");
   e.choose("reject"); e.start(); e.context.ANGELS_ANALYTICS.bookingSuccess();
-  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 0);
+  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 4);
 });
 
 for (const analytics of [false, true]) for (const marketing of [false, true]) check(() => {
   const e = environment({ saved: choice(analytics, marketing) });
   assert.equal(e.head.children?.some((n) => n.id === "angels-gtm") || false, true);
-  assert.equal(e.head.children?.some((n) => n.id === "angels-meta-pixel") || false, marketing);
+  assert.equal(e.head.children?.some((n) => n.id === "angels-meta-pixel") || false, true);
   e.opener.dispatch("click"); e.start(); e.start(); e.start();
   e.context.ANGELS_ANALYTICS.bookingSuccess();
   const g = e.googleEvents().map((event) => event.event);
   const m = e.metaEvents().map((event) => event[1]);
   assert.deepEqual(g, ["angels_page_view", "angels_view_menu", "angels_booking_click", "angels_form_start", "angels_generate_lead"]);
-  assert.deepEqual(m, marketing ? ["PageView", "ViewMenu", "BookingClick", "FormStart", "Lead"] : []);
+  assert.deepEqual(m, ["PageView", "ViewMenu", "BookingClick", "FormStart", "Lead"]);
   const payload = JSON.stringify(e.googleEvents()) + JSON.stringify(e.metaEvents().map((event) => event[2]));
   assert.ok(!payload.includes("private@example.com"));
   for (const command of e.context.fbq?.queue || []) assert.notEqual(command[0], "userData");
@@ -87,7 +87,7 @@ check(() => {
   e.context.ANGELS_ANALYTICS.bookingSuccess();
   e.choose("accept"); e.choose("accept");
   assert.deepEqual(e.googleEvents().map((x) => x.event), ["angels_page_view", "angels_view_menu", "angels_generate_lead"]);
-  assert.deepEqual(e.metaEvents().map((x) => x[1]), ["PageView", "ViewMenu"]);
+  assert.deepEqual(e.metaEvents().map((x) => x[1]), ["PageView", "ViewMenu", "Lead"]);
   assert.equal(Array.from(e.context.fbq.queue).filter((call) => call[0] === "init").length, 1);
   assert.equal(e.head.children.filter((node) => node.id === "angels-meta-pixel").length, 1);
 });
@@ -104,6 +104,12 @@ check(() => {
   assert.equal(e.metaEvents().length, 2);
 });
 
+for (const query of ["v=1", "v=latest", "gtm_debug=x", "lang=uk&utm_campaign=Winter+Warsaw"]) check(() => {
+  const e = environment({ url: `https://angelskaraoke.pl/menu.html?${query}#booking` });
+  assert.equal(e.head.children.filter((node) => node.id === "angels-meta-pixel").length, 1);
+  assert.deepEqual(e.metaEvents().map((event) => event[1]), ["PageView", "ViewMenu"]);
+});
+
 check(() => {
   const e = environment({ saved: choice(false, true) });
   const calls = Array.from(e.context.fbq.queue);
@@ -112,7 +118,8 @@ check(() => {
   assert.ok(grantIndex >= 0 && grantIndex < initIndex, "Marketing grant must precede init in the real Pixel queue");
   assert.ok(!calls.slice(0, initIndex).some((call) => call[0] === "consent" && call[1] === "revoke"), "Do not suspend init behind a revoked consent command");
   e.choose("reject");
-  assert.equal(e.context.fbq.queue.at(-1)[1], "revoke", "Withdrawal must still revoke Meta consent");
+  assert.equal(e.context.fbq.queue.at(-1)[1], "grant", "Google controls must not disable Meta");
+  assert.equal(e.reloads, 0);
 });
 
 check(() => {
@@ -120,16 +127,16 @@ check(() => {
   e.choose("reject");
   assert.equal(e.reloads, 1);
   e.start(); e.context.ANGELS_ANALYTICS.bookingSuccess();
-  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 2);
+  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 4);
   const saved = JSON.parse(e.storage.get("angels-consent-v1"));
   assert.equal(saved.analytics, false); assert.equal(saved.marketing, false);
-  assert.equal(e.context.fbq.queue.at(-1)[1], "revoke");
+  assert.ok(!Array.from(e.context.fbq.queue).some((call) => call[0] === "consent" && call[1] === "revoke"));
 });
 
 check(() => {
   const expired = choice(true, true); expired.savedAt -= 181 * 86400000;
   const e = environment({ saved: expired });
-  assert.equal(e.head.children?.length || 0, 1); assert.equal(e.panel.hidden, false);
+  assert.equal(e.head.children?.length || 0, 2); assert.equal(e.panel.hidden, false);
 });
 
 check(() => {

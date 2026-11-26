@@ -25,7 +25,8 @@
   window.gtag = gtag;
   // Advanced Consent Mode: load GTM immediately with denied defaults.
   // Send GTM signals immediately; Consent Mode governs Google storage/use.
-  // Meta still requires marketing opt-in.
+  // Meta runs on page load by the owner's explicit configuration.
+  // These consent controls apply to Google only.
   gtag("consent", "default", {
     analytics_storage: "denied", ad_storage: "denied",
     ad_user_data: "denied", ad_personalization: "denied",
@@ -37,32 +38,32 @@
 
   const copy = {
     ru: {
-      title: "Настройки cookies", text: "Обязательные настройки помогают сайту работать. С вашего разрешения используем Google Analytics для статистики и Meta Pixel для рекламы. Бронирование доступно при любом выборе.",
-      accept: "Принять все", reject: "Только необходимые", settings: "Настроить", save: "Сохранить выбор", close: "Закрыть", footer: "Настройки cookies",
+      title: "Настройки Google", text: "Meta Pixel работает на этом сайте сразу. Здесь можно разрешить или отклонить дополнительную аналитику и рекламу Google. Бронирование доступно при любом выборе.",
+      accept: "Разрешить Google", reject: "Отклонить Google", settings: "Настроить Google", save: "Сохранить выбор", close: "Закрыть", footer: "Настройки Google",
       analytics: "Аналитика", analyticsText: "Google Analytics: просмотры страниц, меню и действия с формой.",
-      marketing: "Маркетинг", marketingText: "Meta Pixel: эффективность рекламы и действия на сайте.",
-      note: "Имя, телефон и комментарий из формы не передаются в событиях аналитики. Выбор можно изменить внизу сайта.",
+      marketing: "Реклама Google", marketingText: "Разрешение рекламных cookies и персонализации Google.",
+      note: "В события сайта не включаются имя, телефон и комментарий из формы. Настройки Google можно изменить внизу сайта.",
     },
     pl: {
-      title: "Ustawienia cookies", text: "Niezbędne ustawienia umożliwiają działanie strony. Za Twoją zgodą korzystamy z Google Analytics do statystyk i Meta Pixel do reklamy. Rezerwacja działa niezależnie od wyboru.",
-      accept: "Akceptuj wszystkie", reject: "Tylko niezbędne", settings: "Dostosuj", save: "Zapisz wybór", close: "Zamknij", footer: "Ustawienia cookies",
+      title: "Ustawienia Google", text: "Meta Pixel działa na tej stronie od razu. Tutaj możesz zezwolić na dodatkową analitykę i reklamy Google lub je odrzucić. Rezerwacja działa niezależnie od wyboru.",
+      accept: "Zezwól na Google", reject: "Odrzuć Google", settings: "Dostosuj Google", save: "Zapisz wybór", close: "Zamknij", footer: "Ustawienia Google",
       analytics: "Analityka", analyticsText: "Google Analytics: odsłony stron, menu i interakcje z formularzem.",
-      marketing: "Marketing", marketingText: "Meta Pixel: skuteczność reklam i działania na stronie.",
-      note: "Imię, telefon i komentarz z formularza nie są przekazywane w zdarzeniach analitycznych. Wybór możesz zmienić na dole strony.",
+      marketing: "Reklamy Google", marketingText: "Zgoda na reklamowe cookies i personalizację Google.",
+      note: "Zdarzenia wysyłane przez stronę nie zawierają imienia, telefonu ani komentarza z formularza. Ustawienia Google możesz zmienić na dole strony.",
     },
     en: {
-      title: "Cookie settings", text: "Essential settings keep this website working. With your permission, we use Google Analytics for statistics and Meta Pixel for advertising. Booking works with any choice.",
-      accept: "Accept all", reject: "Essential only", settings: "Customize", save: "Save preferences", close: "Close", footer: "Cookie settings",
+      title: "Google settings", text: "Meta Pixel runs on this website immediately. Here you can allow or decline additional Google analytics and advertising. Booking works with any choice.",
+      accept: "Allow Google", reject: "Decline Google", settings: "Customize Google", save: "Save preferences", close: "Close", footer: "Google settings",
       analytics: "Analytics", analyticsText: "Google Analytics: page views, menu views and booking form interactions.",
-      marketing: "Marketing", marketingText: "Meta Pixel: advertising performance and actions on this website.",
-      note: "Your name, phone and form comment are not included in analytics events. You can change your choice in the website footer.",
+      marketing: "Google advertising", marketingText: "Permission for Google advertising cookies and personalization.",
+      note: "Events sent by this website do not include your name, phone or form comment. You can change Google settings in the website footer.",
     },
     uk: {
-      title: "Налаштування cookies", text: "Обов’язкові налаштування забезпечують роботу сайту. З вашого дозволу використовуємо Google Analytics для статистики та Meta Pixel для реклами. Бронювання доступне за будь-якого вибору.",
-      accept: "Прийняти всі", reject: "Лише необхідні", settings: "Налаштувати", save: "Зберегти вибір", close: "Закрити", footer: "Налаштування cookies",
+      title: "Налаштування Google", text: "Meta Pixel працює на цьому сайті одразу. Тут можна дозволити або відхилити додаткову аналітику та рекламу Google. Бронювання доступне за будь-якого вибору.",
+      accept: "Дозволити Google", reject: "Відхилити Google", settings: "Налаштувати Google", save: "Зберегти вибір", close: "Закрити", footer: "Налаштування Google",
       analytics: "Аналітика", analyticsText: "Google Analytics: перегляди сторінок, меню та взаємодії з формою.",
-      marketing: "Маркетинг", marketingText: "Meta Pixel: ефективність реклами та дії на сайті.",
-      note: "Ім’я, телефон і коментар із форми не передаються в подіях аналітики. Вибір можна змінити внизу сайту.",
+      marketing: "Реклама Google", marketingText: "Дозвіл на рекламні cookies та персоналізацію Google.",
+      note: "Ім’я, телефон і коментар із форми не включаються в події сайту. Налаштування Google можна змінити внизу сайту.",
     },
   };
 
@@ -133,22 +134,18 @@
   }
 
   function metaUrlIsSafe() {
-    // Meta reads the browser URL itself. Fail closed on unknown query/hash values.
+    // Meta reads the browser URL itself. Exclude contact data, while allowing
+    // normal campaign, cache-busting and preview parameters.
     const url = new URL(location.href);
     if ([...url.searchParams].some(([key, value]) => {
-      if (key === "lang") return !Object.hasOwn(copy, value);
-      if (key === "v") return !/^[a-f0-9]{7,40}$/i.test(value);
-      if (key === "fbclid" || key === "gclid") return !/^[a-z0-9_-]{10,512}$/i.test(value);
-      if (/^utm_(source|medium|campaign|content|term|id)$/.test(key)) {
-        return value.length > 180 || !/^[\p{L}\p{N} ._~+-]*$/u.test(value);
-      }
-      return true;
+      if (/^(?:e[-_]?mail|phone|tel|mobile|name|first[-_]?name|last[-_]?name|full[-_]?name|address|comment|note|message)$/i.test(key)) return true;
+      return /[^\s@]+@[^\s@]+\.[^\s@]+/.test(value);
     })) return false;
     return !url.hash || /^#[a-z][a-z0-9-]*$/i.test(url.hash);
   }
 
   function loadMeta() {
-    if (!consent.marketing || !metaUrlIsSafe()) return;
+    if (!metaUrlIsSafe()) return;
     // The actual Meta bootstrap and Pixel ID are visible in each page's <head>.
     metaLoaded = window.ANGELS_META_PIXEL?.load() === true;
   }
@@ -167,7 +164,7 @@
       // GTM receives each signal immediately, including in denied consent mode.
       window.dataLayer.push({ event: `angels_${name}`, ...params });
     }
-    if (consent.marketing && metaLoaded && metaUrlIsSafe() && (!onceKey || !sent.meta.has(onceKey))) {
+    if (metaLoaded && metaUrlIsSafe() && (!onceKey || !sent.meta.has(onceKey))) {
       if (onceKey) sent.meta.add(onceKey);
       const [eventName, method] = events[name];
       // Only fixed, non-personal labels. No form field values or DOM text.
@@ -195,18 +192,16 @@
 
   function choose(next) {
     const revokeGoogle = googleLoaded && consent.analytics && !next.analytics;
-    const revokeMeta = metaLoaded && consent.marketing && !next.marketing;
     consent = { analytics: next.analytics === true, marketing: next.marketing === true };
     choiceSaved = true;
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, ...consent, savedAt: Date.now() })); } catch {}
     notifyConsent();
-    if (revokeMeta) window.fbq("consent", "revoke");
     if (!consent.analytics) clearCookies(["_ga", "_gid", "_gat"]);
-    if (!consent.marketing) clearCookies(["_fbp", "_fbc", "_gcl_"]);
+    if (!consent.marketing) clearCookies(["_gcl_"]);
     panel.hidden = true;
     if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
     // A new document removes previously loaded vendor listeners after withdrawal.
-    if (revokeGoogle || revokeMeta) { location.reload(); return; }
+    if (revokeGoogle) { location.reload(); return; }
     loadGoogle();
     loadMeta();
     trackPage();
