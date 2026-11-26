@@ -55,12 +55,12 @@ check(() => {
   const e = environment();
   assert.equal(e.head.children?.length || 0, 1);
   assert.equal(e.head.children[0].id, "angels-gtm");
-  assert.equal(e.googleEvents().length, 0);
+  assert.equal(e.googleEvents().length, 2);
   assert.equal(e.metaEvents().length, 0);
   assert.equal(e.context.dataLayer[0][0], "consent");
   for (const key of ["analytics_storage", "ad_storage", "ad_user_data", "ad_personalization"]) assert.equal(e.context.dataLayer[0][2][key], "denied");
   e.choose("reject"); e.start(); e.context.ANGELS_ANALYTICS.bookingSuccess();
-  assert.equal(e.googleEvents().length, 0); assert.equal(e.metaEvents().length, 0);
+  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 0);
 });
 
 for (const analytics of [false, true]) for (const marketing of [false, true]) check(() => {
@@ -71,7 +71,7 @@ for (const analytics of [false, true]) for (const marketing of [false, true]) ch
   e.context.ANGELS_ANALYTICS.bookingSuccess();
   const g = e.googleEvents().map((event) => event.event);
   const m = e.metaEvents().map((event) => event[1]);
-  assert.deepEqual(g, analytics ? ["angels_page_view", "angels_view_menu", "angels_booking_click", "angels_form_start", "angels_generate_lead"] : []);
+  assert.deepEqual(g, ["angels_page_view", "angels_view_menu", "angels_booking_click", "angels_form_start", "angels_generate_lead"]);
   assert.deepEqual(m, marketing ? ["PageView", "ViewMenu", "BookingClick", "FormStart", "Lead"] : []);
   const payload = JSON.stringify(e.googleEvents()) + JSON.stringify(e.metaEvents().map((event) => event[2]));
   assert.ok(!payload.includes("private@example.com"));
@@ -82,7 +82,7 @@ check(() => {
   const e = environment();
   e.context.ANGELS_ANALYTICS.bookingSuccess();
   e.choose("accept"); e.choose("accept");
-  assert.deepEqual(e.googleEvents().map((x) => x.event), ["angels_page_view", "angels_view_menu"]);
+  assert.deepEqual(e.googleEvents().map((x) => x.event), ["angels_page_view", "angels_view_menu", "angels_generate_lead"]);
   assert.deepEqual(e.metaEvents().map((x) => x[1]), ["PageView", "ViewMenu"]);
 });
 
@@ -103,7 +103,7 @@ check(() => {
   e.choose("reject");
   assert.equal(e.reloads, 1);
   e.start(); e.context.ANGELS_ANALYTICS.bookingSuccess();
-  assert.equal(e.googleEvents().length, 2); assert.equal(e.metaEvents().length, 2);
+  assert.equal(e.googleEvents().length, 4); assert.equal(e.metaEvents().length, 2);
   const saved = JSON.parse(e.storage.get("angels-consent-v1"));
   assert.equal(saved.analytics, false); assert.equal(saved.marketing, false);
   assert.equal(e.context.fbq.queue.at(-1)[1], "revoke");

@@ -25,7 +25,8 @@
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = gtag;
   // Advanced Consent Mode: load GTM immediately with denied defaults.
-  // Optional cookies and our explicit events still require the relevant opt-in.
+  // Send GTM signals immediately; Consent Mode governs Google storage/use.
+  // Meta still requires marketing opt-in.
   gtag("consent", "default", {
     analytics_storage: "denied", ad_storage: "denied",
     ad_user_data: "denied", ad_personalization: "denied",
@@ -173,9 +174,9 @@
   function track(name, onceKey) {
     if (!events[name]) return;
     const params = parameters();
-    if (consent.analytics && googleLoaded && (!onceKey || !sent.google.has(onceKey))) {
+    if (googleLoaded && (!onceKey || !sent.google.has(onceKey))) {
       if (onceKey) sent.google.add(onceKey);
-      // Blammo maps only these explicit signals to GA4 events in GTM.
+      // GTM receives each signal immediately, including in denied consent mode.
       window.dataLayer.push({ event: `angels_${name}`, ...params });
     }
     if (consent.marketing && metaLoaded && metaUrlIsSafe() && (!onceKey || !sent.meta.has(onceKey))) {
