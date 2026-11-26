@@ -53,7 +53,8 @@ function check(fn) { fn(); checks++; }
 
 check(() => {
   const e = environment();
-  assert.equal(e.head.children?.length || 0, 0);
+  assert.equal(e.head.children?.length || 0, 1);
+  assert.equal(e.head.children[0].id, "angels-gtm");
   assert.equal(e.googleEvents().length, 0);
   assert.equal(e.metaEvents().length, 0);
   assert.equal(e.context.dataLayer[0][0], "consent");
@@ -64,7 +65,7 @@ check(() => {
 
 for (const analytics of [false, true]) for (const marketing of [false, true]) check(() => {
   const e = environment({ saved: choice(analytics, marketing) });
-  assert.equal(e.head.children?.some((n) => n.id === "angels-gtm") || false, analytics);
+  assert.equal(e.head.children?.some((n) => n.id === "angels-gtm") || false, true);
   assert.equal(e.head.children?.some((n) => n.id === "angels-meta-pixel") || false, marketing);
   e.opener.dispatch("click"); e.start(); e.start(); e.start();
   e.context.ANGELS_ANALYTICS.bookingSuccess();
@@ -111,7 +112,7 @@ check(() => {
 check(() => {
   const expired = choice(true, true); expired.savedAt -= 181 * 86400000;
   const e = environment({ saved: expired });
-  assert.equal(e.head.children?.length || 0, 0); assert.equal(e.panel.hidden, false);
+  assert.equal(e.head.children?.length || 0, 1); assert.equal(e.panel.hidden, false);
 });
 
 check(() => {
