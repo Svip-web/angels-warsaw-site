@@ -4,9 +4,8 @@
 
   const GTM_ID = "GTM-5Z32PTTB";
   const PIXEL_ID = "1583813716406623";
-  // Blammo must complete ANALYTICS-HANDOFF-ru.md before enabling this switch.
-  // The supplied live container currently enables automatic PII and form collection.
-  const GOOGLE_READY = false;
+  // Website integration is active. GTM owns the GA4 tag configuration.
+  const GOOGLE_READY = true;
   const STORAGE_KEY = "angels-consent-v1";
   const MAX_AGE = 180 * 24 * 60 * 60 * 1000;
   const isMenu = /(?:^|\/)menu\.html$/.test(location.pathname);
@@ -23,7 +22,8 @@
   const consentListeners = [];
 
   window.dataLayer = window.dataLayer || [];
-  const gtag = (...args) => window.dataLayer.push(args);
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
   // Defaults precede all vendor scripts. No tracking script loads before opt-in.
   gtag("consent", "default", {
     analytics_storage: "denied", ad_storage: "denied",
@@ -120,6 +120,13 @@
     if (!GOOGLE_READY || !consent.analytics || googleLoaded) return;
     googleLoaded = true;
     // The container owns GA4. There is no second GA4 installation in the website.
+    const context = parameters();
+    gtag("set", {
+      page_location: context.page_location,
+      page_referrer: context.page_referrer,
+      page_title: context.page_title,
+    });
+    window.dataLayer.push(context);
     window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
     injectScript("angels-gtm", `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`);
   }
