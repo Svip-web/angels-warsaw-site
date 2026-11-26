@@ -158,10 +158,11 @@
       window.fbq = fbq;
       window._fbq = fbq;
     }
-    window.fbq("consent", "revoke");
+    // This loader runs only after marketing opt-in. Grant before init so the
+    // real Pixel runtime cannot suspend init with a later grant stuck in its queue.
+    window.fbq("consent", "grant");
     window.fbq("set", "autoConfig", false, PIXEL_ID);
     window.fbq("init", PIXEL_ID);
-    window.fbq("consent", "grant");
     injectScript("angels-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
   }
 
