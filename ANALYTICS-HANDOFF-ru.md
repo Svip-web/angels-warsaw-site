@@ -2,6 +2,9 @@
 
 Основной сайт: https://angelskaraoke.pl/ и https://angelskaraoke.pl/menu.html.
 Обе страницы используют общий `dist/analytics.js` и общий `dist/booking.js`.
+Базовый код Meta Pixel с ID 1583813716406623 находится прямо в `<head>`
+обеих страниц: `script#angels-meta-pixel-code`. Он виден в исходном HTML.
+Контроллер согласия вызывает его загрузчик; инициализация не дублируется в JS/GTM.
 Языки: PL, EN, UK, RU. Верстка и существующие стили сайта не менялись.
 
 ## Идентификаторы из ТЗ

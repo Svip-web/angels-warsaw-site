@@ -2,6 +2,40 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <!-- Meta Pixel Code: 1583813716406623. Loaded after marketing consent. -->
+    <script id="angels-meta-pixel-code">
+      (() => {
+        if (window.ANGELS_META_PIXEL) return;
+        const pixelId = "1583813716406623";
+        let initialized = false;
+        window.ANGELS_META_PIXEL = Object.freeze({
+          id: pixelId,
+          load() {
+            if (initialized) { window.fbq("consent", "grant"); return true; }
+            if (!window.fbq) {
+              const fbq = function () { fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments); };
+              fbq.push = fbq; fbq.loaded = true; fbq.version = "2.0"; fbq.queue = [];
+              window.fbq = fbq;
+              window._fbq = fbq;
+            }
+            // The consent controller calls this only after marketing opt-in.
+            window.fbq("consent", "grant");
+            window.fbq("set", "autoConfig", false, pixelId);
+            window.fbq("init", pixelId);
+            initialized = true;
+            if (!document.getElementById("angels-meta-pixel")) {
+              const script = document.createElement("script");
+              script.id = "angels-meta-pixel";
+              script.async = true;
+              script.src = "https://connect.facebook.net/en_US/fbevents.js";
+              document.head.append(script);
+            }
+            return true;
+          },
+        });
+      })();
+    </script>
+    <!-- End Meta Pixel Code -->
     <link rel="stylesheet" href="consent.css?v=0542ef76ce24" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -36,7 +70,7 @@
     </script>
     <link rel="stylesheet" href="styles.css?v=9b9bac526666" />
     <script defer src="i18n.js?v=45552a195980"></script>
-    <script defer src="analytics.js?v=75315792eca9"></script>
+    <script defer src="analytics.js?v=55799f079bef"></script>
     <script defer src="menu-data.js?v=eae6691473ac"></script>
     <script defer src="menu-page.js?v=9d2680ec32cb"></script>
     <script defer src="booking.js?v=1e8be9a8a37d"></script>
