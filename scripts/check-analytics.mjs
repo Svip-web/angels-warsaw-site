@@ -115,7 +115,9 @@ check(() => {
   const calls = Array.from(e.context.fbq.queue);
   const initIndex = calls.findIndex((call) => call[0] === "init");
   const grantIndex = calls.findIndex((call) => call[0] === "consent" && call[1] === "grant");
+  const estOptOutIndex = calls.findIndex((call) => call[0] === "optOut" && call[1] === "1583813716406623" && call[2] === "ESTRuleEngine");
   assert.ok(grantIndex >= 0 && grantIndex < initIndex, "Marketing grant must precede init in the real Pixel queue");
+  assert.ok(estOptOutIndex >= 0 && estOptOutIndex < initIndex, "Disable Meta's automatic click-rule engine before init");
   assert.ok(!calls.slice(0, initIndex).some((call) => call[0] === "consent" && call[1] === "revoke"), "Do not suspend init behind a revoked consent command");
   e.choose("reject");
   assert.equal(e.context.fbq.queue.at(-1)[1], "grant", "Google controls must not disable Meta");

@@ -21,6 +21,8 @@
             // Meta is enabled on page load by the site owner's configuration.
             window.fbq("consent", "grant");
             window.fbq("set", "autoConfig", false, pixelId);
+            // Only the validated booking success may create a Lead, never an EST click rule.
+            window.fbq("optOut", pixelId, "ESTRuleEngine");
             window.fbq("init", pixelId);
             initialized = true;
             if (!document.getElementById("angels-meta-pixel")) {
